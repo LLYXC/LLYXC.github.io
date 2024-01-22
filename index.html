@@ -2,6 +2,15 @@
   "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
+<style>
+	.news-container {
+	  height: 300px; /* Adjust the height as needed */
+	  overflow-y: auto; /* This enables scrolling */
+	  border: 1px solid #ccc; /* Optional: adds a border around the news container */
+	  padding: 10px; /* Optional: adds some space inside the container */
+	  margin: 20px 0; /* Optional: adds some space outside the container */
+	}
+	</style>
 <link rel="shortcut icon" href="myIcon.ico">
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 
@@ -79,10 +88,13 @@ ga('send', 'pageview');
 <p>My research interest majorly focuses on developing efficient and trustworthy deep learning algorithms for medical data analysis. Currently, I am particularly interested in developing and applying foundation models for
 	multimodal biomedical data analysis.</p>
 
-<h2>News</h2>
+<div class="news-container">
 <ul>
 	<li>
-		[01/2024] Our survey on <a href="https://arxiv.org/abs/2304.06662">Deep Learning in Breast Cancer Imaging</a> was accepted by IEEE RBME.
+		[01/2024] One survey on <a href="https://arxiv.org/abs/2304.06662">Deep Learning in Breast Cancer Imaging</a> was accepted by IEEE RBME.
+	</li>
+	<li>
+		[01/2024] Our paper on multimodal and explainable AI for cervical cancer diagnosis was accepted by Nature Communications.
 	</li>
 	<li>
 		[01/2024] One paper on Omni-supervised Learning was accepted by TMI.
@@ -115,7 +127,7 @@ ga('send', 'pageview');
 		[01/2022] Our ISBI2022 paper on semi-supervised cervical cancer cell detection was selected as <i><p style="color: red; display: inline;">Oral Presentation</p></i>.
 	</li>
 	<li>
-		[08/2021] Our MICCAI2021 paper on semi-supervised COVID-19 lesion segmentation was selected as <i><p style="color: red; display: inline;">Oral Presentation</p></i>.
+		[08/2021] One MICCAI2021 paper on semi-supervised COVID-19 lesion segmentation was selected as <i><p style="color: red; display: inline;">Oral Presentation</p></i>.
 	</li>
 	<li>
 		[06/2021] One paper on omni-supervised Chest X-ray disease detection was accepted by MICCAI.
@@ -138,7 +150,7 @@ ga('send', 'pageview');
 	<li>
 		[06/2019] Two papers were <i><p style="color: red; display: inline;">early accepted</p></i> by MICCAI.
 	</li>
-</ul>
+</div>
 
 
 
@@ -150,14 +162,27 @@ ga('send', 'pageview');
 	<tr>&nbsp</tr>
 	<tr>&nbsp</tr>
 	<tbody>
+
+	<tr>
+		<td width="270">
+		<img src="./indexpics/Ada-ABC.png" width="250px"  style="border: 2px dotted lightgray; border-radius: 10px;" class="center" >
+		</td>		
+		<td> Medical Image Debiasing by Learning Adaptive Agreement from a Biased Council </a><br>
+		<b>Luyang Luo</b>, Xin Huang, Minghao Wang, Zhuoyue Wan, Hao Chen <br>
+		<em>Preprint</em>, 2024.
+		</td>
+	</tr>
+	<tr>&nbsp</tr>
+	<tr>&nbsp</tr>
+	<tr>&nbsp</tr>
 		
 	<tr>
 		<td width="270">
-		<img src="./indexpics/bc_survey.jpg" width="250px"  style="border: 2px dotted lightgray; border-radius: 10px;" class="center" >
+		<img src="./indexpics/bc_survey.png" width="250px"  style="border: 2px dotted lightgray; border-radius: 10px;" class="center" >
 		</td>		
 		<td> <a href="https://arxiv.org/abs/2304.06662" target="_blank">Deep Learning in Breast Cancer Imaging: A Decade of Progress and Future Directions </a><br>
 		<b>Luyang Luo</b>, Xi Wang, Yi Lin, Xiaoqi Ma, Andong Tan, Vince Vardhanabhuti, Winnie CW Chu, Kwang-Ting Cheng, Hao Chen <br>
-		<em>IEEE RBME</em>, 2024.
+		<em>IEEE Reviews in Biomedical Engineering (<b></b>IEEE RBME</b>)</em>, 2024.
 		</td>
 	</tr>
 	<tr>&nbsp</tr>
@@ -170,8 +195,62 @@ ga('send', 'pageview');
 		</td>		
 		<td><a href="https://arxiv.org/pdf/2306.13301.pdf" target="_blank">Deep Omni-supervised Learning for Rib Fracture Detection from Chest Radiology Images</a><br>
 		Zhizhong Chai, <b>Luyang Luo*</b>, Huangjing Ling, Pheng-Ann Heng, Hao Chen<br>
-		<em>TMI</em>, 2024.
+		<em>IEEE Transactions on Medical Imaging (<b>IEEE TMI</b>)</em>, 2024.
 		<p>[<a href="https://github.com/zhizhongchai/ORF-Net/tree/main" target="_blank">code</a>]</p>
+		</td>
+	</tr>
+	<tr>&nbsp</tr>
+	<tr>&nbsp</tr>
+	<tr>&nbsp</tr>
+	
+	<tr>
+		<td width="270">
+		<img src="./indexpics/MICA.png" width="250px"  style="border: 2px dotted lightgray; border-radius: 10px;" class="center" >
+		</td>		
+		<td> <a href="https://arxiv.org/abs/2401.08527" target="_blank">MICA: Towards Explainable Skin Lesion Diagnosis via Multi-Level Image-Concept Alignment	</a><br>
+		Yequan Bie, <b>Luyang Luo</b>, Hao Chen <br>
+		<em>AAAI Conference on Artificial Intelligence (<b>AAAI</b>)</em>, 2024.
+		<p>[<a href="https://github.com/Tommy-Bie/MICA" target="_blank">code</a>]</p>
+		</td>
+	</tr>
+	<tr>&nbsp</tr>
+	<tr>&nbsp</tr>
+	<tr>&nbsp</tr>
+
+	<tr>	
+		<td width="270">
+		<img src="./indexpics/OvcaFinder.png" width="250px" style="border: 2px dotted lightgray; border-radius: 10px;" class="center"  >
+		</td>
+		<td> OvcaFinder: Development and Validation of an Interpretable Model Integrating Multimodal Information for Improving Ovarian Cancer Diagnosis: A Retrospective Study. </a><br>
+			Huiling Xiang*, Yongjie Xiao*, Fang Li, Chunyan Li, Lixian Liu, Tingting Deng, Cuiju Yan, Fengtao Zhou, Xi Wang, Jinjing Ou, Qingguang Lin, Ruixia Hong, Lishu Huang, <b>Luyang Luo</b>, Huangjing Lin, Xi Lin, Hao Chen <br>
+		<em><b>Nature Communications</b></em>, 2024.
+		</td>
+	</tr>
+	<tr>&nbsp</tr>
+    <tr>&nbsp</tr>
+    <tr>&nbsp</tr>
+
+	<tr>
+		<td width="270">
+		<img src="./indexpics/ICMIL.png" width="250px"  style="border: 2px dotted lightgray; border-radius: 10px;" class="center" >
+		</td>		
+		<td> <a href="https://arxiv.org/abs/2312.01099" target="_blank">Rethinking Multiple Instance Learning for Whole Slide Image Classification: A Bag-Level Classifier is a Good Instance-Level Teacher </a><br>
+		Hongyi Wang, <b>Luyang Luo</b>, Fang Wang, Ruofeng Tong, Yen-Wei Chen, Hongjie Hu, Lanfen Lin, Hao Chen <br>
+		<em>Under Major Revision</em>, 2024.
+		</td>
+	</tr>
+	<tr>&nbsp</tr>
+	<tr>&nbsp</tr>
+	<tr>&nbsp</tr>
+
+
+	<tr>
+		<td width="270">
+		<img src="./indexpics/mtl-scale-seg.png" width="250px" style="border: 2px dotted lightgray; border-radius: 10px;" class="center"  >
+		</td>		
+		<td> <a href="https://arxiv.org/pdf/2305.19063.pdf" target="_blank">Scale-aware Super-resolution Network with Dual Affinity Learning for Lesion Segmentation from Medical Images</a> <br>
+		Yanwen Li, <b>Luyang Luo*</b>, Huangjing Ling, Pheng-Ann Heng, Hao Chen <br>
+		<em>Under Major Revision</em>, 2024.
 		</td>
 	</tr>
 	<tr>&nbsp</tr>
@@ -180,11 +259,12 @@ ga('send', 'pageview');
 
 	<tr>
 		<td width="270">
-		<img src="./indexpics/mtl-scale-seg.png" width="250px" style="border: 2px dotted lightgray; border-radius: 10px;" class="center"  >
+		<img src="./indexpics/FedLSM.png" width="250px" style="border: 2px dotted lightgray; border-radius: 10px;" class="center"  >
 		</td>		
-		<td> <a href="https://arxiv.org/pdf/2305.19063.pdf" target="_blank">Scale-aware Super-resolution Network with Dual Affinity Learning for Lesion Segmentation from Medical Images</a> <br>
-		Yanwen Li, <b>Luyang Luo*</b>, Huangjing Ling, Pheng-Ann Heng, Hao Chen <br>
-		<em>Under Major Revision</em>, 2023.
+		<td> <a href="https://arxiv.org/abs/2304.06931" target="_blank">Scale Federated Learning for Label Set Mismatch in Medical Image Classification </a> <br>
+		Zhipeng Deng, <b>Luyang Luo</b>, Hao Chen <br>
+		<em>International Conference on Medical Image Computing and Computer-Assisted Intervention (<b>MICCAI</b>)</em>, 2023.
+		<p>[<a href="https://github.com/dzp2095/FedLSM" target="_blank">code</a>]</p>
 		</td>
 	</tr>
 	<tr>&nbsp</tr>
@@ -197,7 +277,7 @@ ga('send', 'pageview');
 		</td>		
 		<td> <a href="https://arxiv.org/abs/2104.10553" target="_blank">Rethinking Annotation Granularity for Overcoming Shortcuts in Deep Learning–based Radiograph Diagnosis: A Multicenter Study </a><br>
 		<b>Luyang Luo</b>, Hao Chen, Yongjie Xiao, Yanning Zhou, Xi Wang, Varut Vardhanabhuti, Mingxiang Wu, Chu Han, Zaiyi Liu, Xin Hao Benjamin Fang, Efstratios Tsougenis, Huangjing Lin, Pheng-Ann Heng <br>
-		<em>Radiology: Artificial Intelligence</em>, 2022.
+		<em><b>Radiology: Artificial Intelligence</b></em>, 2022.
 		</td>
 	</tr>
 	<tr>&nbsp</tr>
@@ -275,7 +355,7 @@ ga('send', 'pageview');
 	<tr>&nbsp</tr>
     <tr>&nbsp</tr>
     <tr>&nbsp</tr>
-				
+			
 	<tr>	
 		<td width="270">
 		<img src="./indexpics/jmri19_weak.png" width="250px" style="border: 2px dotted lightgray; border-radius: 10px;" class="center"  >
