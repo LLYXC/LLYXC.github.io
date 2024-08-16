@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://llyxc.github.io/sitemap.xml
