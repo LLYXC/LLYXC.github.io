@@ -1,663 +1,1454 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
-  "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<!DOCTYPE html>
+<html lang="en">
+	
 <head>
-<style>
-	.news-container {
-	  height: 300px; /* Adjust the height as needed */
-	  overflow-y: auto; /* This enables scrolling */
-	  border: 1px solid #ccc; /* Optional: adds a border around the news container */
-	  padding: 10px; /* Optional: adds some space inside the container */
-	  margin: 20px 0; /* Optional: adds some space outside the container */
-	}
-	</style>
-<link rel="shortcut icon" href="myIcon.ico">
-<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords" content="Luyang Luo, DBMI, Harvard">
+    <meta name="description" content="Luyang Luo's home page">
+    <title>Luyang Luo's Homepage</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.29.0/feather.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+	<title>Footer</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 
-<meta name="keywords" content="Luyang Luo, DBMI, Harvard"> 
-<meta name="description" content="Luyang Luo&#39;s home page">
-<meta name="google-site-verification" content="X2QFrl-bPeg9AdlMt4VKT9v6MJUSTCf-SrY3CvKt4Zs" />
-<link rel="stylesheet" href="jemdoc.css" type="text/css">
-<title>Luyang Luo&#39;s Homepage</title>
-<!-- Google Analytics -->
-<script>
-(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-ga('create', 'UA-159069803-1', 'auto');
-ga('send', 'pageview');
-</script>
-<!-- End Google Analytics -->
-<!--
-<script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-  ga('create', 'UA-87320911-1', 'auto');
-  ga('send', 'pageview');
-
-</script>
--->
-<script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Person",
-      "name": "Luyang Luo",
-      "alternateName": "骆路阳",
-      "url": "https://llyxc.github.io",
-      "sameAs": [
-        "https://www.linkedin.com/in/luyang-luo/",
-        "https://github.com/LLYXC",
-	"https://scholar.google.com/citations?user=eD1O_vAAAAAJ&hl=en"
-      ],
-      "jobTitle": "Post-doctoral Fellow",
-      "worksFor": {
-        "name": "Harvard"
-      }
-    }
-    </script>
-	
+    <style>
+        .publication-card {
+            transition: transform 0.2s;
+        }
+        .publication-card:hover {
+            transform: translateY(-4px);
+        }
+        .news-container {
+            max-height: 400px;
+            overflow-y: auto;
+            border-radius: 0.5rem;
+            padding: 1rem;
+        }
+        .news-container::-webkit-scrollbar {
+            width: 8px;
+        }
+        .news-container::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 4px;
+        }
+        .news-container::-webkit-scrollbar-thumb {
+            background: #888;
+            border-radius: 4px;
+        }
+		.service-card {
+            transition: all 0.3s ease;
+        }
+        .service-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+		.student-card {
+            transition: all 0.3s ease;
+        }
+        .student-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+		.course-card {
+            transition: all 0.3s ease;
+        }
+        .course-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+		.map-container {
+            transition: all 0.3s ease;
+            max-width: 300px;
+            margin: 0 auto;
+        }
+        .map-container:hover {
+            transform: translateY(-4px);
+        }
+        .footer-gradient {
+            background: linear-gradient(180deg, rgba(249,250,251,0) 0%, rgba(249,250,251,1) 100%);
+        }
+    </style>
 </head>
-<body>
-<div id="layout-content" style="margin-top:25px">
- <a href="https://github.com/LLYXC" class="github-corner"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#FD6C6C; color:#fff; position: absolute; top: 0; border: 0; right: 0;"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+<body class="bg-gray-50">
 
-<table>
-	<tbody>
-		<tr>
-			<td width="650">
-				<div id="toptitle">					
-					<h1>Luyang Luo</h1><h1>
-				</h1></div>
+    <div class="max-w-7xl mx-auto px-4 py-12">
+        <!-- Header Section -->
+        <div class="flex flex-col md:flex-row items-center md:items-start gap-8 mb-12">
+            <div class="flex-1">
+                <h1 class="text-4xl font-bold text-gray-900 mb-4">Luyang Luo</h1>
+                <h3 class="text-xl text-gray-700 mb-4">Post-doctoral Fellow</h3>
+                <p class="text-gray-600 mb-4">
+					<a href="https://hms.harvard.edu" 
+						class="text-red-900 hover:text-red-700">
+						Department of Biomedical Informatics<br>
+						Harvard Medical School
+					</a>
+                </p>
+                <div class="flex gap-4">
+					
+                    <a href="https://scholar.google.com.hk/citations?user=eD1O_vAAAAAJ&hl=en">
+                        <img src="./pic/google_scholar.png" alt="Google Scholar" class="h-8">
+                    </a>
+                    <a href="https://github.com/LLYXC">
+                        <img src="./pic/github_s.jpg" alt="GitHub" class="h-8">
+                    </a>
+                    <a href="https://www.researchgate.net/profile/Luyang_Luo">
+                        <img src="./pic/twittwer.png" alt="Twitter" class="h-8">
+                    </a>
+                    <a href="https://www.linkedin.com/in/luyang-luo">
+                        <img src="./pic/LinkedIn_s.png" alt="LinkedIn" class="h-8">
+                    </a>
+					<a href="https://dbmi.hms.harvard.edu/people/luyang-luo">
+                        <img src="./pic/dbmi.jpg" alt="DBMI" class="h-8">
+                    </a>
+                </div>
+            </div>
+            <div class="w-64 flex-shrink-0">
+                <img src="./pic/portrait.jpg" alt="Luyang Luo" class="H-full object-contain">
+            </div>
+        </div>
 
-				<h3>Post-doctoral Fellow </h3>
-				<p>
-					Department of Biomedical Informatics <br>
-					Harvard University<br>
-				</p>
-					<a href="https://scholar.google.com.hk/citations?user=eD1O_vAAAAAJ&hl=en"><img src="./pic/google_scholar.png" height="30px" style="margin-bottom:-3px"></a>
-					<a href="https://github.com/LLYXC"><img src="./pic/github_s.jpg" height="30px" style="margin-bottom:-3px"></a>
-					<a href="https://www.researchgate.net/profile/Luyang_Luo"><img src="./pic/rg.png" height="30px" style="margin-bottom:-3px"></a>
-					<a href="https://www.linkedin.com/in/luyang-luo"><img src="./pic/LinkedIn_s.png" height="30px" style="margin-bottom:-3px"></a>
-				</p>
-			</td>
-			<td>
-				<img src="./pic/portrait.jpg" border="0" width="250"><br>
-			</td>
-		</tr><tr>
-	</tr></tbody>
-</table>
+        <!-- Biography Section -->
+        <div class="mb-12">
+            <h2 class="text-2xl font-bold text-gray-900 mb-4">Biography</h2>
+            <div class="bg-white rounded-lg shadow-sm p-6">
+                <p class="text-gray-700">
+					I am currently a post-doctoral fellow at the <span class="font-semibold">Department of Biomedical Informatics, Harvard Medical School</span>, where I am working with <a href="https://pranavrajpurkar.com/">Prof. Pranav Rajpurkar</a>. I co-lead the <a href="https://www.rajpurkarlab.hms.harvard.edu/medical-ai-bootcamp-harvard-stanford" class="text-red-800 hover:text-red-900">Harvard/Stanford Medical AI Bootcamp</a>, an innovative program bridging medical education with artificial intelligence.
+					Before that, I have worked as a post-doctoral fellow with <a href="https://cse.hkust.edu.hk/~jhc/">Prof. Hao Chen</a> at HKUST.
+					I obtained my Ph.D. degree from the CSE department,
+					<a href="http://www.cuhk.edu.hk/">CUHK</a>, 
+					advised by <a href="http://www.cse.cuhk.edu.hk/~pheng">Prof. HENG Pheng-Ann</a> and <a href="https://www.cse.cuhk.edu.hk/~ttwong/myself.html">Prof. WONG, Tien-Tsin</a>.
+					Previously, I obtained my B.Sc. degree from the CSE department, CUHK.
+                </p>
+            </div>
+        </div>
 
-<!--<h2>Biography [<a href="./CV-JinYueming.pdf">CV</a>]</h2>-->
-<h2>Biography </h2>
-<p>
-	I am currently a post-doctoral fellow at the Department of Biomedical Informatics, Harvard University, where I am working with <a href="https://pranavrajpurkar.com/">Prof. Pranav Rajpurkar</a> and co-leading the <a href="https://www.rajpurkarlab.hms.harvard.edu/medical-ai-bootcamp-harvard-stanford">Harvard/Stanford Medical AI Bootcamp</a>.
-	Before that, I have worked as a post-doctoral fellow with <a href="https://cse.hkust.edu.hk/~jhc/">Prof. Hao Chen</a> at HKUST.
-	I obtained my Ph.D. degree from the CSE department,
-	<a href="http://www.cuhk.edu.hk/">CUHK</a>, 
-	advised by <a href="http://www.cse.cuhk.edu.hk/~pheng">Prof. HENG Pheng-Ann</a> and <a href="https://www.cse.cuhk.edu.hk/~ttwong/myself.html">Prof. WONG, Tien-Tsin</a>.
-	Previously, I obtained my B.Sc. degree from the CSE department, CUHK.
-</p>
+		<!-- Harvard Initiatives Section -->
+        <div class="mb-12">
+            <div class="grid md:grid-cols-2 gap-6">
+				<!-- Rajpurkar Lab Card -->
+                <div class="bg-white rounded-lg shadow-sm p-6 hover:shadow-md transition-all">
+                    <div class="flex items-start space-x-4">
+                        <div class="flex-shrink-0">
+                            <div class="w-12 h-12 bg-red-900 rounded-lg flex items-center justify-center">
+                                <i data-feather="layers" class="w-6 h-6 text-white"></i>
+                            </div>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-semibold text-gray-900">Rajpurkar Lab at Harvard DBMI</h3>
+                            <a href="https://www.rajpurkarlab.hms.harvard.edu/" 
+                               class="mt-3 text-red-800 hover:text-red-900 inline-flex items-center">
+                                Visit lab website
+                                <i data-feather="arrow-right" class="w-4 h-4 ml-1"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Medical AI Bootcamp Card -->
+                <div class="bg-white rounded-lg shadow-sm p-6 hover:shadow-md transition-all">
+                    <div class="flex items-start space-x-4">
+                        <div class="flex-shrink-0">
+                            <div class="w-12 h-12 bg-red-900 rounded-lg flex items-center justify-center">
+                                <i data-feather="book" class="w-6 h-6 text-white"></i>
+                            </div>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-semibold text-gray-900">Harvard/Stanford Medical AI Bootcamp</h3>
+                            <a href="https://www.rajpurkarlab.hms.harvard.edu/medical-ai-bootcamp-harvard-stanford" 
+                               class="mt-3 text-red-800 hover:text-red-900 inline-flex items-center">
+                                Learn more
+                                <i data-feather="arrow-right" class="w-4 h-4 ml-1"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+		
 
-<p>My research interest lies broadly in the intersection of AI and healthcare. 
-	Currently, I am particularly interested in developing and applying foundation models for
-	multimodal biomedical data analysis to bridging AI, patients, and doctors.</p>
+        <!-- News Section -->
+        <div class="mb-12">
+            <h2 class="text-2xl font-bold text-gray-900 mb-4">News</h2>
+            <div class="news-container bg-white shadow-sm">
+                <ul class="space-y-3">
+                    <li class="news-item p-3 rounded-lg">
+						<div class="flex items-start gap-3">
+							<span class="text-gray-500 whitespace-nowrap">[02/2025]</span>
+							<span>
+								Nominated a member of 
+								<a href="https://www.sigmaxi.org/" class="text-blue-600 hover:text-blue-800">
+									Sigma Xi, The Scientific Research Honor Society
+								</a>.
+							</span>
+						</div>
+					</li>
+	
+					<li class="news-item p-3 rounded-lg">
+						<div class="flex items-start gap-3">
+							<span class="text-gray-500 whitespace-nowrap">[01/2025]</span>
+							<span>
+								One abstract was selected as 
+								<span class="text-red-600 font-medium">Oral Presentation</span>
+								at SIIM 2025.
+							</span>
+						</div>
+					</li>
+	
+					<li class="news-item p-3 rounded-lg">
+						<div class="flex items-start gap-3">
+							<span class="text-gray-500 whitespace-nowrap">[01/2025]</span>
+							<span>One paper got accepted by Medical Image Analysis.</span>
+						</div>
+					</li>
+	
+					<li class="news-item p-3 rounded-lg">
+						<div class="flex items-start gap-3">
+							<span class="text-gray-500 whitespace-nowrap">[01/2025]</span>
+							<span>One paper got accepted by Nature Communications!</span>
+						</div>
+					</li>
+	
+					<li class="news-item p-3 rounded-lg">
+						<div class="flex items-start gap-3">
+							<span class="text-gray-500 whitespace-nowrap">[01/2025]</span>
+							<span>Invited to serve as Area Chair for MICCAI 2025!</span>
+						</div>
+					</li>
+	
+					<li class="news-item p-3 rounded-lg">
+						<div class="flex items-start gap-3">
+							<span class="text-gray-500 whitespace-nowrap">[01/2025]</span>
+							<span>
+								Our paper 
+								<a href="https://arxiv.org/abs/2410.00441" class="text-blue-600 hover:text-blue-800">ReXplain</a>
+								won the <span class="text-red-600 font-medium">Best Paper</span> of AI for Medicine and Healthcare, AAAI Bridge Program 2025!
+							</span>
+						</div>
+					</li>
+	
+					<li class="news-item p-3 rounded-lg">
+						<div class="flex items-start gap-3">
+							<span class="text-gray-500 whitespace-nowrap">[11/2024]</span>
+							<span>
+								Our 
+								<a href="https://ieeexplore.ieee.org/abstract/document/10745914" class="text-blue-600 hover:text-blue-800">
+									Editorial on Trustworthy Machine Learning for Health Informatics
+								</a>
+								is published!
+							</span>
+						</div>
+					</li>
+	
+					<li class="news-item p-3 rounded-lg">
+						<div class="flex items-start gap-3">
+							<span class="text-gray-500 whitespace-nowrap">[10/2024]</span>
+							<span>One paper on scale-aware segmentation of lesions from medical images was accepted by IEEE TNNLS.</span>
+						</div>
+					</li>
+	
+					<li class="news-item p-3 rounded-lg">
+						<div class="flex items-start gap-3">
+							<span class="text-gray-500 whitespace-nowrap">[09/2024]</span>
+							<span>
+								Awarded the <span class="text-red-600 font-medium">Second Place</span> in the Poster Presentation category at the 2024 Harvard DBMI Science Day.
+							</span>
+						</div>
+					</li>
+	
+					<li class="news-item p-3 rounded-lg">
+						<div class="flex items-start gap-3">
+							<span class="text-gray-500 whitespace-nowrap">[07/2024]</span>
+							<span>
+								Serve as a guest editor for the 
+								<a href="https://www.sciencedirect.com/journal/computerized-medical-imaging-and-graphics/about/call-for-papers#trustworthy-artificial-intelligence-for-medical-imaging" class="text-blue-600 hover:text-blue-800">
+									CMIG SI on TAI4MI
+								</a>.
+							</span>
+						</div>
+					</li>
 
-<div class="news-container">
-<ul>
-	<li>
-		[02/2025] Norminated a member of <a href="https://www.sigmaxi.org/">Sigma Xi, The Scientific Research Honor Society</a>.
-	</li>
-	<li>
-		[01/2025] One abstract was selected as <i><p style="color: red; display: inline;">Oral Presentation</p></i> at SIIM 2025.
-	</li>
-	<li>
-		[01/2025] One paper got accepted by Medical Image Analysis.
-	</li>
-	<li>
-		[01/2025] One paper got accepted by Nature Communications!
-	</li>
-	<li>
-		[01/2025] Invited to serve as Area Chair for MICCAI 2025!
-	</li>
-	<li>
-		[01/2025] Our paper <a href="https://arxiv.org/abs/2410.00441">ReXplain</a> won the <i><p style="color: red; display: inline;">Best Paper</p></i> of AI for Medicine and Healthcare, AAAI Bridge Program 2025!
-	</li>
-	<li>
-		[11/2024] Our <a href="https://ieeexplore.ieee.org/abstract/document/10745914">Editorial on Trustworthy Machine Learning for Health Informatics</a> is published! 
-	</li>
-	<li>
-		[10/2024] One paper on scale-aware segmentation of lesions from medical images was accepted by IEEE TNNLS.
-	</li>
-	<li>
-		[09/2024] Awarded the <i><p style="color: red; display: inline;">Second Place</p></i> in the Poster Presentation category at the 2024 Harvard DBMI Science Day.</a>
-	</li>
-	<li>
-		[07/2024] Serve as a guest editor for the <a href="https://www.sciencedirect.com/journal/computerized-medical-imaging-and-graphics/about/call-for-papers#trustworthy-artificial-intelligence-for-medical-imaging">CMIG SI on TAI4MI</a>.
-	</li>
-	<li>
-		[07/2024] Survey on AI-based breast cancer imaging was sleceted as a <i><p style="color: red; display: inline;">featured article</p></i> for IEEE RBME.
-	</li>
-	<li>
-		[05/2023] One paper on MIL-based WSI classification was accepted by IEEE TMI.
-	</li>
-	<li>
-		[05/2023] Serve as the program committee of the IJCAI 2024 workshop on <a href="https://sites.google.com/view/tai4h2024">TAI4H</a>.
-	</li>
-	<li>
-		[05/2024] Two papers were <i><p style="color: red; display: inline;">early accepted</p></i> by MICCAI 2024.
-	</li>
-	<li>
-		[01/2024] One survey on <a href="https://arxiv.org/abs/2304.06662">Deep Learning in Breast Cancer Imaging</a> was accepted by IEEE RBME.
-	</li>
-	<li>
-		[01/2024] Our paper on multimodal and explainable AI for cervical cancer diagnosis was accepted by Nature Communications.
-	</li>
-	<li>
-		[01/2024] One paper on Omni-supervised Learning was accepted by TMI.
-	</li>
-	<li>
-		[12/2023] One paper on XAI for skin lesion was accepted by AAAI 2024.
-	</li>
-	<li>
-		[08/2023] <a href="https://link.springer.com/book/10.1007/978-3-031-39539-0
+					<li class="news-item p-3 rounded-lg">
+						<div class="flex items-start gap-3">
+							<span class="text-gray-500 whitespace-nowrap">[07/2024]</span>
+							<span>
+								Survey on AI-based breast cancer imaging was selected as a 
+								<span class="text-red-600">featured article</span> 
+								for IEEE RBME.
+							</span>
+						</div>
+					</li>
+					<li class="news-item p-3 rounded-lg">
+						<div class="flex items-start gap-3">
+							<span class="text-gray-500 whitespace-nowrap">[05/2024]</span>
+							<span>
+								Two papers were 
+								<span class="text-red-600">early accepted</span> 
+								by MICCAI 2024.
+							</span>
+						</div>
+					</li>
+					<li class="news-item p-3 rounded-lg">
+						<div class="flex items-start gap-3">
+							<span class="text-gray-500 whitespace-nowrap">[01/2024]</span>
+							<span>
+								One survey on 
+								<a href="https://arxiv.org/abs/2304.06662" class="text-blue-600 hover:text-blue-800">
+									Deep Learning in Breast Cancer Imaging
+								</a> 
+								was accepted by IEEE RBME.
+							</span>
+						</div>
+					</li>
+					<li class="news-item p-3 rounded-lg">
+						<div class="flex items-start gap-3">
+							<span class="text-gray-500 whitespace-nowrap">[01/2024]</span>
+							<span>
+								Our paper on multimodal and explainable AI for cervical cancer diagnosis was accepted by Nature Communications.
+							</span>
+						</div>
+					</li>
+					<li class="news-item p-3 rounded-lg">
+						<div class="flex items-start gap-3">
+							<span class="text-gray-500 whitespace-nowrap">[01/2024]</span>
+							<span>
+								One paper on Omni-supervised Learning was accepted by TMI.
+							</span>
+						</div>
+					</li>
+					<li class="news-item p-3 rounded-lg">
+						<div class="flex items-start gap-3">
+							<span class="text-gray-500 whitespace-nowrap">[12/2023]</span>
+							<span>
+								One paper on XAI for skin lesion was accepted by AAAI 2024.
+							</span>
+						</div>
+					</li>
+					<li class="news-item p-3 rounded-lg">
+						<div class="flex items-start gap-3">
+							<span class="text-gray-500 whitespace-nowrap">[08/2023]</span>
+							<span>
+								<a href="https://link.springer.com/book/10.1007/978-3-031-39539-0" class="text-blue-600 hover:text-blue-800" target="_blank">
+									Proceedings of TML4H 2023
+								</a> 
+								was officially online.
+							</span>
+						</div>
+					</li>
+					<li class="news-item p-3 rounded-lg">
+						<div class="flex items-start gap-3">
+							<span class="text-gray-500 whitespace-nowrap">[06/2023]</span>
+							<span>
+								Two papers were accepted by MICCAI 2023, one of which was 
+								<span class="text-red-600">early accepted</span>.
+							</span>
+						</div>
+					</li>
+					<li class="news-item p-3 rounded-lg">
+						<div class="flex items-start gap-3">
+							<span class="text-gray-500 whitespace-nowrap">[05/2023]</span>
+							<span>
+								One paper on MIL-based WSI classification was accepted by IEEE TMI.
+							</span>
+						</div>
+					</li>
+					<li class="news-item p-3 rounded-lg">
+						<div class="flex items-start gap-3">
+							<span class="text-gray-500 whitespace-nowrap">[05/2023]</span>
+							<span>
+								Serve as the program committee of the IJCAI 2024 workshop on 
+								<a href="https://sites.google.com/view/tai4h2024" class="text-blue-600 hover:text-blue-800">
+									TAI4H
+								</a>.
+							</span>
+						</div>
+					</li>
+					<li class="news-item p-3 rounded-lg">
+						<div class="flex items-start gap-3">
+							<span class="text-gray-500 whitespace-nowrap">[05/2023]</span>
+							<span>
+								I have been serving as a guest editor for the 
+								<a href="https://www.embs.org/jbhi/wp-content/uploads/sites/18/2023/05/Trustworthy-20230401_CallforPapers_TMLH.pdf" class="text-blue-600 hover:text-blue-800">
+									IEEE JBHI SI on Trustworthy Machine Learning for Health Informatics
+								</a>.
+							</span>
+						</div>
+					</li>
+					<li class="news-item p-3 rounded-lg">
+						<div class="flex items-start gap-3">
+							<span class="text-gray-500 whitespace-nowrap">[02/2023]</span>
+							<span>
+								One paper was accepted by MedIA.
+							</span>
+						</div>
+					</li>
+					<li class="news-item p-3 rounded-lg">
+						<div class="flex items-start gap-3">
+							<span class="text-gray-500 whitespace-nowrap">[01/2023]</span>
+							<span>
+								I have been serving as the co-chair of the first ICLR 2023 workshop on 
+								<a href="https://sites.google.com/view/tml4h2023/home" class="text-blue-600 hover:text-blue-800">
+									TML4H
+								</a>.
+							</span>
+						</div>
+					</li>
+                </ul>
+            </div>
+        </div>
+
+		
+		
+
+		<!-- Academic Services Section -->
+        <h2 class="text-3xl font-bold text-gray-900 mb-8">Academic Services</h2>
         
-        " target="_blank">Proceedings of TML4H 2023</a> was officially online.
-	</li>
-	<li>
-		[06/2023] Two papers were accepted by MICCAI 2023, one of which was <i><p style="color: red; display: inline;">early accepted</p></i>.
-	</li>
-	<li>
-		[05/2023] I have been serving as a guest editor for the <a href="https://www.embs.org/jbhi/wp-content/uploads/sites/18/2023/05/Trustworthy-20230401_CallforPapers_TMLH.pdf">IEEE JBHI SI on Trustworthy Machine Learning for Health Informatics</a>.
-	</li>
-	<li>
-		[02/2023] One paper was accepted by MedIA.
-	</li>
-	<li>
-		[01/2023] I have been serving as the co-chair of the first ICLR 2023 workshop on <a href="https://sites.google.com/view/tml4h2023/home">TML4H</a>.
-	</li>
-	<li>
-		[06/2022] I passed my oral defense and became a Ph.D.
-	</li>
-	<li>
-		[05/2022] Two papers were <i><p style="color: red; display: inline;">early accepted</p></i> by MICCAI 2022.
-	</li>
-	<li>
-		[01/2022] Our ISBI2022 paper on semi-supervised cervical cancer cell detection was selected as <i><p style="color: red; display: inline;">Oral Presentation</p></i>.
-	</li>
-	<li>
-		[08/2021] One MICCAI2021 paper on semi-supervised COVID-19 lesion segmentation was selected as <i><p style="color: red; display: inline;">Oral Presentation</p></i>.
-	</li>
-	<li>
-		[06/2021] One paper on omni-supervised Chest X-ray disease detection was accepted by MICCAI.
-	</li>
-	<li>
-		[05/2021] One paper on semi-supervised COVID-19 lesion segmentation was <i><p style="color: red; display: inline;">early accepted</p></i> by MICCAI.
-	</li>
-	<li>
-		[06/2020] One paper on learning from imperfect multi-site ChestX-ray data was accepted by IEEE TMI.
-	</li>
-	<li>
-		[05/2020] One paper on semi-supervised learning was accepted by IEEE TMI.
-	</li>
-	<li>
-		[02/2020] Two papers accepted by MedIA and IEEE JBHI, respectively.
-	</li>
-	<li>
-		[08/2019] One paper on OCT glaucoma screening was accepted by The Lacent Digital Health and selected as the <i><p style="color: red; display: inline;">Cover Page</p></i>.
-	</li>
-	<li>
-		[06/2019] Two papers were <i><p style="color: red; display: inline;">early accepted</p></i> by MICCAI.
-	</li>
-</div>
+        <div class="grid gap-6 md:grid-cols-2">
+            <!-- Editor Section -->
+            <div class="service-card bg-white rounded-lg shadow-sm p-6">
+                <div class="flex items-center gap-2 mb-4">
+                    <i data-feather="edit" class="w-5 h-5 text-blue-600"></i>
+                    <h3 class="text-xl font-semibold text-gray-900">Editor</h3>
+                </div>
+                <ul class="space-y-3 text-gray-700">
+                    <li class="flex items-start gap-2">
+                        <i data-feather="chevron-right" class="w-4 h-4 mt-1 text-blue-600 flex-shrink-0"></i>
+                        <span>
+                            <a href="https://www.sciencedirect.com/journal/computerized-medical-imaging-and-graphics/about/call-for-papers#trustworthy-artificial-intelligence-for-medical-imaging" 
+                               class="text-blue-600 hover:text-blue-800">
+                                CMIG Special Issue on Trustworthy Artificial Intelligence for Medical Imaging
+                            </a>
+                            <span class="text-gray-500 ml-2">[Guest Editor]</span>
+                        </span>
+                    </li>
+                    <li class="flex items-start gap-2">
+                        <i data-feather="chevron-right" class="w-4 h-4 mt-1 text-blue-600 flex-shrink-0"></i>
+                        <span>
+                            <a href="https://www.embs.org/jbhi/wp-content/uploads/sites/18/2023/05/Trustworthy-20230401_CallforPapers_TMLH.pdf" 
+                               class="text-blue-600 hover:text-blue-800">
+                                IEEE J-BHI Special Issue on "Trustworthy Machine Learning for Health Informatics"
+                            </a>
+                            <span class="text-gray-500 ml-2">[Guest Editor]</span>
+                        </span>
+                    </li>
+                    <li class="flex items-start gap-2">
+                        <i data-feather="chevron-right" class="w-4 h-4 mt-1 text-blue-600 flex-shrink-0"></i>
+                        <span>
+                            <a href="https://link.springer.com/book/10.1007/978-3-031-39539-0" 
+                               class="text-blue-600 hover:text-blue-800">
+                                "Trustworthy Machine Learning for Healthcare", TML4H 2023, Proceedings
+                            </a>
+                            <span class="text-gray-500 ml-2">[Editor]</span>
+                        </span>
+                    </li>
+                </ul>
+            </div>
 
+            <!-- Area Chair Section -->
+            <div class="service-card bg-white rounded-lg shadow-sm p-6">
+                <div class="flex items-center gap-2 mb-4">
+                    <i data-feather="users" class="w-5 h-5 text-green-600"></i>
+                    <h3 class="text-xl font-semibold text-gray-900">Area Chair & Program Chair & Meta Reviewer</h3>
+                </div>
+                <ul class="space-y-3 text-gray-700">
+                    <li class="flex items-start gap-2">
+                        <i data-feather="chevron-right" class="w-4 h-4 mt-1 text-green-600 flex-shrink-0"></i>
+                        <span>MICCAI 2025</span>
+                    </li>
+                    <li class="flex items-start gap-2">
+                        <i data-feather="chevron-right" class="w-4 h-4 mt-1 text-green-600 flex-shrink-0"></i>
+                        <span>IJCAI 2024 workshop on TAI4H</span>
+                    </li>
+                    <li class="flex items-start gap-2">
+                        <i data-feather="chevron-right" class="w-4 h-4 mt-1 text-green-600 flex-shrink-0"></i>
+                        <span>ICLR 2023 workshop on TML4H</span>
+                    </li>
+                    <li class="flex items-start gap-2">
+                        <i data-feather="chevron-right" class="w-4 h-4 mt-1 text-green-600 flex-shrink-0"></i>
+                        <span>ICCV CVAMD 2023</span>
+                    </li>
+                    <li class="flex items-start gap-2">
+                        <i data-feather="chevron-right" class="w-4 h-4 mt-1 text-green-600 flex-shrink-0"></i>
+                        <span>4th International Workshop on MMMI</span>
+                    </li>
+                </ul>
+            </div>
 
+            <!-- Conference Reviews Section -->
+            <div class="service-card bg-white rounded-lg shadow-sm p-6">
+                <div class="flex items-center gap-2 mb-4">
+                    <i data-feather="book-open" class="w-5 h-5 text-purple-600"></i>
+                    <h3 class="text-xl font-semibold text-gray-900">Conference Reviews</h3>
+                </div>
+                <ul class="space-y-3 text-gray-700">
+                    <li class="flex items-start gap-2">
+                        <i data-feather="chevron-right" class="w-4 h-4 mt-1 text-purple-600 flex-shrink-0"></i>
+                        <span>MICCAI 2024, 2023, 2022, 2021</span>
+                    </li>
+                    <li class="flex items-start gap-2">
+                        <i data-feather="chevron-right" class="w-4 h-4 mt-1 text-purple-600 flex-shrink-0"></i>
+                        <span>CVPR 2025, 2024</span>
+                    </li>
+                    <li class="flex items-start gap-2">
+                        <i data-feather="chevron-right" class="w-4 h-4 mt-1 text-purple-600 flex-shrink-0"></i>
+                        <span>AAAI 2025, 2024, 2022</span>
+                    </li>
+                    <li class="flex items-start gap-2">
+                        <i data-feather="chevron-right" class="w-4 h-4 mt-1 text-purple-600 flex-shrink-0"></i>
+                        <span>ISBI 2022</span>
+                    </li>
+                </ul>
+            </div>
 
-<h2>Selected Publications [<a href="https://scholar.google.com.hk/citations?user=eD1O_vAAAAAJ&hl=en">Google Scholar</a>]</h2>
-<table id="tbPublications" width="100%">
-	<b>*</b> joint first authors
-	<tr>&nbsp</tr>
-	<tr>&nbsp</tr>
-	<tr>&nbsp</tr>
-	<tr>&nbsp</tr>
-	<tbody>
+            <!-- Journal Reviews Section -->
+            <div class="service-card bg-white rounded-lg shadow-sm p-6">
+                <div class="flex items-center gap-2 mb-4">
+                    <i data-feather="file-text" class="w-5 h-5 text-red-600"></i>
+                    <h3 class="text-xl font-semibold text-gray-900">Journal Reviews</h3>
+                </div>
+                <ul class="space-y-3 text-gray-700">
+                    <li class="flex items-start gap-2">
+                        <i data-feather="chevron-right" class="w-4 h-4 mt-1 text-red-600 flex-shrink-0"></i>
+                        <span>Nature Cancer</span>
+                    </li>
+                    <li class="flex items-start gap-2">
+                        <i data-feather="chevron-right" class="w-4 h-4 mt-1 text-red-600 flex-shrink-0"></i>
+                        <span>NEJM AI</span>
+                    </li>
+                    <li class="flex items-start gap-2">
+                        <i data-feather="chevron-right" class="w-4 h-4 mt-1 text-red-600 flex-shrink-0"></i>
+                        <span>IEEE Transactions on Medical Imaging (TMI)</span>
+                    </li>
+                    <li class="flex items-start gap-2">
+                        <i data-feather="chevron-right" class="w-4 h-4 mt-1 text-red-600 flex-shrink-0"></i>
+                        <span>Medical Image Analysis (MedIA)</span>
+                    </li>
+                    <li class="flex items-start gap-2">
+                        <i data-feather="chevron-right" class="w-4 h-4 mt-1 text-red-600 flex-shrink-0"></i>
+                        <span>IEEE Transactions on Image Processing (TIP)</span>
+                    </li>
+                    <li class="flex items-start gap-2">
+                        <i data-feather="chevron-right" class="w-4 h-4 mt-1 text-red-600 flex-shrink-0"></i>
+                        <span>IEEE Journal of Biomedical and Health Informatics (IEEE JBHI)</span>
+                    </li>
+                    <li class="flex items-start gap-2">
+                        <i data-feather="chevron-right" class="w-4 h-4 mt-1 text-red-600 flex-shrink-0"></i>
+                        <span>Scientific Reports</span>
+                    </li>
+                    <li class="flex items-start gap-2">
+                        <i data-feather="chevron-right" class="w-4 h-4 mt-1 text-red-600 flex-shrink-0"></i>
+                        <span>Medical Physics</span>
+                    </li>
+                    <li class="flex items-start gap-2">
+                        <i data-feather="chevron-right" class="w-4 h-4 mt-1 text-red-600 flex-shrink-0"></i>
+                        <span>Journal of Magnetic Resonance Imaging (JMRI)</span>
+                    </li>
+                    <li class="flex items-start gap-2">
+                        <i data-feather="chevron-right" class="w-4 h-4 mt-1 text-red-600 flex-shrink-0"></i>
+                        <span>Expert Systems With Applications (ESWA)</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
 
-	<tr>
-		<td width="270">
-		<img src="./indexpics/ReXplain.jpg" width="250px"  style="border: 2px dotted lightgray; border-radius: 10px;" class="center" >
-		</td>		
-		<td><a href="https://arxiv.org/pdf/2410.00441" target="_blank">  ReXplain: Translating Radiology into Patient-Friendly Video Reports </a><br>
-		<b>Luyang Luo</b>, Jenanan Vairavamurthy, Xiaoman Zhang, Abhinav Kumar, Ramon R. Ter-Oganesyan, Stuart T. Schroff, Dan Shilo, Rydhwana Hossain, Mike Moritz, and Pranav Rajpurkar <br>
-		<em>AIMedHeath</em>, 2025.
-		<i><p style="color: red; display: inline;">(Best Paper)</p></i>
-		<p>[<a href="https://www.rajpurkarlab.hms.harvard.edu/rexplain" target="_blank">project page</a>][<a href="https://www.youtube.com/watch?v=q_RRZouLG9A&ab_channel=LuyangLUO" target="_blank">introduction video</a>][<a href="https://www.youtube.com/playlist?list=PLusrD-deXfO2E9G3BI3AoyT4x2YXELayR" target="_blank">demos</a>]</p>
-		</td>
-	</tr>
-	<tr>&nbsp</tr>
-	<tr>&nbsp</tr>
-	<tr>&nbsp</tr>
+	<div class="max-w-7xl mx-auto px-4">
+        <h2 class="text-3xl font-bold text-gray-900 mb-8">Mentorship</h2>
 
-	<tr>
-		<td width="270">
-			<img src="./indexpics/PASTA.png" width="250px" style="border: 2px dotted lightgray; border-radius: 10px;" class="center">
-		</td>
-		<td>
-			<a href="https://www.arxiv.org/abs/2502.06171" target="_blank">A Data-Efficient Pan-Tumor Foundation Model for Oncology CT Interpretation</a><br>
-			Wenhui Lei*, Hanyu Chen*, Zitian Zhang*, <b>Luyang Luo*</b>, Qiong Xiao, Yannian Gu, Peng Gao, Yankai Jiang, Ci Wang, Guangtao Wu, Tongjia Xu, Yingjie Zhang, Xiaofan Zhang, Pranav Rajpurkar, Shaoting Zhang, Zhenning Wang<br>
-			<em>arXiv:2502.06171</em>, 2024<br>
-		</td>
-	</tr>
-	<tr>&nbsp;</tr>
-	<tr>&nbsp;</tr>
-	<tr>&nbsp;</tr>
+        <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            <!-- Medical AI Bootcamp -->
+            <div class="student-card bg-gradient-to-br from-blue-50 to-white rounded-lg shadow-sm p-6">
+                <div class="flex items-center gap-3 mb-4">
+                    <i data-feather="book" class="w-5 h-5 text-blue-600"></i>
+                    <h3 class="text-lg font-semibold text-gray-900">
+                        <a href="https://www.rajpurkarlab.hms.harvard.edu/medical-ai-bootcamp-harvard-stanford" 
+                           class="hover:text-blue-600 transition-colors">
+                            Harvard/Stanford Medical AI Bootcamp
+                        </a>
+                    </h3>
+                </div>
+            </div>
 
-	<tr>
-		<td width="270">
-		<img src="./indexpics/MOME.jpg" width="250px"  style="border: 2px dotted lightgray; border-radius: 10px;" class="center" >
-		</td>		
-		<td><a href="https://arxiv.org/abs/2408.12606" target="_blank">  A Large Model for Non-invasive and Personalized Management of Breast Cancer from Multiparametric MRI </a><br>
-		<b>Luyang Luo</b>, Mingxiang Wu, Mei Li, Yi Xin, Qiong Wang, Varut Vardhanabhuti, Winnie CW Chu, Zhenhui Li, Juan Zhou, Pranav Rajpurkar, and Hao Chen <br>
-		<em><b>Nature Communications</b></em>, 2025.
-		<p>[<a href="https://github.com/LLYXC/MOME/tree/main" target="_blank">code</a>]</p>
-		</td>
-	</tr>
-	<tr>&nbsp</tr>
-	<tr>&nbsp</tr>
-	<tr>&nbsp</tr>
-		
-	<tr>
-		<td width="270">
-		<img src="./indexpics/bc_survey.png" width="250px"  style="border: 2px dotted lightgray; border-radius: 10px;" class="center" >
-		</td>		
-		<td> <a href="https://arxiv.org/abs/2304.06662" target="_blank">Deep Learning in Breast Cancer Imaging: A Decade of Progress and Future Directions </a><br>
-		<b>Luyang Luo</b>, Xi Wang, Yi Lin, Xiaoqi Ma, Andong Tan, Vince Vardhanabhuti, Winnie CW Chu, Kwang-Ting Cheng, Hao Chen <br>
-		<em>IEEE Reviews in Biomedical Engineering (<b>IEEE RBME</b>)</em>, 2024.
-		<i><p style="color: red; display: inline;">(Featured Article)</p></i>
-		</td>
-	</tr>
-	<tr>&nbsp</tr>
-	<tr>&nbsp</tr>
-	<tr>&nbsp</tr>
+            <!-- PhD Students at HKUST -->
+            <div class="student-card bg-white rounded-lg shadow-sm p-6 md:col-span-2">
+                <div class="flex items-center gap-3 mb-4">
+                    <i data-feather="users" class="w-5 h-5 text-green-600"></i>
+                    <h3 class="text-lg font-semibold text-gray-900">PhD Students at HKUST</h3>
+                </div>
+                <div class="grid gap-4 md:grid-cols-2">
+                    <ul class="space-y-3 text-gray-700">
+                        <li class="flex items-center gap-2">
+                            <i data-feather="user" class="w-4 h-4 text-green-600"></i>
+                            <a href="https://tommy-bie.github.io" class="hover:text-blue-600">Yequan Bie</a>
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <i data-feather="user" class="w-4 h-4 text-green-600"></i>
+                            <a href="https://scholar.google.com/citations?user=6QlQF1oAAAAJ" class="hover:text-blue-600">Shu Yang</a>
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <i data-feather="user" class="w-4 h-4 text-green-600"></i>
+                            <a href="https://zhi-xuan-chen.github.io/homepage/" class="hover:text-blue-600">Zhixuan Chen</a>
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <i data-feather="user" class="w-4 h-4 text-green-600"></i>
+                            <a href="https://academic.peterkam.top/" class="hover:text-blue-600">Cheng Jin</a>
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <i data-feather="user" class="w-4 h-4 text-green-600"></i>
+                            <a href="https://github.com/Davidczy" class="hover:text-blue-600">Zhiyuan Cai</a>
+                        </li>
+                    </ul>
+                    <ul class="space-y-3 text-gray-700">
+                        <li class="flex items-center gap-2">
+                            <i data-feather="user" class="w-4 h-4 text-green-600"></i>
+                            <a href="https://jiaxinzhuang.github.io/" class="hover:text-blue-600">Jiaxin Zhuang</a>
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <i data-feather="user" class="w-4 h-4 text-green-600"></i>
+                            <a href="https://hkustsmartlab.netlify.app/people/wen-qiang-li/" class="hover:text-blue-600">Wenqiang Li</a>
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <i data-feather="user" class="w-4 h-4 text-green-600"></i>
+                            <a href="https://www.linkedin.com/in/xiaoyuzlovesds/" class="hover:text-blue-600">Xiaoyu Zheng</a>
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <i data-feather="user" class="w-4 h-4 text-green-600"></i>
+                            <a href="https://scholar.google.com.hk/citations?user=uxpMVsYAAAAJ&hl=zh-CN" class="hover:text-blue-600">Zhizhong Chai</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
 
-	<tr>
-		<td width="270">
-		<img src="./indexpics/MIA2025_multisource.png" width="250px"  style="border: 2px dotted lightgray; border-radius: 10px;" class="center" >
-		</td>		
-		<td> <a href="https://arxiv.org/abs/2304.06662" target="_blank">Learning Robust Medical Image Segmentation from Multi-source Annotations</a><br>
-		Yifeng Wang, <b>Luyang Luo*</b>, Mingxiang Wu, Qiong Wang, Hao Chen <br>
-		<em>Medical Image Analysis (<b>Medical Image Analysis</b>)</em>, 2025.
-		</td>
-	</tr>
-	<tr>&nbsp</tr>
-	<tr>&nbsp</tr>
-	<tr>&nbsp</tr>
+            <!-- Other Universities -->
+            <div class="student-card bg-white rounded-lg shadow-sm p-6">
+                <div class="flex items-center gap-3 mb-4">
+                    <i data-feather="award" class="w-5 h-5 text-purple-600"></i>
+                    <h3 class="text-lg font-semibold text-gray-900">Other Universities</h3>
+                </div>
+                <ul class="space-y-3 text-gray-700">
+                    <li class="flex items-center gap-2">
+                        <i data-feather="user" class="w-4 h-4 text-purple-600"></i>
+                        <a href="https://dootmaan.github.io" class="hover:text-blue-600">
+                            Hongyi Wang
+                            <span class="text-gray-500 text-sm">(PhD at Zhejiang University)</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Masters and MPhil Students -->
+            <div class="student-card bg-white rounded-lg shadow-sm p-6">
+                <div class="flex items-center gap-3 mb-4">
+                    <i data-feather="book-open" class="w-5 h-5 text-orange-600"></i>
+                    <h3 class="text-lg font-semibold text-gray-900">Masters and MPhil Students</h3>
+                </div>
+                <ul class="space-y-3 text-gray-700">
+                    <li class="flex items-center gap-2">
+                        <i data-feather="user" class="w-4 h-4 text-orange-600"></i>
+                        <a href="https://wmh1203.github.io/" class="hover:text-blue-600">
+                            Minghao Wang
+                            <span class="text-gray-500 text-sm">(MSc at HKUST → PhD at HKUST)</span>
+                        </a>
+                    </li>
+                    <li class="flex items-center gap-2">
+                        <i data-feather="user" class="w-4 h-4 text-orange-600"></i>
+                        <a href="https://scholar.google.com.hk/citations?user=5Ki41BAAAAAJ" class="hover:text-blue-600">
+                            Dunyuan Xu
+                            <span class="text-gray-500 text-sm">(MSc at CUHK → PhD at CUHK)</span>
+                        </a>
+                    </li>
+                    <li class="flex items-center gap-2">
+                        <i data-feather="user" class="w-4 h-4 text-orange-600"></i>
+                        <span>Yi Xin <span class="text-gray-500 text-sm">(MPhil at HKUST)</span></span>
+                    </li>
+                    <li class="flex items-center gap-2">
+                        <i data-feather="user" class="w-4 h-4 text-orange-600"></i>
+                        <span>Yifeng Wang <span class="text-gray-500 text-sm">(Master at THU)</span></span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+        <!-- Publications Section -->
+        <div class="max-w-7xl mx-auto px-4">
+			<div class="mb-8">
+				<h2 class="text-3xl font-bold text-gray-900 mb-2">
+					Selected Publications 
+					<a href="https://scholar.google.com.hk/citations?user=eD1O_vAAAAAJ&hl=en" 
+					   class="text-base text-blue-600 hover:text-blue-800 ml-2">
+						[Google Scholar]
+					</a>
+				</h2>
+				<p class="text-gray-600 mb-4">* denotes equal contribution</p>
+			</div>
 	
-	<tr>
-		<td width="270">
-		<img src="./indexpics/Ada-ABC.png" width="250px"  style="border: 2px dotted lightgray; border-radius: 10px;" class="center" >
-		</td>		
-		<td><a href="https://arxiv.org/abs/2401.11713" target="_blank"> Medical Image Debiasing by Learning Adaptive Agreement from a Biased Council </a><br>
-		<b>Luyang Luo</b>, Xin Huang, Minghao Wang, Zhuoyue Wan, Hao Chen <br>
-		<em>Preprint</em>, 2024.
-		</td>
-	</tr>
-	<tr>&nbsp</tr>
-	<tr>&nbsp</tr>
-	<tr>&nbsp</tr>
-
-	<tr>
-		<td width="270">
-		<img src="./indexpics/mtl-scale-seg.png" width="250px" style="border: 2px dotted lightgray; border-radius: 10px;" class="center"  >
-		</td>		
-		<td> <a href="https://arxiv.org/pdf/2305.19063.pdf" target="_blank">Scale-aware Super-resolution Network with Dual Affinity Learning for Lesion Segmentation from Medical Images</a> <br>
-		<b>Luyang Luo</b>, Yanwen Li*, Huangjing Ling, Pheng-Ann Heng, Hao Chen <br>
-		<em>IEEE Transactions on Neural Networks and Learning Systems (<b>IEEE TNNLS</b>)</em>, 2024.
-		</td>
-	</tr>
-	<tr>&nbsp</tr>
-	<tr>&nbsp</tr>
-	<tr>&nbsp</tr>
-		
-	<tr>
-		<td width="270">
-		<img src="./indexpics/ICMIL.png" width="250px"  style="border: 2px dotted lightgray; border-radius: 10px;" class="center" >
-		</td>		
-		<td> <a href="https://arxiv.org/abs/2312.01099" target="_blank">Rethinking Multiple Instance Learning for Whole Slide Image Classification: A Bag-Level Classifier is a Good Instance-Level Teacher </a><br>
-		Hongyi Wang, <b>Luyang Luo*</b>, Fang Wang, Ruofeng Tong, Yen-Wei Chen, Hongjie Hu, Lanfen Lin, Hao Chen <br>
-		<em>IEEE Transactions on Medical Imaging (<b>IEEE TMI</b>)</em>, 2024.
-		<p>[<a href="https://github.com/Dootmaan/ICMIL/tree/confidence_based" target="_blank">code</a>]</p>
-		</td>
-	</tr>
-	<tr>&nbsp</tr>
-	<tr>&nbsp</tr>
-	<tr>&nbsp</tr>
-
-	<tr>
-		<td width="270">
-		<img src="./indexpics/orfnetv2.png" width="250px" style="border: 2px dotted lightgray; border-radius: 10px;" class="center"  >
-		</td>		
-		<td><a href="https://arxiv.org/pdf/2306.13301.pdf" target="_blank">Deep Omni-supervised Learning for Rib Fracture Detection from Chest Radiology Images</a><br>
-		Zhizhong Chai, <b>Luyang Luo*</b>, Huangjing Ling, Pheng-Ann Heng, Hao Chen<br>
-		<em>IEEE Transactions on Medical Imaging (<b>IEEE TMI</b>)</em>, 2024.
-		<p>[<a href="https://github.com/zhizhongchai/ORF-Net/tree/main" target="_blank">code</a>]</p>
-		</td>
-	</tr>
-	<tr>&nbsp</tr>
-	<tr>&nbsp</tr>
-	<tr>&nbsp</tr>
+			<div class="grid gap-8 lg:grid-cols-1">
+				<!-- ReXplain Paper -->
+				<div class="publication-card bg-white rounded-lg shadow-sm overflow-hidden">
+					<div class="flex flex-col md:flex-row">
+						<div class="md:w-1/4 p-4">
+							<img src="./indexpics/rexplain.jpg" alt="ReXplain" 
+								 class="w-full h-38 object-cover rounded-lg">
+						</div>
+						<div class="md:w-3/4 p-6">
+							<div class="flex flex-wrap gap-2 mb-3">
+								<span class="px-3 py-1 bg-red-100 text-red-800 text-sm font-medium rounded-full">
+									<i data-feather="award" class="w-4 h-4 inline-block mr-1"></i>
+									Best Paper
+								</span>
+							</div>
+							
+							<h3 class="text-xl font-semibold text-gray-900 mb-3">
+								<a href="https://arxiv.org/pdf/2410.00441" class="hover:text-blue-600">
+									ReXplain: Translating Radiology into Patient-Friendly Video Reports
+								</a>
+							</h3>
+							
+							<p class="text-gray-600 mb-4">
+								<span class="author-highlight font-bold">Luyang Luo</span>, 
+								Jenanan Vairavamurthy, Xiaoman Zhang, Abhinav Kumar, Ramon R. Ter-Oganesyan, 
+								Stuart T. Schroff, Dan Shilo, Rydhwana Hossain, Mike Moritz, and Pranav Rajpurkar
+							</p>
+							
+							<p class="text-gray-700 mb-4">
+								<span class="font-medium">AAAI AIMedHeath</span>, 2025
+							</p>
+							
+							<div class="flex flex-wrap gap-2">
+								<a href="https://www.rajpurkarlab.hms.harvard.edu/rexplain" 
+								   class="inline-flex items-center px-3 py-1 border border-gray-300 rounded-md text-sm font-medium text-gray-700 bg-white hover:bg-gray-50">
+									<i data-feather="external-link" class="w-4 h-4 mr-1"></i>
+									Project Page
+								</a>
+								<a href="https://www.youtube.com/watch?v=q_RRZouLG9A" 
+								   class="inline-flex items-center px-3 py-1 border border-gray-300 rounded-md text-sm font-medium text-gray-700 bg-white hover:bg-gray-50">
+									<i data-feather="video" class="w-4 h-4 mr-1"></i>
+									Video
+								</a>
+								<a href="https://www.youtube.com/playlist?list=PLusrD-deXfO2E9G3BI3AoyT4x2YXELayR" 
+								   class="inline-flex items-center px-3 py-1 border border-gray-300 rounded-md text-sm font-medium text-gray-700 bg-white hover:bg-gray-50">
+									<i data-feather="play" class="w-4 h-4 mr-1"></i>
+									Demos
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
 	
-	<tr>
-		<td width="270">
-		<img src="./indexpics/MICA.png" width="250px"  style="border: 2px dotted lightgray; border-radius: 10px;" class="center" >
-		</td>		
-		<td> <a href="https://arxiv.org/abs/2401.08527" target="_blank">MICA: Towards Explainable Skin Lesion Diagnosis via Multi-Level Image-Concept Alignment	</a><br>
-		Yequan Bie, <b>Luyang Luo</b>, Hao Chen <br>
-		<em>AAAI Conference on Artificial Intelligence (<b>AAAI</b>)</em>, 2024.
-		<p>[<a href="https://github.com/Tommy-Bie/MICA" target="_blank">code</a>]</p>
-		</td>
-	</tr>
-	<tr>&nbsp</tr>
-	<tr>&nbsp</tr>
-	<tr>&nbsp</tr>
+				<!-- PASTA Paper -->
+				<div class="publication-card bg-white rounded-lg shadow-sm overflow-hidden">
+					<div class="flex flex-col md:flex-row">
+						<div class="md:w-1/4 p-4">
+							<img src="./indexpics/PASTA.png" alt="PASTA" 
+								 class="w-full h-38 object-cover rounded-lg">
+						</div>
+						<div class="md:w-3/4 p-6">
+							<div class="flex flex-wrap gap-2 mb-3">
+							</div>
+							
+							<h3 class="text-xl font-semibold text-gray-900 mb-3">
+								<a href="https://www.arxiv.org/abs/2502.06171" class="hover:text-blue-600">
+									A Data-Efficient Pan-Tumor Foundation Model for Oncology CT Interpretation
+								</a>
+							</h3>
+							
+							<p class="text-gray-600 mb-4">
+								Wenhui Lei*, Hanyu Chen*, Zitian Zhang*, <span class="author-highlight font-bold">Luyang Luo*</span>, 
+								Qiong Xiao, Yannian Gu, Peng Gao, Yankai Jiang, Ci Wang, Guangtao Wu, Tongjia Xu, 
+								Yingjie Zhang, Xiaofan Zhang, Pranav Rajpurkar, Shaoting Zhang, Zhenming Wang
+							</p>
+							
+							<p class="text-gray-700 mb-4">
+								<span class="font-medium">arXiv:2502.06171</span>, 2024
+							</p>
+						</div>
+					</div>
+				</div>
+				
+				<!-- MOME Paper -->
+				<div class="publication-card bg-white rounded-lg shadow-sm overflow-hidden">
+					<div class="flex flex-col md:flex-row">
+						<div class="md:w-1/4 p-4">
+							<img src="./indexpics/MOME.jpg" alt="MOME" 
+								 class="w-full h-38 object-cover rounded-lg">
+						</div>
+						<div class="md:w-3/4 p-6">
+							<h3 class="text-xl font-semibold text-gray-900 mb-3">
+								<a href="https://arxiv.org/abs/2408.12606" class="hover:text-blue-600">
+									A Large Model for Non-invasive and Personalized Management of Breast Cancer from Multiparametric MRI
+								</a>
+							</h3>
+							
+							<p class="text-gray-600 mb-4">
+								<span class="author-highlight font-bold">Luyang Luo</span>, 
+								Mingxiang Wu, Mei Li, Yi Xin, Qiong Wang, Varut Vardhanabhuti, Winnie CW Chu, 
+								Zhenhui Li, Juan Zhou, Pranav Rajpurkar, and Hao Chen
+							</p>
+							
+							<p class="text-gray-700 mb-4">
+								<span class="font-medium">Nature Communications</span>, 2025
+							</p>
+							
+							<div class="flex flex-wrap gap-2">
+								<a href="https://github.com/LLYXC/MOME/tree/main" 
+								   class="inline-flex items-center px-3 py-1 border border-gray-300 rounded-md text-sm font-medium text-gray-700 bg-white hover:bg-gray-50">
+									<i data-feather="github" class="w-4 h-4 mr-1"></i>
+									Code
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
 	
-	<tr>	
-		<td width="270">
-		<img src="./indexpics/OvcaFinder.png" width="250px" style="border: 2px dotted lightgray; border-radius: 10px;" class="center"  >
-		</td>
-		<td> <a href="https://www.nature.com/articles/s41467-024-46700-2" target="_blank"> Development and validation of an interpretable model integrating multimodal information for improving ovarian cancer diagnosis. </a><br>
-			Huiling Xiang*, Yongjie Xiao*, Fang Li, Chunyan Li, Lixian Liu, Tingting Deng, Cuiju Yan, Fengtao Zhou, Xi Wang, Jinjing Ou, Qingguang Lin, Ruixia Hong, Lishu Huang, <b>Luyang Luo</b>, Huangjing Lin, Xi Lin, Hao Chen <br>
-		<em><b>Nature Communications</b></em>, 2024.
-		</td>
-	</tr>
-	<tr>&nbsp</tr>
-    <tr>&nbsp</tr>
-    <tr>&nbsp</tr>
-
-	<tr>
-		<td width="270">
-		<img src="./indexpics/FedLSM.png" width="250px" style="border: 2px dotted lightgray; border-radius: 10px;" class="center"  >
-		</td>		
-		<td> <a href="https://arxiv.org/abs/2304.06931" target="_blank">Scale Federated Learning for Label Set Mismatch in Medical Image Classification </a> <br>
-		Zhipeng Deng, <b>Luyang Luo</b>, Hao Chen <br>
-		<em>International Conference on Medical Image Computing and Computer-Assisted Intervention (<b>MICCAI</b>)</em>, 2023.
-		<p>[<a href="https://github.com/dzp2095/FedLSM" target="_blank">code</a>]</p>
-		</td>
-	</tr>
-	<tr>&nbsp</tr>
-	<tr>&nbsp</tr>
-	<tr>&nbsp</tr>
-
-	<tr>
-		<td width="270">
-		<img src="./indexpics/RadAI 2022.jpg" width="250px" style="border: 2px dotted lightgray; border-radius: 10px;" class="center"  >
-		</td>		
-		<td> <a href="https://arxiv.org/abs/2104.10553" target="_blank">Rethinking Annotation Granularity for Overcoming Shortcuts in Deep Learning–based Radiograph Diagnosis: A Multicenter Study </a><br>
-		<b>Luyang Luo</b>, Hao Chen, Yongjie Xiao, Yanning Zhou, Xi Wang, Varut Vardhanabhuti, Mingxiang Wu, Chu Han, Zaiyi Liu, Xin Hao Benjamin Fang, Efstratios Tsougenis, Huangjing Lin, Pheng-Ann Heng <br>
-		<em><b>Radiology: Artificial Intelligence</b></em>, 2022.
-		</td>
-	</tr>
-	<tr>&nbsp</tr>
-    <tr>&nbsp</tr>
-    <tr>&nbsp</tr>
-		
-	<tr>
-		<td width="270">
-		<img src="./indexpics/MICCAI22 PBBL 2.jpg" width="250px" style="border: 2px dotted lightgray; border-radius: 10px;" class="center"  >
-		</td>		
-		<td> <a href="https://arxiv.org/pdf/2203.09860.pdf" target="_blank">Pseudo Bias-Balanced Learning for Debiased Chest X-ray Classification</a> <br>
-		<b>Luyang Luo</b>, Dunyuan Xu, Hao Chen, Tien-Tsin Wong, Pheng-Ann Heng. <br>
-		<em>International Conference on Medical Image Computing and Computer-Assisted Intervention (<b>MICCAI</b>)</em>, 2022.
-		<i><p style="color: red; display: inline;">(Early Accept)</p></i>
-		<p>[<a href="https://github.com/LLYXC/PBBL" target="_blank">code</a>][<a href="https://github.com/LLYXC/PBBL/tree/main/dataset/csv" target="_blank">data</a>]</p>
-		</td>
-	</tr>
-	<tr>&nbsp</tr>
-    <tr>&nbsp</tr>
-    <tr>&nbsp</tr>
-
-		
-	<tr>
-		<td width="270">
-		<img src="./indexpics/miccai21_oxnet-2.png" width="250px" style="border: 2px dotted lightgray; border-radius: 10px;" class="center"  >
-		</td>		
-		<td> <a href="https://arxiv.org/pdf/2104.03218.pdf" target="_blank">OXnet: Deep Omni-supervised Thoracic Disease Detection from Chest X-rays</a> <br>
-		<b>Luyang Luo</b>, Hao Chen*, Yanning Zhou, Huangjing Lin, Pheng-Ann Heng. <br>
-		<em>International Conference on Medical Image Computing and Computer-Assisted Intervention (<b>MICCAI</b>)</em>, 2021.
-		<p>[<a href="https://github.com/LLYXC/OXnet" target="_blank">code</a>]</p>
-		</td>
-	</tr>
-	<tr>&nbsp</tr>
-    <tr>&nbsp</tr>
-    <tr>&nbsp</tr>
-		
-	<tr>
-		<td width="270">
-		<img src="./indexpics/miccai21_covid19-2.png" width="250px" height="90px" style="border: 2px dotted lightgray; border-radius: 10px;" class="center"  >
-		</td>		
-		<td><a href="https://arxiv.org/pdf/2104.03225.pdf" target="_blank">Dual-Consistency Semi-Supervised Learning with Uncertainty Quantification for COVID-19 Lesion Segmentation from CT Images </a> <br>
-		Yanwen Li, <b>Luyang Luo*</b>, Huangjing Lin, Hao Chen, Pheng-Ann Heng. <br>
-		<em>International Conference on Medical Image Computing and Computer-Assisted Intervention (<b>MICCAI</b>)</em>, 2021.
-		<i><p style="color: red; display: inline;">(Oral)</p></i>
-		<p>[<a href="https://github.com/poiuohke/UDC-Net" target="_blank">code</a>]</p>
-		</td>
-	</tr>
-	<tr>&nbsp</tr>
-    <tr>&nbsp</tr>
-    <tr>&nbsp</tr>
-		
-	<tr>
-		<td width="270">
-		<img src="./indexpics/tmi20_cxr-2.png" width="250px" style="border: 2px dotted lightgray; border-radius: 10px;" class="center"  >
-		</td>		
-		<td> <a href="https://arxiv.org/pdf/2006.03796.pdf">Deep Mining External Imperfect Data for Chest X-ray Disease Screening.</a> <br>
-		<b>Luyang Luo</b>, Lequan Yu*, Hao Chen, Quande Liu, Xi Wang, Jiaqi Xu, Pheng-Ann Heng. <br>
-		<em>IEEE Transactions on Medical Imaging (<b>IEEE TMI</b>)</em>, 2020.
-		</td>
-	</tr>
-	<tr>&nbsp</tr>
-    <tr>&nbsp</tr>
-    <tr>&nbsp</tr>
-
-	<tr>
-		<td width="270">
-		<img src="./indexpics/miccai19_angular.jpg" width="250px" height="110px" style="border: 2px dotted lightgray; border-radius: 10px;" class="center"  >
-		</td>		
-		<td> <a href="https://arxiv.org/pdf/1906.02999.pdf">Deep Angular Embedding and Feature Correlation Attention for Breast MRI Cancer Analysis</a> <br>
-		<b>Luyang Luo </b>, Hao Chen, Xi Wang, Qi Dou, Huangjing Lin, Juan Zhou, Gongjie Li, Pheng-Ann Heng <br>
-		<em>Medical Image Computing and Computer Assisted Intervention (<b>MICCAI</b>)</em>, 2019.
-		<i><p style="color: red; display: inline;">(Early Accept)</p></i>
-		</td>
-	</tr>
-	<tr>&nbsp</tr>
-    <tr>&nbsp</tr>
-    <tr>&nbsp</tr>
+				<!-- BC Survey Paper -->
+				<div class="publication-card bg-white rounded-lg shadow-sm overflow-hidden">
+					<div class="flex flex-col md:flex-row">
+						<div class="md:w-1/4 p-4">
+							<img src="./indexpics/bc_survey.png" alt="BC Survey" 
+								 class="w-full h-38 object-cover rounded-lg">
+						</div>
+						<div class="md:w-3/4 p-6">
+							<div class="flex flex-wrap gap-2 mb-3">
+								<span class="px-3 py-1 bg-red-100 text-red-800 text-sm font-medium rounded-full">
+									Featured Article
+								</span>
+							</div>
+							
+							<h3 class="text-xl font-semibold text-gray-900 mb-3">
+								<a href="https://arxiv.org/abs/2304.06662" class="hover:text-blue-600">
+									Deep Learning in Breast Cancer Imaging: A Decade of Progress and Future Directions
+								</a>
+							</h3>
+							
+							<p class="text-gray-600 mb-4">
+								<span class="author-highlight font-bold">Luyang Luo</span>, 
+								Xi Wang, Yi Lin, Xiaoqi Ma, Andong Tan, Vince Vardhanabhuti, 
+								Winnie CW Chu, Kwang-Ting Cheng, Hao Chen
+							</p>
+							
+							<p class="text-gray-700 mb-4">
+								<span class="font-medium">IEEE Reviews in Biomedical Engineering (IEEE RBME)</span>, 2024
+							</p>
+						</div>
+					</div>
+				</div>
+				
+				<!-- MIA 2025 Paper -->
+				<div class="publication-card bg-white rounded-lg shadow-sm overflow-hidden">
+					<div class="flex flex-col md:flex-row">
+						<div class="md:w-1/4 p-4">
+							<img src="./indexpics/MIA2025_multisource.png" alt="Multi-source" 
+								 class="w-full h-38 object-cover rounded-lg">
+						</div>
+						<div class="md:w-3/4 p-6">
+							<h3 class="text-xl font-semibold text-gray-900 mb-3">
+								<a href="https://arxiv.org/abs/2304.06662" class="hover:text-blue-600">
+									Learning Robust Medical Image Segmentation from Multi-source Annotations
+								</a>
+							</h3>
+							
+							<p class="text-gray-600 mb-4">
+								Yifeng Wang, <span class="author-highlight font-bold">Luyang Luo*</span>, 
+								Mingxiang Wu, Qiong Wang, Hao Chen
+							</p>
+							
+							<p class="text-gray-700 mb-4">
+								<span class="font-medium">Medical Image Analysis</span>, 2025
+							</p>
+						</div>
+					</div>
+				</div>
 			
-	<tr>	
-		<td width="270">
-		<img src="./indexpics/jmri19_weak.png" width="250px" style="border: 2px dotted lightgray; border-radius: 10px;" class="center"  >
-		</td>
-		<td> <a href="https://onlinelibrary.wiley.com/doi/pdf/10.1002/jmri.26721" target="_blank">Weakly Supervised 3D Deep Learning for Breast Cancer Classification and Localization of the Lesions in MR Images. </a><br>
-		Juan Zhou, <b>Luyang Luo*</b>, Qi Dou, Hao Chen, Cheng Chen, Gong‐Jie Li, Ze‐Fei Jiang, Pheng‐Ann Heng. <br>
-		<em>Journal of Magnetic Resonance Imaging (<b>JMRI</b>)</em>, 2019.
-		</td>
-	</tr>
-	<tr>&nbsp</tr>
-    <tr>&nbsp</tr>
-    <tr>&nbsp</tr>
-
-	<!--
-	<tr>
-		<td width="270">
-		<img src="./indexpics/miccai_23_fed.png" width="250px" style="border: 2px dotted lightgray; border-radius: 10px;" class="center"  >
-		</td>		
-		<td> Scale Federated Learning for Label Set Mismatch in Medical Image Classification. <br>
-		Zhipeng Deng, <b>Luyang Luo</b>, Hao Chen. <br>
-		<em>Medical Image Computing and Computer Assisted Intervention (<b>MICCAI</b>)</em>, 2023.
-		<i><p style="color: red; display: inline;">(Early Accept)</p></i>
-		<p>[<a href="https://arxiv.org/pdf/2303.15749.pdf">paper</a>][<a href="https://github.com/dzp2095/FedLSM">code</a>]</p>
-		</td>
-	</tr>
-	<tr>&nbsp</tr>
-    <tr>&nbsp</tr>
-    <tr>&nbsp</tr>
-	-->
-
-	<tr>
-		<td width="270">
-		<img src="./indexpics/lancet19_glaucoma.jpg" width="250px" style="border: 2px dotted lightgray; border-radius: 10px;" class="center"  >
-		</td>		
-		<td> <a href="https://www.sciencedirect.com/science/article/pii/S2589750019300858" target="_blank">Detection of Glaucomatous Optic Neuropathy with Spectral-domain Optical Coherence Tomography: A Retrospective Training and Validation Deep-learning Analysis.</a> <br>
-		An Ran Ran, Carol Y Cheung, Xi Wang, Hao Chen, <b>Luyang Luo</b>, Poemen P Chan, Mandy OM Wong, Robert T Chang, Suria S Mannil, Alvin L Young, Hon-wah Yung, Chi Pui Pang, Pheng-Ann Heng, Clement C Tham. <br>
-		<em><b>The Lancet Digital Health</b></em>, 2019.
-		<i><p style="color: red; display: inline;">(Cover Page)</p></i>
-		<p>	[<a href="https://www.ovs.cuhk.edu.hk/dr-carol-cheungs-ai-gon-image-was-selected-for-cover-story-in-lancet-digital-health/" target="_blank">news</a>]</p>
-		</td>
-	</tr>
-	<tr>&nbsp</tr>
-    <tr>&nbsp</tr>
-    <tr>&nbsp</tr>
-
-
-</tbody></table>
-
-
-
-<h2>Academic Services</h2>
-<ul>
-	<li>
-		<b>Editor:</b><br>
-		<a href="https://www.sciencedirect.com/journal/computerized-medical-imaging-and-graphics/about/call-for-papers#trustworthy-artificial-intelligence-for-medical-imaging">CMIG Special Issue on Trustworthy Artificial Intelligence for Medical Imaging</a> [Guest Editor]<br>
-		<a href="https://www.embs.org/jbhi/wp-content/uploads/sites/18/2023/05/Trustworthy-20230401_CallforPapers_TMLH.pdf">IEEE J-BHI Special Issue on “Trustworthy Machine Learning for Health Informatics”</a> [Guest Editor]<br>
-		<a href="https://link.springer.com/book/10.1007/978-3-031-39539-0" target="_blank">“Trustworthy Machine Learning for Healthcare”, TML4H 2023, Proceedings.</a> [Editor]<br>
-		<p style="margin-top:3px"></p>
-	</li>
-	<li>
-		<b>Area Chair&Program Chair&Meta Reviewer:</b><br>
-		MICCAI 2025<br>
-		IJCAI 2024 workshop on TAI4H<br>
-		ICLR 2023 workshop on TML4H<br>
-		ICCV CVAMD 2023<br>
-		4th International Workshop on MMMI<br>
-		<p style="margin-top:3px"></p>
-	</li>
-	<li>
-		<b>Conference Reviews:</b><br>
-			MICCAI 2024, 2023, 2022, 2021<br>
-			CVPR 2025, 2024<br>
-			AAAI 2025, 2024, 2022<br>
-			ISBI 2022<br>
-		<p style="margin-top:3px"></p>
-	</li>
-	<li>
-		<b>Journal Reviews:</b><br>
-			Nature Cancer <br>
-			NEJM AI <br>
-			IEEE Transactions on Medical Imaging (TMI) <br>
-			Medical Image Analysis (MedIA) <br>
-			IEEE Transactions on Image Processing (TIP) <br>
-			IEEE Journal of Biomedical and Health Informatics (IEEE JBHI)<br>
-			Scientific Reports <br>
-			Medical Physics <br>
-			Journal of Magnetic Resonance Imaging (JMRI) <br>
-			Expert Systems With Applications (ESWA) <br>
-		<p style="margin-top:3px"></p>		
-	</li>
-</ul>
-
-
-<h2>Supervising</h2>
-<table id="tbTeaching" border="0" width="100%">
-	<tbody>
-
-		<tr>
-			<td> <a href="https://www.rajpurkarlab.hms.harvard.edu/medical-ai-bootcamp-harvard-stanford">Harvard/Stanford Medical AI Bootcamp</a></td>
-		</tr>
+				<!-- Ada-ABC Paper -->
+				<div class="publication-card bg-white rounded-lg shadow-sm overflow-hidden">
+					<div class="flex flex-col md:flex-row">
+						<div class="md:w-1/4 p-4">
+							<img src="./indexpics/Ada-ABC.png" alt="Ada-ABC" 
+								 class="w-full h-38 object-cover rounded-lg">
+						</div>
+						<div class="md:w-3/4 p-6">
+							<h3 class="text-xl font-semibold text-gray-900 mb-3">
+								<a href="https://arxiv.org/abs/2401.11713" class="hover:text-blue-600">
+									Medical Image Debiasing by Learning Adaptive Agreement from a Biased Council
+								</a>
+							</h3>
+							
+							<p class="text-gray-600 mb-4">
+								<span class="author-highlight font-bold">Luyang Luo</span>, 
+								Xin Huang, Minghao Wang, Zhuoyue Wan, Hao Chen
+							</p>
+							
+							<p class="text-gray-700 mb-4">
+								<span class="font-medium">Preprint</span>, 2024
+							</p>
+						</div>
+					</div>
+				</div>
 			
-		<tr>
-			<td> <a href="https://tommy-bie.github.io" target="_blank">Yequan Bie</a> (PhD at HKUST)</td>
-		</tr>
-		<tr>
-			<td> <a href="https://scholar.google.com/citations?hl=zh-CN&view_op=list_works&gmla=AKKJWFcxp5HFqpDcrs5wed5a910PNrZgCDUKMdueEdUAojNIXwSqIaTGk6YzYsh91QaLGFZ9z60nFg45s0bTEUtPE_3-mRorNrNwc4jGdyx-t-Ctil1BiCAtuDxGnz3vxAc&user=6QlQF1oAAAAJ" target="_blank">Shu Yang</a> (PhD at HKUST)</td>
-		</tr>
-		<tr>
-			<td> <a href="https://zhi-xuan-chen.github.io/homepage/" target="_blank">Zhixuan Chen</a> (PhD at HKUST)</td>
-		</tr>
-		<tr>
-			<td> <a href="https://academic.peterkam.top/" target="_blank">Cheng Jin</a> (PhD at HKUST)</td>
-		</tr>
-		<tr>
-			<td> <a href="https://github.com/Davidczy" target="_blank">Zhiyuan Cai</a> (PhD at HKUST)</td>
-		</tr>
-		<tr>
-			<td> <a href="https://jiaxinzhuang.github.io/" target="_blank">Jiaxin Zhuang</a> (PhD at HKUST)</td>
-		</tr>
-		<tr>
-			<td> <a href="https://hkustsmartlab.netlify.app/people/wen-qiang-li/" target="_blank">Wenqiang Li</a> (PhD at HKUST)</td>
-		</tr>
-		<tr>
-			<td> <a href="https://www.linkedin.com/in/xiaoyuzlovesds/" target="_blank">Xiaoyu Zheng</a> (PhD at HKUST)</td>
-		</tr>
-		<tr>
-			<td> <a href="https://dootmaan.github.io" target="_blank">Hongyi Wang</a> (PhD at Zhejiang University)</td>
-		</tr>
-		<tr>
-			<td> <a href="https://scholar.google.com.hk/citations?user=uxpMVsYAAAAJ&hl=zh-CN" target="_blank">Zhizhong Chai</a> (PhD at HKUST)</td>
-		</tr>
-		<tr>
-			<td> <a href="https://wmh1203.github.io/" target="_blank">Minghao Wang</a> (Msc at HKUST -> PhD at HKUST)</td>
-		</tr>
-		<tr>
-			<td> <a href="https://scholar.google.com.hk/citations?user=5Ki41BAAAAAJ" target="_blank">Dunyuan Xu</a> (Msc at CUHK -> PhD at CUHK)</td>
-		</tr>
-		<tr>
-			<td> Yi Xin (MPhil at HKUST)</td>
-		</tr>
-		<tr>
-			<td> Yifeng Wang (Master at THU)</td>
-		</tr>
+				<!-- TNNLS Paper -->
+				<div class="publication-card bg-white rounded-lg shadow-sm overflow-hidden">
+					<div class="flex flex-col md:flex-row">
+						<div class="md:w-1/4 p-4">
+							<img src="./indexpics/mtl-scale-seg.png" alt="MTL Scale Seg" 
+								 class="w-full h-38 object-cover rounded-lg">
+						</div>
+						<div class="md:w-3/4 p-6">
+							<h3 class="text-xl font-semibold text-gray-900 mb-3">
+								<a href="https://arxiv.org/pdf/2305.19063.pdf" class="hover:text-blue-600">
+									Scale-aware Super-resolution Network with Dual Affinity Learning for Lesion Segmentation from Medical Images
+								</a>
+							</h3>
+							
+							<p class="text-gray-600 mb-4">
+								<span class="author-highlight font-bold">Luyang Luo</span>, 
+								Yanwen Li*, Huangjing Ling, Pheng-Ann Heng, Hao Chen
+							</p>
+							
+							<p class="text-gray-700 mb-4">
+								<span class="font-medium">IEEE Transactions on Neural Networks and Learning Systems (IEEE TNNLS)</span>, 2024
+							</p>
 
-	</tbody>
-</table>
+							<div class="flex flex-wrap gap-2">
+								<a href="https://github.com/poiuohke/SASR_Net" 
+								   class="inline-flex items-center px-3 py-1 border border-gray-300 rounded-md text-sm font-medium text-gray-700 bg-white hover:bg-gray-50">
+									<i data-feather="github" class="w-4 h-4 mr-1"></i>
+									Code
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+					
+				<!-- ICMIL Paper -->
+				<div class="publication-card bg-white rounded-lg shadow-sm overflow-hidden">
+					<div class="flex flex-col md:flex-row">
+						<div class="md:w-1/4 p-4">
+							<img src="./indexpics/ICMIL.png" alt="ICMIL" 
+								class="w-full h-38 object-cover rounded-lg">
+						</div>
+						<div class="md:w-3/4 p-6">
+							<h3 class="text-xl font-semibold text-gray-900 mb-3">
+								<a href="https://arxiv.org/abs/2312.01099" class="hover:text-blue-600">
+									Rethinking Multiple Instance Learning for Whole Slide Image Classification: A Bag-Level Classifier is a Good Instance-Level Teacher
+								</a>
+							</h3>
+							
+							<p class="text-gray-600 mb-4">
+								Hongyi Wang, <span class="author-highlight font-bold">Luyang Luo*</span>, 
+								Fang Wang, Ruofeng Tong, Yen-Wei Chen, Hongjie Hu, Lanfen Lin, Hao Chen
+							</p>
+							
+							<p class="text-gray-700 mb-4">
+								<span class="font-medium">IEEE Transactions on Medical Imaging (IEEE TMI)</span>, 2024
+							</p>
+							
+							<div class="flex flex-wrap gap-2">
+								<a href="https://github.com/Dootmaan/ICMIL/tree/confidence_based" 
+								class="inline-flex items-center px-3 py-1 border border-gray-300 rounded-md text-sm font-medium text-gray-700 bg-white hover:bg-gray-50">
+									<i data-feather="github" class="w-4 h-4 mr-1"></i>
+									Code
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- ORFNet Paper -->
+				<div class="publication-card bg-white rounded-lg shadow-sm overflow-hidden">
+					<div class="flex flex-col md:flex-row">
+						<div class="md:w-1/4 p-4">
+							<img src="./indexpics/orfnetv2.png" alt="ORFNet" 
+								class="w-full h-38 object-cover rounded-lg">
+						</div>
+						<div class="md:w-3/4 p-6">
+							<h3 class="text-xl font-semibold text-gray-900 mb-3">
+								<a href="https://arxiv.org/pdf/2306.13301.pdf" class="hover:text-blue-600">
+									Deep Omni-supervised Learning for Rib Fracture Detection from Chest Radiology Images
+								</a>
+							</h3>
+							
+							<p class="text-gray-600 mb-4">
+								Zhizhong Chai, <span class="author-highlight font-bold">Luyang Luo*</span>, 
+								Huangjing Ling, Pheng-Ann Heng, Hao Chen
+							</p>
+							
+							<p class="text-gray-700 mb-4">
+								<span class="font-medium">IEEE Transactions on Medical Imaging (IEEE TMI)</span>, 2024
+							</p>
+							
+							<div class="flex flex-wrap gap-2">
+								<a href="https://github.com/zhizhongchai/ORF-Net/tree/main" 
+								class="inline-flex items-center px-3 py-1 border border-gray-300 rounded-md text-sm font-medium text-gray-700 bg-white hover:bg-gray-50">
+									<i data-feather="github" class="w-4 h-4 mr-1"></i>
+									Code
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- MICA Paper -->
+				<div class="publication-card bg-white rounded-lg shadow-sm overflow-hidden">
+					<div class="flex flex-col md:flex-row">
+						<div class="md:w-1/4 p-4">
+							<img src="./indexpics/MICA.png" alt="MICA" 
+								class="w-full h-38 object-cover rounded-lg">
+						</div>
+						<div class="md:w-3/4 p-6">
+							<h3 class="text-xl font-semibold text-gray-900 mb-3">
+								<a href="https://arxiv.org/abs/2401.08527" class="hover:text-blue-600">
+									MICA: Towards Explainable Skin Lesion Diagnosis via Multi-Level Image-Concept Alignment
+								</a>
+							</h3>
+							
+							<p class="text-gray-600 mb-4">
+								Yequan Bie, <span class="author-highlight font-bold">Luyang Luo</span>, Hao Chen
+							</p>
+							
+							<p class="text-gray-700 mb-4">
+								<span class="font-medium">AAAI Conference on Artificial Intelligence (AAAI)</span>, 2024
+							</p>
+							
+							<div class="flex flex-wrap gap-2">
+								<a href="https://github.com/Tommy-Bie/MICA" 
+								class="inline-flex items-center px-3 py-1 border border-gray-300 rounded-md text-sm font-medium text-gray-700 bg-white hover:bg-gray-50">
+									<i data-feather="github" class="w-4 h-4 mr-1"></i>
+									Code
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- OvcaFinder Paper -->
+				<div class="publication-card bg-white rounded-lg shadow-sm overflow-hidden">
+					<div class="flex flex-col md:flex-row">
+						<div class="md:w-1/4 p-4">
+							<img src="./indexpics/OvcaFinder.png" alt="OvcaFinder" 
+								class="w-full h-38 object-cover rounded-lg">
+						</div>
+						<div class="md:w-3/4 p-6">
+							<h3 class="text-xl font-semibold text-gray-900 mb-3">
+								<a href="https://www.nature.com/articles/s41467-024-46700-2" class="hover:text-blue-600">
+									Development and validation of an interpretable model integrating multimodal information for improving ovarian cancer diagnosis
+								</a>
+							</h3>
+							
+							<p class="text-gray-600 mb-4">
+								Huiling Xiang*, Yongjie Xiao*, Fang Li, Chunyan Li, Lixian Liu, Tingting Deng, Cuiju Yan, 
+								Fengtao Zhou, Xi Wang, Jinjing Ou, Qingguang Lin, Ruixia Hong, Lishu Huang, 
+								<span class="author-highlight font-bold">Luyang Luo</span>, Huangjing Lin, Xi Lin, Hao Chen
+							</p>
+							
+							<p class="text-gray-700 mb-4">
+								<span class="font-medium">Nature Communications</span>, 2024
+							</p>
+						</div>
+					</div>
+				</div>
+			
+				<!-- FedLSM Paper -->
+				<div class="publication-card bg-white rounded-lg shadow-sm overflow-hidden">
+					<div class="flex flex-col md:flex-row">
+						<div class="md:w-1/4 p-4">
+							<img src="./indexpics/FedLSM.png" alt="FedLSM" 
+								class="w-full h-38 object-cover rounded-lg">
+						</div>
+						<div class="md:w-3/4 p-6">
+							<h3 class="text-xl font-semibold text-gray-900 mb-3">
+								<a href="https://arxiv.org/abs/2304.06931" class="hover:text-blue-600">
+									Scale Federated Learning for Label Set Mismatch in Medical Image Classification
+								</a>
+							</h3>
+							
+							<p class="text-gray-600 mb-4">
+								Zhipeng Deng, <span class="author-highlight font-bold">Luyang Luo</span>, Hao Chen
+							</p>
+							
+							<p class="text-gray-700 mb-4">
+								<span class="font-medium">International Conference on Medical Image Computing and Computer-Assisted Intervention (MICCAI)</span>, 2023
+							</p>
+							
+							<div class="flex flex-wrap gap-2">
+								<a href="https://github.com/dzp2095/FedLSM" 
+								class="inline-flex items-center px-3 py-1 border border-gray-300 rounded-md text-sm font-medium text-gray-700 bg-white hover:bg-gray-50">
+									<i data-feather="github" class="w-4 h-4 mr-1"></i>
+									Code
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- RadAI Paper -->
+				<div class="publication-card bg-white rounded-lg shadow-sm overflow-hidden">
+					<div class="flex flex-col md:flex-row">
+						<div class="md:w-1/4 p-4">
+							<img src="./indexpics/RadAI 2022.jpg" alt="RadAI" 
+								class="w-full h-38 object-cover rounded-lg">
+						</div>
+						<div class="md:w-3/4 p-6">
+							<h3 class="text-xl font-semibold text-gray-900 mb-3">
+								<a href="https://arxiv.org/abs/2104.10553" class="hover:text-blue-600">
+									Rethinking Annotation Granularity for Overcoming Shortcuts in Deep Learning–based Radiograph Diagnosis: A Multicenter Study
+								</a>
+							</h3>
+							
+							<p class="text-gray-600 mb-4">
+								<span class="author-highlight font-bold">Luyang Luo</span>, Hao Chen, Yongjie Xiao, Yanning Zhou, Xi Wang, 
+								Varut Vardhanabhuti, Mingxiang Wu, Chu Han, Zaiyi Liu, Xin Hao Benjamin Fang, 
+								Efstratios Tsougenis, Huangjing Lin, Pheng-Ann Heng
+							</p>
+							
+							<p class="text-gray-700 mb-4">
+								<span class="font-medium">Radiology: Artificial Intelligence</span>, 2022
+							</p>
+						</div>
+					</div>
+				</div>
+
+				<!-- PBBL Paper -->
+				<div class="publication-card bg-white rounded-lg shadow-sm overflow-hidden">
+					<div class="flex flex-col md:flex-row">
+						<div class="md:w-1/4 p-4">
+							<img src="./indexpics/MICCAI22 PBBL 2.jpg" alt="PBBL" 
+								class="w-full h-38 object-cover rounded-lg">
+						</div>
+						<div class="md:w-3/4 p-6">
+							<div class="flex flex-wrap gap-2 mb-3">
+								<span class="px-3 py-1 bg-red-100 text-red-800 text-sm font-medium rounded-full">
+									Early Accept
+								</span>
+							</div>
+							
+							<h3 class="text-xl font-semibold text-gray-900 mb-3">
+								<a href="https://arxiv.org/pdf/2203.09860.pdf" class="hover:text-blue-600">
+									Pseudo Bias-Balanced Learning for Debiased Chest X-ray Classification
+								</a>
+							</h3>
+							
+							<p class="text-gray-600 mb-4">
+								<span class="author-highlight font-bold">Luyang Luo</span>, Dunyuan Xu, Hao Chen, Tien-Tsin Wong, Pheng-Ann Heng
+							</p>
+							
+							<p class="text-gray-700 mb-4">
+								<span class="font-medium">International Conference on Medical Image Computing and Computer-Assisted Intervention (MICCAI)</span>, 2022
+							</p>
+							
+							<div class="flex flex-wrap gap-2">
+								<a href="https://github.com/LLYXC/PBBL" 
+								class="inline-flex items-center px-3 py-1 border border-gray-300 rounded-md text-sm font-medium text-gray-700 bg-white hover:bg-gray-50">
+									<i data-feather="github" class="w-4 h-4 mr-1"></i>
+									Code
+								</a>
+								<a href="https://github.com/LLYXC/PBBL/tree/main/dataset/csv" 
+								class="inline-flex items-center px-3 py-1 border border-gray-300 rounded-md text-sm font-medium text-gray-700 bg-white hover:bg-gray-50">
+									<i data-feather="database" class="w-4 h-4 mr-1"></i>
+									Data
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- OXnet Paper -->
+				<div class="publication-card bg-white rounded-lg shadow-sm overflow-hidden">
+					<div class="flex flex-col md:flex-row">
+						<div class="md:w-1/4 p-4">
+							<img src="./indexpics/miccai21_oxnet-2.png" alt="OXnet" 
+								class="w-full h-38 object-cover rounded-lg">
+						</div>
+						<div class="md:w-3/4 p-6">
+							<h3 class="text-xl font-semibold text-gray-900 mb-3">
+								<a href="https://arxiv.org/pdf/2104.03218.pdf" class="hover:text-blue-600">
+									OXnet: Deep Omni-supervised Thoracic Disease Detection from Chest X-rays
+								</a>
+							</h3>
+							
+							<p class="text-gray-600 mb-4">
+								<span class="author-highlight font-bold">Luyang Luo</span>, Hao Chen*, Yanning Zhou, Huangjing Lin, Pheng-Ann Heng
+							</p>
+							
+							<p class="text-gray-700 mb-4">
+								<span class="font-medium">International Conference on Medical Image Computing and Computer-Assisted Intervention (MICCAI)</span>, 2021
+							</p>
+							
+							<div class="flex flex-wrap gap-2">
+								<a href="https://github.com/LLYXC/OXnet" 
+								class="inline-flex items-center px-3 py-1 border border-gray-300 rounded-md text-sm font-medium text-gray-700 bg-white hover:bg-gray-50">
+									<i data-feather="github" class="w-4 h-4 mr-1"></i>
+									Code
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+					
+				<!-- COVID-19 Paper -->
+				<div class="publication-card bg-white rounded-lg shadow-sm overflow-hidden">
+					<div class="flex flex-col md:flex-row">
+						<div class="md:w-1/4 p-4">
+							<img src="./indexpics/miccai21_covid19-2.png" alt="COVID-19" 
+								class="w-full h-38 object-cover rounded-lg">
+						</div>
+						<div class="md:w-3/4 p-6">
+							<div class="flex flex-wrap gap-2 mb-3">
+								<span class="px-3 py-1 bg-red-100 text-red-800 text-sm font-medium rounded-full">
+									Oral Presentation
+								</span>
+							</div>
+							
+							<h3 class="text-xl font-semibold text-gray-900 mb-3">
+								<a href="https://arxiv.org/pdf/2104.03225.pdf" class="hover:text-blue-600">
+									Dual-Consistency Semi-Supervised Learning with Uncertainty Quantification for COVID-19 Lesion Segmentation from CT Images
+								</a>
+							</h3>
+							
+							<p class="text-gray-600 mb-4">
+								Yanwen Li, <span class="author-highlight font-bold">Luyang Luo*</span>, Huangjing Lin, Hao Chen, Pheng-Ann Heng
+							</p>
+							
+							<p class="text-gray-700 mb-4">
+								<span class="font-medium">International Conference on Medical Image Computing and Computer-Assisted Intervention (MICCAI)</span>, 2021
+							</p>
+							
+							<div class="flex flex-wrap gap-2">
+								<a href="https://github.com/poiuohke/UDC-Net" 
+								class="inline-flex items-center px-3 py-1 border border-gray-300 rounded-md text-sm font-medium text-gray-700 bg-white hover:bg-gray-50">
+									<i data-feather="github" class="w-4 h-4 mr-1"></i>
+									Code
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- TMI Paper -->
+				<div class="publication-card bg-white rounded-lg shadow-sm overflow-hidden">
+					<div class="flex flex-col md:flex-row">
+						<div class="md:w-1/4 p-4">
+							<img src="./indexpics/tmi20_cxr-2.png" alt="TMI" 
+								class="w-full h-38 object-cover rounded-lg">
+						</div>
+						<div class="md:w-3/4 p-6">
+							<h3 class="text-xl font-semibold text-gray-900 mb-3">
+								<a href="https://arxiv.org/pdf/2006.03796.pdf" class="hover:text-blue-600">
+									Deep Mining External Imperfect Data for Chest X-ray Disease Screening
+								</a>
+							</h3>
+							
+							<p class="text-gray-600 mb-4">
+								<span class="author-highlight font-bold">Luyang Luo</span>, Lequan Yu*, Hao Chen, Quande Liu, Xi Wang, Jiaqi Xu, Pheng-Ann Heng
+							</p>
+							
+							<p class="text-gray-700 mb-4">
+								<span class="font-medium">IEEE Transactions on Medical Imaging (IEEE TMI)</span>, 2020
+							</p>
+						</div>
+					</div>
+				</div>
+
+				<!-- MICCAI 2019 Paper -->
+				<div class="publication-card bg-white rounded-lg shadow-sm overflow-hidden">
+					<div class="flex flex-col md:flex-row">
+						<div class="md:w-1/4 p-4">
+							<img src="./indexpics/miccai19_angular.jpg" alt="Angular" 
+								class="w-full h-38 object-cover rounded-lg">
+						</div>
+						<div class="md:w-3/4 p-6">
+							<div class="flex flex-wrap gap-2 mb-3">
+								<span class="px-3 py-1 bg-red-100 text-red-800 text-sm font-medium rounded-full">
+									Early Accept
+								</span>
+							</div>
+							
+							<h3 class="text-xl font-semibold text-gray-900 mb-3">
+								<a href="https://arxiv.org/pdf/1906.02999.pdf" class="hover:text-blue-600">
+									Deep Angular Embedding and Feature Correlation Attention for Breast MRI Cancer Analysis
+								</a>
+							</h3>
+							
+							<p class="text-gray-600 mb-4">
+								<span class="author-highlight font-bold">Luyang Luo</span>, Hao Chen, Xi Wang, Qi Dou, Huangjing Lin, Juan Zhou, Gongjie Li, Pheng-Ann Heng
+							</p>
+							
+							<p class="text-gray-700 mb-4">
+								<span class="font-medium">Medical Image Computing and Computer Assisted Intervention (MICCAI)</span>, 2019
+							</p>
+						</div>
+					</div>
+				</div>
+
+				<!-- JMRI Paper -->
+				<div class="publication-card bg-white rounded-lg shadow-sm overflow-hidden">
+					<div class="flex flex-col md:flex-row">
+						<div class="md:w-1/4 p-4">
+							<img src="./indexpics/jmri19_weak.png" alt="JMRI" 
+								class="w-full h-38 object-cover rounded-lg">
+						</div>
+						<div class="md:w-3/4 p-6">
+							<h3 class="text-xl font-semibold text-gray-900 mb-3">
+								<a href="https://onlinelibrary.wiley.com/doi/pdf/10.1002/jmri.26721" class="hover:text-blue-600">
+									Weakly Supervised 3D Deep Learning for Breast Cancer Classification and Localization of the Lesions in MR Images
+								</a>
+							</h3>
+							
+							<p class="text-gray-600 mb-4">
+								Juan Zhou, <span class="author-highlight font-bold">Luyang Luo*</span>, Qi Dou, Hao Chen, Cheng Chen, Gong‐Jie Li, Ze‐Fei Jiang, Pheng‐Ann Heng
+							</p>
+							
+							<p class="text-gray-700 mb-4">
+								<span class="font-medium">Journal of Magnetic Resonance Imaging (JMRI)</span>, 2019
+							</p>
+						</div>
+					</div>
+				</div>
+
+				<!-- Lancet Paper -->
+				<div class="publication-card bg-white rounded-lg shadow-sm overflow-hidden">
+					<div class="flex flex-col md:flex-row">
+						<div class="md:w-1/4 p-4">
+							<img src="./indexpics/lancet19_glaucoma.jpg" alt="Lancet" 
+								class="w-full h-38 object-cover rounded-lg">
+						</div>
+						<div class="md:w-3/4 p-6">
+							<div class="flex flex-wrap gap-2 mb-3">
+								<span class="px-3 py-1 bg-red-100 text-red-800 text-sm font-medium rounded-full">
+									Cover Page
+								</span>
+							</div>
+							
+							<h3 class="text-xl font-semibold text-gray-900 mb-3">
+								<a href="https://www.sciencedirect.com/science/article/pii/S2589750019300858" class="hover:text-blue-600">
+									Detection of Glaucomatous Optic Neuropathy with Spectral-domain Optical Coherence Tomography: A Retrospective Training and Validation Deep-learning Analysis
+								</a>
+							</h3>
+							
+							<p class="text-gray-600 mb-4">
+								An Ran Ran, Carol Y Cheung, Xi Wang, Hao Chen, <span class="author-highlight font-bold">Luyang Luo</span>, 
+								Poemen P Chan, Mandy OM Wong, Robert T Chang, Suria S Mannil, Alvin L Young, Hon-wah Yung, 
+								Chi Pui Pang, Pheng-Ann Heng, Clement C Tham
+							</p>
+							
+							<p class="text-gray-700 mb-4">
+								<span class="font-medium">The Lancet Digital Health</span>, 2019
+							</p>
+							
+							<div class="flex flex-wrap gap-2">
+								<a href="https://www.ovs.cuhk.edu.hk/dr-carol-cheungs-ai-gon-image-was-selected-for-cover-story-in-lancet-digital-health/" 
+								class="inline-flex items-center px-3 py-1 border border-gray-300 rounded-md text-sm font-medium text-gray-700 bg-white hover:bg-gray-50">
+									<i data-feather="external-link" class="w-4 h-4 mr-1"></i>
+									News
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+
+        
+
+	<div class="max-w-7xl mx-auto px-4">
+        <h2 class="text-3xl font-bold text-gray-900 mb-8">Teaching Experience</h2>
+
+        <div class="grid gap-6 md:grid-cols-2">
+            <!-- 2020-2021 -->
+            <div class="course-card bg-white rounded-lg shadow-sm p-6">
+                <div class="flex items-center gap-3 mb-4">
+                    <i data-feather="calendar" class="w-5 h-5 text-blue-600"></i>
+                    <h3 class="text-lg font-semibold text-gray-900">2020-2021</h3>
+                </div>
+                <div class="flex items-start gap-3">
+                    <i data-feather="code" class="w-5 h-5 mt-1 text-blue-600"></i>
+                    <div>
+                        <h4 class="font-medium text-gray-900">Fundamental Computing with C++ (CSCI 1540)</h4>
+                        <p class="text-gray-600 mt-1">
+                            Introduction to programming concepts and practices using C++. 
+                            Covers fundamental programming constructs, algorithms, and problem-solving techniques.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2019-2020 First Course -->
+            <div class="course-card bg-white rounded-lg shadow-sm p-6">
+                <div class="flex items-center gap-3 mb-4">
+                    <i data-feather="calendar" class="w-5 h-5 text-green-600"></i>
+                    <h3 class="text-lg font-semibold text-gray-900">2019-2020</h3>
+                </div>
+                <div class="flex items-start gap-3">
+                    <i data-feather="terminal" class="w-5 h-5 mt-1 text-green-600"></i>
+                    <div>
+                        <h4 class="font-medium text-gray-900">Computer Principles and C Programming (CSCI 1510)</h4>
+                        <p class="text-gray-600 mt-1">
+                            Basic computer concepts and C programming fundamentals. 
+                            Focus on programming principles and practical implementation.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2019-2020 Second Course -->
+            <div class="course-card bg-white rounded-lg shadow-sm p-6">
+                <div class="flex items-center gap-3 mb-4">
+                    <i data-feather="calendar" class="w-5 h-5 text-purple-600"></i>
+                    <h3 class="text-lg font-semibold text-gray-900">2019-2020</h3>
+                </div>
+                <div class="flex items-start gap-3">
+                    <i data-feather="cpu" class="w-5 h-5 mt-1 text-purple-600"></i>
+                    <div>
+                        <h4 class="font-medium text-gray-900">Digital Logic and Systems (ENGG 2020)</h4>
+                        <p class="text-gray-600 mt-1">
+                            Study of digital systems, boolean algebra, logic gates, and digital circuit design principles.
+                            Practical applications in modern digital systems.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2018-2019 -->
+            <div class="course-card bg-white rounded-lg shadow-sm p-6">
+                <div class="flex items-center gap-3 mb-4">
+                    <i data-feather="calendar" class="w-5 h-5 text-red-600"></i>
+                    <h3 class="text-lg font-semibold text-gray-900">2018-2019</h3>
+                </div>
+                <div class="flex items-start gap-3">
+                    <i data-feather="cpu" class="w-5 h-5 mt-1 text-red-600"></i>
+                    <div>
+                        <h4 class="font-medium text-gray-900">Digital Logic and Systems (ENGG 2020)</h4>
+                        <p class="text-gray-600 mt-1">
+                            Fundamentals of digital logic and computer organization.
+                            Coverage of combinational and sequential circuits, memory systems, and basic computer architecture.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
 
 
-<h2>Teaching</h2>
-<table id="tbTeaching&Supervising" border="0" width="100%">
-	<tbody>
-		<tr>
-			<td> 2020-2021</td><td></td><td>Fundamental Computing with C++ (CSCI 1540)</td>
-		</tr>
-		<tr>
-			<td> 2019-2020</td><td></td><td>Computer Principles and C Programming (CSCI 1510)</td>
-		</tr>
-		<tr>
-			<td> 2019-2020</td><td></td><td>Digital Logic and Systems (ENGG 2020)</td>
-		</tr>
-		<tr>
-			<td> 2018-2019</td><td></td><td>Digital Logic and Systems (ENGG 2020)</td>
-		</tr>
 
-	</tbody>
-</table>
-
-
-<div id="footer">
-	<div id="footer-text"></div>
-</div>
-	<p><center>
-      	<div id="clustrmaps-widget" style="width:20%">
-		<script type="text/javascript" id="clstr_globe" src="//cdn.clustrmaps.com/globe.js?d=Se_iOWoa_E5xFQ-3xHdWfIv9l7HN3JRKdpLZ4PpPlYk"></script>
-	</div>  
+		<footer class="text-center py-8">
+			
+			<div class="text-sm text-gray-600 mt-4">
+				<a href="https://hms.harvard.edu" class="hover:text-red-900">Harvard Medical School</a> |
+				<a href="https://dbmi.hms.harvard.edu" class="hover:text-red-900">Department of Biomedical Informatics</a>
+			</div>
+			
 	
-	<br>
-        &copy; Luyang Luo | Last updated: Nov 2024
-     
-      </center></p>
+			<p class="mt-6 text-gray-600 text-sm">
+				© Luyang Luo | Last updated: Feb 2025
+			</p>
+		</footer>
+    </div>
 
-
-</div>
-
-</body></html>
+    <script>
+        // Initialize Feather Icons
+        document.addEventListener('DOMContentLoaded', function() {
+            feather.replace();
+        });
+    </script>
+</body>
+</html>
