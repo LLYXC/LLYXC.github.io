@@ -24,6 +24,7 @@
             overflow-y: auto;
             display: flex;
             justify-content: center; /* Center the content container */
+            z-index: 30; /* Ensure panel stays above other content */
         }
 
         .left-panel-content {
@@ -215,9 +216,77 @@
             background-color: #A51C30;
             font-weight: 600;
         }
+
+        /* Enhanced mobile responsiveness */
+        @media (max-width: 768px) {
+            .left-panel {
+                width: 100%;
+                max-width: 100%;
+                height: 100vh;
+                transform: translateX(-100%);
+                transition: transform 0.3s ease-in-out;
+                padding: 2rem;
+            }
+
+            .left-panel.active {
+                transform: translateX(0);
+            }
+
+            .left-panel-content {
+                max-width: 100%;
+            }
+
+            .top-bar {
+                left: 0;
+                padding: 0 1rem;
+                z-index: 20;
+            }
+
+            .main-content {
+                margin-left: 0;
+                width: 100%;
+                padding: 1rem;
+            }
+
+            /* Mobile menu button */
+            .menu-button {
+                display: block;
+                position: fixed;
+                top: 10px;
+                left: 10px;
+                z-index: 40;
+                background-color: white;
+                border: 1px solid #edf2f7;
+                border-radius: 4px;
+                padding: 0.5rem;
+                cursor: pointer;
+            }
+
+            /* Adjust navigation for mobile */
+            .top-bar .flex {
+                flex-wrap: wrap;
+                justify-content: flex-end;
+            }
+
+            .nav-link {
+                font-size: 0.8rem;
+                padding: 0.25rem 0.5rem;
+            }
+        }
+
+        @media (min-width: 769px) {
+            .menu-button {
+                display: none;
+            }
+        }
     </style>
 </head>
 <body class="bg-white">
+    <!-- Mobile Menu Button -->
+    <button id="menuButton" class="menu-button">
+        <i data-feather="menu"></i>
+    </button>
+
     <!-- Left Panel -->
     <div class="left-panel">
         <div class="left-panel-content">
@@ -569,7 +638,31 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            // Initialize Feather icons
             feather.replace();
+
+            // Mobile menu functionality
+            const menuButton = document.getElementById('menuButton');
+            const leftPanel = document.querySelector('.left-panel');
+            const mainContent = document.querySelector('.main-content');
+
+            function toggleMenu() {
+                leftPanel.classList.toggle('active');
+            }
+
+            if (menuButton) {
+                menuButton.addEventListener('click', toggleMenu);
+            }
+
+            // Close menu when clicking outside
+            document.addEventListener('click', function(event) {
+                const isClickInsidePanel = leftPanel.contains(event.target);
+                const isClickOnButton = menuButton.contains(event.target);
+                
+                if (!isClickInsidePanel && !isClickOnButton && leftPanel.classList.contains('active')) {
+                    leftPanel.classList.remove('active');
+                }
+            });
         });
     </script>
 </body>
