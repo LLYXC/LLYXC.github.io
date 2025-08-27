@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords" content="Luyang Luo, DBMI, Harvard">
+    <meta name="description" content="Luyang Luo's Teaching and Mentorship">
+    <title>Teaching & Mentorship - Luyang Luo</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.29.0/feather.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize Feather icons
+            feather.replace();
+
+            // Mobile menu functionality
+            const menuButton = document.getElementById('menuButton');
+            const leftPanel = document.querySelector('.left-panel');
+            const mainContent = document.querySelector('.main-content');
+
+            function toggleMenu() {
+                leftPanel.classList.toggle('active');
+            }
+
+            if (menuButton) {
+                menuButton.addEventListener('click', toggleMenu);
+            }
+
+            // Close menu when clicking outside
+            document.addEventListener('click', function(event) {
+                const isClickInsidePanel = leftPanel.contains(event.target);
+                const isClickOnButton = menuButton.contains(event.target);
+                
+                if (!isClickInsidePanel && !isClickOnButton && leftPanel.classList.contains('active')) {
+                    leftPanel.classList.remove('active');
+                }
+            });
+        });
+    </script>
+
+    <style>
+        /* Left panel styles */
+        .left-panel {
+            position: fixed;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 33.333%;
+            max-width: 500px;
+            background-color: white;
+            padding: 3rem;
+            overflow-y: auto;
+            display: flex;
+            justify-content: center;
+            z-index: 30;
+        }
+
+        .left-panel-content {
+            width: 80%;
+            max-width: 300px;
+        }
+
+        .top-bar {
+            position: fixed;
+            top: 0;
+            left: min(500px, 33.333%);
+            right: 0;
+            height: 50px;
+            background-color: white;
+            z-index: 10;
+        }
+
+        .main-content {
+            margin-left: min(500px, 33.333%);
+            margin-top: 50px;
+            padding: 2rem;
+            background-color: white;
+            min-height: calc(100vh - 50px);
+        }
+
+        /* Profile section styles */
+        .profile-photo {
+            width: 300px;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin: 0 auto 1.5rem;
+        }
+
+        .profile-name {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #1a202c;
+            margin-bottom: 0.5rem;
+        }
+
+        .profile-title {
+            font-size: 1.1rem;
+            color: #4a5568;
+            margin-bottom: 0.5rem;
+        }
+
+        .profile-affiliation {
+            font-size: 1rem;
+            color: #4a5568;
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-info {
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
+
+        .social-links {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .social-link {
+            display: flex;
+            align-items: center;
+            color: #4a5568;
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: color 0.2s;
+        }
+
+        .social-link:hover {
+            color: #A51C30;
+        }
+
+        .social-icon {
+            width: 20px;
+            height: 20px;
+            margin-right: 8px;
+        }
+
+        /* Navigation styles */
+        .nav-link {
+            color: #A51C30;
+            text-decoration: none;
+            font-size: 0.9rem;
+            padding: 0.5rem 1rem;
+            transition: all 0.2s;
+            letter-spacing: 1px;
+            border-radius: 0.25rem;
+        }
+
+        .nav-link:hover {
+            color: #A51C30;
+            background-color: #f3f4f6;
+        }
+
+        .nav-link.active {
+            color: white;
+            background-color: #A51C30;
+            font-weight: 600;
+        }
+
+        /* Card styles */
+        .course-card, .student-card {
+            transition: all 0.3s ease;
+        }
+        .course-card:hover, .student-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 1280px) {
+            .left-panel {
+                width: 400px;
+            }
+            .top-bar {
+                left: 400px;
+            }
+            .main-content {
+                margin-left: 400px;
+            }
+        }
+
+        @media (max-width: 1024px) {
+            .left-panel {
+                width: 350px;
+            }
+            .top-bar {
+                left: 350px;
+            }
+            .main-content {
+                margin-left: 350px;
+            }
+        }
+
+        /* Enhanced mobile responsiveness */
+        @media (max-width: 768px) {
+            .left-panel {
+                width: 100%;
+                max-width: 100%;
+                height: 100vh;
+                transform: translateX(-100%);
+                transition: transform 0.3s ease-in-out;
+                padding: 2rem;
+            }
+
+            .left-panel.active {
+                transform: translateX(0);
+            }
+
+            .left-panel-content {
+                max-width: 100%;
+            }
+
+            .top-bar {
+                left: 0;
+                padding: 0 1rem;
+                z-index: 20;
+            }
+
+            .main-content {
+                margin-left: 0;
+                width: 100%;
+                padding: 1rem;
+            }
+
+            /* Mobile menu button */
+            .menu-button {
+                display: block;
+                position: fixed;
+                top: 10px;
+                left: 10px;
+                z-index: 40;
+                background-color: white;
+                border: 1px solid #edf2f7;
+                border-radius: 4px;
+                padding: 0.5rem;
+                cursor: pointer;
+            }
+
+            /* Adjust navigation for mobile */
+            .top-bar .flex {
+                flex-wrap: wrap;
+                justify-content: flex-end;
+            }
+
+            .nav-link {
+                font-size: 0.8rem;
+                padding: 0.25rem 0.5rem;
+            }
+
+            /* Adjust teaching cards for mobile */
+            .grid {
+                grid-template-columns: 1fr !important;
+            }
+
+            .course-card,
+            .student-card {
+                margin-bottom: 1rem;
+            }
+
+            h2.text-2xl {
+                font-size: 1.5rem;
+                margin-bottom: 1rem;
+            }
+        }
+
+        @media (min-width: 769px) {
+            .menu-button {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body class="bg-white">
+    <!-- Mobile Menu Button -->
+    <button id="menuButton" class="menu-button">
+        <i data-feather="menu"></i>
+    </button>
+
+    <!-- Left Panel -->
+    <div class="left-panel">
+        <div class="left-panel-content">
+            <div class="text-center">
+                <img src="./pic/portrait.jpg" alt="Luyang Luo" class="profile-photo">
+                <h1 class="profile-name">Luyang Luo (骆路阳)</h1>
+                <h2 class="profile-title">Post-doctoral Fellow</h2>
+                <div class="profile-affiliation">
+                    <a href="https://dbmi.hms.harvard.edu/" class="text-red-900 hover:text-red-700">
+                        Department of Biomedical Informatics
+                    </a><br>
+                    <a href="https://hms.harvard.edu" class="text-red-900 hover:text-red-700">
+                        Harvard Medical School
+                    </a>
+                </div>
+            </div>
+
+            <div class="contact-info">
+                <p class="mb-2">
+                    <i data-feather="mail" class="inline w-4 h-4 mr-2"></i>
+                    luyang_luo@hms.harvard.edu
+                </p>
+                <p>
+                    <i data-feather="map-pin" class="inline w-4 h-4 mr-2"></i>
+                    Boston
+                </p>
+            </div>
+
+            <div class="social-links">
+                <a href="https://scholar.google.com.hk/citations?user=eD1O_vAAAAAJ&hl=en" class="social-link">
+                    <img src="./pic/google_scholar.png" alt="Google Scholar" class="social-icon">
+                    Google Scholar
+                </a>
+                <a href="https://github.com/LLYXC" class="social-link">
+                    <img src="./pic/github_s.jpg" alt="GitHub" class="social-icon">
+                    GitHub
+                </a>
+                <a href="https://x.com/LLYfromXC" class="social-link">
+                    <img src="./pic/twittwer.png" alt="Twitter" class="social-icon">
+                    Twitter
+                </a>
+                <a href="https://www.linkedin.com/in/luyang-luo" class="social-link">
+                    <img src="./pic/LinkedIn_s.png" alt="LinkedIn" class="social-icon">
+                    LinkedIn
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Top Navigation Bar -->
+    <div class="top-bar">
+        <div class="h-full flex items-center justify-center space-x-12">
+            <a href="index.html" class="nav-link">HOME</a>
+            <a href="publications.html" class="nav-link">PUBLICATIONS</a>
+            <a href="services.html" class="nav-link">ACADEMIC SERVICES</a>
+            <a href="teaching.html" class="nav-link active">MENTORING & TEACHING</a>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <h2 class="text-2xl font-bold text-gray-900 mb-8">Mentorship</h2>
+
+        <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            <!-- Medical AI Bootcamp -->
+            <div class="student-card bg-gradient-to-br from-blue-50 to-white rounded-lg shadow-sm p-6">
+                <div class="flex items-center gap-3 mb-4">
+                    <i data-feather="book" class="w-5 h-5 text-blue-600"></i>
+                    <h3 class="text-lg font-semibold text-gray-900">
+                        <a href="https://www.rajpurkarlab.hms.harvard.edu/medical-ai-bootcamp-harvard-stanford" 
+                           class="hover:text-blue-600 transition-colors">
+                            Harvard/MIT/Stanford Medical AI Bootcamp
+                        </a>
+                    </h3>
+                </div>
+            </div>
+
+            <!-- PhD Students at HKUST -->
+            <div class="student-card bg-white rounded-lg shadow-sm p-6 md:col-span-2">
+                <div class="flex items-center gap-3 mb-4">
+                    <i data-feather="users" class="w-5 h-5 text-green-600"></i>
+                    <h3 class="text-lg font-semibold text-gray-900">PhD Students at HKUST</h3>
+                </div>
+                <div class="grid gap-4 md:grid-cols-2">
+                    <ul class="space-y-3 text-gray-700">
+                        <li class="flex items-center gap-2">
+                            <i data-feather="user" class="w-4 h-4 text-green-600"></i>
+                            <a href="https://tommy-bie.github.io" class="hover:text-blue-600">Yequan Bie</a>
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <i data-feather="user" class="w-4 h-4 text-green-600"></i>
+                            <a href="https://scholar.google.com/citations?user=6QlQF1oAAAAJ" class="hover:text-blue-600">Shu Yang</a>
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <i data-feather="user" class="w-4 h-4 text-green-600"></i>
+                            <a href="https://zhi-xuan-chen.github.io/homepage/" class="hover:text-blue-600">Zhixuan Chen</a>
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <i data-feather="user" class="w-4 h-4 text-green-600"></i>
+                            <a href="https://academic.peterkam.top/" class="hover:text-blue-600">Cheng Jin</a>
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <i data-feather="user" class="w-4 h-4 text-green-600"></i>
+                            <a href="https://github.com/Davidczy" class="hover:text-blue-600">Zhiyuan Cai</a>
+                        </li>
+                    </ul>
+                    <ul class="space-y-3 text-gray-700">
+                        <li class="flex items-center gap-2">
+                            <i data-feather="user" class="w-4 h-4 text-green-600"></i>
+                            <a href="https://jiaxinzhuang.github.io/" class="hover:text-blue-600">Jiaxin Zhuang</a>
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <i data-feather="user" class="w-4 h-4 text-green-600"></i>
+                            <a href="https://hkustsmartlab.netlify.app/people/wen-qiang-li/" class="hover:text-blue-600">Wenqiang Li</a>
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <i data-feather="user" class="w-4 h-4 text-green-600"></i>
+                            <a href="https://www.linkedin.com/in/xiaoyuzlovesds/" class="hover:text-blue-600">Xiaoyu Zheng</a>
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <i data-feather="user" class="w-4 h-4 text-green-600"></i>
+                            <a href="https://scholar.google.com.hk/citations?user=uxpMVsYAAAAJ&hl=zh-CN" class="hover:text-blue-600">Zhizhong Chai</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Other Universities -->
+            <div class="student-card bg-white rounded-lg shadow-sm p-6">
+                <div class="flex items-center gap-3 mb-4">
+                    <i data-feather="award" class="w-5 h-5 text-purple-600"></i>
+                    <h3 class="text-lg font-semibold text-gray-900">Other Universities</h3>
+                </div>
+                <ul class="space-y-3 text-gray-700">
+                    <li class="flex items-center gap-2">
+                        <i data-feather="user" class="w-4 h-4 text-purple-600"></i>
+                        <a href="https://dootmaan.github.io" class="hover:text-blue-600">
+                            Hongyi Wang
+                            <span class="text-gray-500 text-sm">(PhD at Zhejiang University)</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Masters and MPhil Students -->
+            <div class="student-card bg-white rounded-lg shadow-sm p-6">
+                <div class="flex items-center gap-3 mb-4">
+                    <i data-feather="book-open" class="w-5 h-5 text-orange-600"></i>
+                    <h3 class="text-lg font-semibold text-gray-900">Masters and MPhil Students</h3>
+                </div>
+                <ul class="space-y-3 text-gray-700">
+                    <li class="flex items-center gap-2">
+                        <i data-feather="user" class="w-4 h-4 text-orange-600"></i>
+                        <a href="https://wmh1203.github.io/" class="hover:text-blue-600">
+                            Minghao Wang
+                            <span class="text-gray-500 text-sm">(MSc at HKUST → PhD at HKUST)</span>
+                        </a>
+                    </li>
+                    <li class="flex items-center gap-2">
+                        <i data-feather="user" class="w-4 h-4 text-orange-600"></i>
+                        <a href="https://scholar.google.com.hk/citations?user=5Ki41BAAAAAJ" class="hover:text-blue-600">
+                            Dunyuan Xu
+                            <span class="text-gray-500 text-sm">(MSc at CUHK → PhD at CUHK)</span>
+                        </a>
+                    </li>
+                    <li class="flex items-center gap-2">
+                        <i data-feather="user" class="w-4 h-4 text-orange-600"></i>
+                        <span>Yi Xin <span class="text-gray-500 text-sm">(MPhil at HKUST)</span></span>
+                    </li>
+                    <li class="flex items-center gap-2">
+                        <i data-feather="user" class="w-4 h-4 text-orange-600"></i>
+                        <span>Yifeng Wang <span class="text-gray-500 text-sm">(Master at THU)</span></span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <h2 class="text-3xl font-bold text-gray-900 my-8">Teaching Experience</h2>
+
+        <div class="grid gap-6 md:grid-cols-2">
+            <!-- 2020-2021 -->
+            <div class="course-card bg-white rounded-lg shadow-sm p-6">
+                <div class="flex items-center gap-3 mb-4">
+                    <i data-feather="calendar" class="w-5 h-5 text-blue-600"></i>
+                    <h3 class="text-lg font-semibold text-gray-900">2020-2021</h3>
+                </div>
+                <div class="flex items-start gap-3">
+                    <i data-feather="code" class="w-5 h-5 mt-1 text-blue-600"></i>
+                    <div>
+                        <h4 class="font-medium text-gray-900">Fundamental Computing with C++ (CSCI 1540)</h4>
+                        <p class="text-gray-600 mt-1">
+                            Introduction to programming concepts and practices using C++. 
+                            Covers fundamental programming constructs, algorithms, and problem-solving techniques.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2019-2020 First Course -->
+            <div class="course-card bg-white rounded-lg shadow-sm p-6">
+                <div class="flex items-center gap-3 mb-4">
+                    <i data-feather="calendar" class="w-5 h-5 text-green-600"></i>
+                    <h3 class="text-lg font-semibold text-gray-900">2019-2020</h3>
+                </div>
+                <div class="flex items-start gap-3">
+                    <i data-feather="terminal" class="w-5 h-5 mt-1 text-green-600"></i>
+                    <div>
+                        <h4 class="font-medium text-gray-900">Computer Principles and C Programming (CSCI 1510)</h4>
+                        <p class="text-gray-600 mt-1">
+                            Basic computer concepts and C programming fundamentals. 
+                            Focus on programming principles and practical implementation.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2019-2020 Second Course -->
+            <div class="course-card bg-white rounded-lg shadow-sm p-6">
+                <div class="flex items-center gap-3 mb-4">
+                    <i data-feather="calendar" class="w-5 h-5 text-purple-600"></i>
+                    <h3 class="text-lg font-semibold text-gray-900">2019-2020</h3>
+                </div>
+                <div class="flex items-start gap-3">
+                    <i data-feather="cpu" class="w-5 h-5 mt-1 text-purple-600"></i>
+                    <div>
+                        <h4 class="font-medium text-gray-900">Digital Logic and Systems (ENGG 2020)</h4>
+                        <p class="text-gray-600 mt-1">
+                            Study of digital systems, boolean algebra, logic gates, and digital circuit design principles.
+                            Practical applications in modern digital systems.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2018-2019 -->
+            <div class="course-card bg-white rounded-lg shadow-sm p-6">
+                <div class="flex items-center gap-3 mb-4">
+                    <i data-feather="calendar" class="w-5 h-5 text-red-600"></i>
+                    <h3 class="text-lg font-semibold text-gray-900">2018-2019</h3>
+                </div>
+                <div class="flex items-start gap-3">
+                    <i data-feather="cpu" class="w-5 h-5 mt-1 text-red-600"></i>
+                    <div>
+                        <h4 class="font-medium text-gray-900">Digital Logic and Systems (ENGG 2020)</h4>
+                        <p class="text-gray-600 mt-1">
+                            Study of digital systems, boolean algebra, logic gates, and digital circuit design principles.
+                            Practical applications in modern digital systems.
+					   </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="text-center py-8">
+            <div class="text-sm text-gray-600 mt-4">
+                <a href="https://hms.harvard.edu" class="hover:text-red-900">Harvard Medical School</a> |
+                <a href="https://dbmi.hms.harvard.edu" class="hover:text-red-900">Department of Biomedical Informatics</a>
+            </div>
+            <p class="mt-6 text-gray-600 text-sm">
+                © Luyang Luo | Last updated: Feb 2025
+            </p>
+        </footer>
+    </div>
+</body>
+</html> 
