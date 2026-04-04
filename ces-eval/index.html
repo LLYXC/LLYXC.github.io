@@ -323,13 +323,13 @@ function isPatientScored(srcIdx, pid) {
 }
 
 function esiLabel(acuity) {
-  const map = {1: 'Low', 2: 'Medium', 3: 'High'};
+  const map = {1: 'High', 2: 'Medium', 3: 'Low'};
   return map[acuity] || acuity || '-';
 }
 
 function esiText(str) {
   if (!str) return str;
-  return str.replace(/\bESI\s*1\b/gi, 'Triage Low').replace(/\bESI\s*2\b/gi, 'Triage Medium').replace(/\bESI\s*3\b/gi, 'Triage High');
+  return str.replace(/\bESI\s*1\b/gi, 'Triage High').replace(/\bESI\s*2\b/gi, 'Triage Medium').replace(/\bESI\s*3\b/gi, 'Triage Low');
 }
 
 function populatePatients() {
