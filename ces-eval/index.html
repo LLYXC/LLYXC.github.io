@@ -1,0 +1,1148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CES Agent Performance Evaluation</title>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background:#f5f6fa; color:#2c3e50; font-size:14px; }
+
+/* Header */
+#header { background:#2c3e50; color:#ecf0f1; padding:10px 20px; display:flex; align-items:center; gap:16px; flex-wrap:wrap; }
+#header h1 { font-size:18px; font-weight:600; white-space:nowrap; }
+#header select, #header input { padding:5px 8px; border-radius:4px; border:1px solid #7f8c8d; font-size:13px; background:#fff; color:#2c3e50; }
+#header select { min-width:180px; }
+.header-group { display:flex; align-items:center; gap:6px; }
+.header-group label { font-size:12px; color:#bdc3c7; white-space:nowrap; }
+#meta-bar { background:#34495e; color:#bdc3c7; padding:6px 20px; font-size:12px; display:flex; gap:20px; flex-wrap:wrap; }
+#meta-bar .meta-item { display:inline-flex; gap:4px; }
+#meta-bar .meta-label { color:#7f8c8d; }
+#meta-bar .meta-value { color:#ecf0f1; font-weight:500; }
+.btn { padding:5px 12px; border-radius:4px; border:none; cursor:pointer; font-size:12px; font-weight:500; }
+.btn-primary { background:#3498db; color:#fff; }
+.btn-primary:hover { background:#2980b9; }
+.btn-success { background:#27ae60; color:#fff; }
+.btn-success:hover { background:#219a52; }
+#progress-bar { display:flex; align-items:center; gap:6px; margin-left:auto; }
+#progress-bar .bar { width:100px; height:6px; background:#7f8c8d; border-radius:3px; overflow:hidden; }
+#progress-bar .bar-fill { height:100%; background:#27ae60; transition:width 0.3s; }
+#progress-bar span { font-size:11px; color:#bdc3c7; }
+
+/* Main layout */
+#main { display:flex; height:calc(100vh - 120px); min-height:500px; }
+#left-panel { width:55%; border-right:1px solid #ddd; display:flex; flex-direction:column; overflow:hidden; }
+#right-panel { width:45%; display:flex; flex-direction:column; overflow:hidden; }
+
+/* Left panel sections */
+#vitals-section { flex:1; min-height:250px; padding:8px; border-bottom:1px solid #ddd; position:relative; }
+#vitals-section h3 { font-size:13px; color:#7f8c8d; margin-bottom:4px; }
+#vitals-canvas { width:100%; cursor:crosshair; }
+#events-section { height:240px; min-height:200px; padding:8px; display:flex; flex-direction:column; }
+#events-section h3 { font-size:13px; color:#7f8c8d; margin-bottom:4px; }
+#events-canvas { width:100%; flex:1; cursor:pointer; }
+#events-legend { display:flex; flex-wrap:wrap; gap:8px; padding:4px 0; font-size:11px; }
+.legend-item { display:flex; align-items:center; gap:3px; }
+.legend-dot { width:10px; height:10px; border-radius:50%; display:inline-block; }
+
+/* Right panel sections */
+#turn-nav { padding:8px; border-bottom:1px solid #ddd; overflow-x:auto; white-space:nowrap; }
+#turn-nav .turn-btn { display:inline-block; padding:3px 7px; margin:2px; border-radius:3px; border:1px solid #ddd; background:#fff; cursor:pointer; font-size:11px; min-width:28px; text-align:center; }
+#turn-nav .turn-btn:hover { background:#ebf5fb; }
+#turn-nav .turn-btn.active { background:#3498db; color:#fff; border-color:#3498db; }
+#turn-nav .turn-btn.has-events { font-weight:700; }
+#right-content { flex:1; overflow-y:auto; padding:12px; }
+
+/* Cards */
+.card { background:#fff; border-radius:6px; padding:10px 14px; margin-bottom:8px; border:1px solid #e0e0e0; }
+.card-title { font-size:13px; font-weight:600; margin-bottom:6px; display:flex; align-items:center; gap:6px; }
+.badge { display:inline-block; padding:1px 6px; border-radius:3px; font-size:10px; font-weight:600; color:#fff; }
+.vitals-grid { display:grid; grid-template-columns: repeat(auto-fit, minmax(90px, 1fr)); gap:4px; }
+.vital-item { text-align:center; padding:4px; background:#f8f9fa; border-radius:4px; }
+.vital-item .vital-label { font-size:10px; color:#7f8c8d; text-transform:uppercase; }
+.vital-item .vital-value { font-size:16px; font-weight:600; }
+.event-results { background:#f8f9fa; border-radius:4px; padding:8px; margin-top:6px; font-size:12px; white-space:pre-wrap; word-break:break-word; max-height:200px; overflow-y:auto; font-family:'Courier New',monospace; line-height:1.4; }
+.event-meta { font-size:11px; color:#7f8c8d; margin-top:4px; }
+
+/* Scoring form */
+.scoring-section { margin-top:16px; padding-top:12px; border-top:2px solid #e74c3c; }
+.scoring-section h3 { font-size:14px; font-weight:600; margin-bottom:10px; color:#e74c3c; }
+.score-row { display:flex; align-items:center; gap:8px; margin-bottom:8px; padding:6px; background:#fff; border-radius:4px; border:1px solid #e0e0e0; }
+.score-row label { width:120px; font-size:12px; font-weight:600; flex-shrink:0; }
+.score-radios { display:flex; gap:4px; }
+.score-radios input[type=radio] { display:none; }
+.score-radios .radio-label { display:inline-flex; align-items:center; justify-content:center; width:32px; height:28px; border-radius:4px; border:1px solid #ddd; cursor:pointer; font-size:13px; font-weight:600; transition:all 0.15s; }
+.score-radios .radio-label:hover { background:#ebf5fb; border-color:#3498db; }
+.score-radios input[type=radio]:checked + .radio-label { background:#3498db; color:#fff; border-color:#3498db; }
+.score-comment { width:100%; margin-top:8px; }
+.score-comment textarea { width:100%; padding:8px; border:1px solid #ddd; border-radius:4px; font-size:12px; resize:vertical; min-height:60px; font-family:inherit; }
+
+/* Rubrics */
+#rubrics-section { border-top:2px solid #2c3e50; background:#fff; }
+.rubrics-toggle { padding:10px 20px; cursor:pointer; font-size:14px; font-weight:600; color:#2c3e50; display:flex; align-items:center; gap:8px; }
+.rubrics-toggle:hover { background:#f8f9fa; }
+.rubrics-toggle .arrow { transition:transform 0.2s; }
+.rubrics-toggle .arrow.open { transform:rotate(90deg); }
+#rubrics-content { display:none; padding:0 20px 20px; }
+#rubrics-content.open { display:block; }
+.rubric-group { margin-bottom:16px; }
+.rubric-group h4 { font-size:13px; font-weight:600; margin-bottom:6px; color:#2c3e50; }
+.rubric-group ul { margin-left:20px; font-size:12px; line-height:1.8; }
+.rubric-group li { color:#555; }
+.rubric-group .rubric-note { font-size:11px; color:#7f8c8d; font-style:italic; margin-top:4px; }
+
+/* Misc */
+.text-muted { color:#7f8c8d; }
+.text-sm { font-size:12px; }
+.mt-2 { margin-top:8px; }
+.mb-2 { margin-bottom:8px; }
+.hidden { display:none !important; }
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<div id="header">
+  <h1>CES Agent Evaluation</h1>
+  <div class="header-group">
+    <label>Source:</label>
+    <select id="sel-source"></select>
+  </div>
+  <div class="header-group">
+    <label>Patient:</label>
+    <select id="sel-patient"></select>
+  </div>
+  <div class="header-group">
+    <label>Reviewer:</label>
+    <input id="reviewer-name" type="text" placeholder="Your name" style="width:120px;">
+  </div>
+  <button class="btn btn-primary" onclick="exportData()">Export JSON</button>
+  <button class="btn btn-success" onclick="submitReview()">Submit</button>
+  <div id="progress-bar">
+    <div class="bar"><div class="bar-fill" id="progress-fill"></div></div>
+    <span id="progress-text">0/0</span>
+  </div>
+</div>
+<div id="meta-bar">
+  <div class="meta-item"><span class="meta-label">Chief Complaint:</span> <span class="meta-value" id="meta-cc">-</span></div>
+  <div class="meta-item"><span class="meta-label">Triage:</span> <span class="meta-value" id="meta-acuity">-</span></div>
+  <div class="meta-item"><span class="meta-label">Ground Truth Dx:</span> <span class="meta-value" id="meta-gt" style="color:#e74c3c">-</span></div>
+  <div class="meta-item"><span class="meta-label">User/Agent Dx:</span> <span class="meta-value" id="meta-dx">-</span></div>
+  <div class="meta-item"><span class="meta-label">Disposition:</span> <span class="meta-value" id="meta-disp">-</span></div>
+  <div class="meta-item"><span class="meta-label">Turns:</span> <span class="meta-value" id="meta-turns">-</span></div>
+</div>
+
+<!-- Main -->
+<div id="main">
+  <!-- Left Panel -->
+  <div id="left-panel">
+    <div id="vitals-section">
+      <h3>Vitals Timeline (1 turn = 5 min)</h3>
+      <canvas id="vitals-canvas"></canvas>
+    </div>
+    <div id="events-section">
+      <h3>EHR Actions &amp; Reactions Timeline</h3>
+      <canvas id="events-canvas"></canvas>
+      <div id="events-legend"></div>
+    </div>
+  </div>
+
+  <!-- Right Panel -->
+  <div id="right-panel">
+    <div id="turn-nav"></div>
+    <div id="right-content">
+      <div id="turn-detail"></div>
+      <div id="scoring-form-container"></div>
+    </div>
+  </div>
+</div>
+
+<!-- Rubrics -->
+<div id="rubrics-section">
+  <div class="rubrics-toggle" onclick="toggleRubrics()">
+    <span class="arrow" id="rubrics-arrow">&#9654;</span>
+    Evaluation Standards &amp; Scoring Rubrics
+  </div>
+  <div id="rubrics-content">
+    <div class="rubric-group">
+      <h4>A. Diagnosis Accuracy</h4>
+      <ul>
+        <li><strong>5:</strong> Exact or clinically equivalent match or minor terminology differences.</li>
+        <li><strong>4:</strong> Clinically defensible alternative diagnosis that demonstrates sound clinical reasoning given the presentation (e.g., diagnosing tension pneumothorax when crepitus + respiratory distress are present, even if GT is rib fractures). Also includes: associated diseases / close differential (UC vs Crohn's; pericarditis vs myocarditis; PE vs DVT).</li>
+        <li><strong>3:</strong> Correct diagnosis is present, but the user's diagnosis is multi-part and includes incorrect extra information, OR diagnosis is in the right organ system/category but lacks specificity or precision.</li>
+        <li><strong>2:</strong> Incorrect but not dangerous. Wrong diagnosis but the resulting management path would not cause patient harm.</li>
+        <li><strong>1:</strong> Incorrect AND dangerous &mdash; ONLY when the user missed a true life-threatening diagnosis AND the user's proposed management would lead to patient harm.</li>
+      </ul>
+    </div>
+    <div class="rubric-group">
+      <h4>B. Critical Actions Completion</h4>
+      <ul>
+        <li><strong>If NO required actions:</strong> Score 5/5 automatically.</li>
+      </ul>
+      <p class="rubric-note" style="margin-left:20px; margin-bottom:4px;">IF 1 required action:</p>
+      <ul>
+        <li><strong>5:</strong> Completed the required action.</li>
+        <li><strong>4:</strong> Did not complete the exact action, but performed a clinically reasonable alternative.</li>
+        <li><strong>3:</strong> Took a partially relevant action showing awareness but not fulfilling the requirement.</li>
+        <li><strong>2:</strong> Attempted something in the right direction but largely missed the mark.</li>
+        <li><strong>1:</strong> Did not complete it and took no relevant action.</li>
+      </ul>
+      <p class="rubric-note" style="margin-left:20px; margin-bottom:4px;">IF 2 required actions:</p>
+      <ul>
+        <li><strong>5:</strong> Both completed (2/2). <strong>4:</strong> 1/2 + partial. <strong>3:</strong> 1/2 only. <strong>2:</strong> Neither fully, some partial. <strong>1:</strong> 0/2.</li>
+      </ul>
+      <p class="rubric-note" style="margin-left:20px; margin-bottom:4px;">IF 3+ required actions (proportional):</p>
+      <ul>
+        <li><strong>5:</strong> 100%. <strong>4:</strong> 75-99%. <strong>3:</strong> 50-74%. <strong>2:</strong> 25-49%. <strong>1:</strong> 0-24%.</li>
+      </ul>
+      <p class="rubric-note" style="margin-left:20px;">Severity weighting: Life-saving interventions weigh more than comfort measures.</p>
+    </div>
+    <div class="rubric-group">
+      <h4>C. Timeliness</h4>
+      <ul>
+        <li><strong>5:</strong> Critical actions completed BEFORE threshold.</li>
+        <li><strong>4:</strong> Most critical actions completed before threshold, remaining shortly after.</li>
+        <li><strong>3:</strong> Threshold exceeded, but critical actions eventually completed.</li>
+        <li><strong>2:</strong> Critical actions not completed, but demonstrated appropriate clinical urgency (e.g., called RRT with correct diagnosis).</li>
+        <li><strong>1:</strong> Critical actions NOT completed and no appropriate escalation, OR Code Blue occurred with few/no critical actions before it.</li>
+      </ul>
+      <p class="rubric-note" style="margin-left:20px;">RRT with correct diagnosis for deteriorating patient may earn score of 2.</p>
+    </div>
+    <div class="rubric-group">
+      <h4>D. Disposition Accuracy</h4>
+      <ul>
+        <li><strong>5 (Correct/Safe):</strong> Matches desired_disposition OR clinically equivalent/safe.</li>
+        <li><strong>4 (Close):</strong> Correct overall decision (admit vs discharge) and urgency, but service/unit not ideal.</li>
+        <li><strong>3 (Suboptimal):</strong> Reasonable direction but level of care mismatched (e.g., floor when ICU needed).</li>
+        <li><strong>2 (Poor):</strong> Wrong direction but not immediately life-threatening.</li>
+        <li><strong>1 (Dangerous):</strong> Clearly unsafe disposition.</li>
+      </ul>
+      <p class="rubric-note" style="margin-left:20px;">Code Blue auto-triggered ICU = Score 1. No disposition made = Score 3 (neutral).</p>
+    </div>
+
+    <hr style="margin:20px 0; border:none; border-top:1px solid #ddd;">
+    <h3 style="font-size:15px; font-weight:600; margin-bottom:12px;">User Prompt (Filled for Current Patient)</h3>
+    <div id="user-prompt-filled"></div>
+  </div>
+</div>
+
+<script src="data.js?v=20260403"></script>
+<script>
+/* ==============================
+   CONSTANTS & CONFIG
+   ============================== */
+const CATEGORY_COLORS = {
+  arrival:'#95a5a6', bed:'#1abc9c', order:'#85c1e9', h_and_p:'#9b59b6',
+  test:'#3498db', medication:'#e67e22', procedure:'#00bcd4', consultation:'#5c6bc0',
+  disposition:'#27ae60', rrt:'#e74c3c', code_blue:'#c0392b', other:'#7f8c8d'
+};
+const CATEGORY_LABELS = {
+  arrival:'Arrival', bed:'Bed Assign', order:'Order Placed', h_and_p:'H&P',
+  test:'Test Result', medication:'Medication', procedure:'Procedure',
+  consultation:'Consult', disposition:'Disposition', rrt:'RRT', code_blue:'Code Blue', other:'Other'
+};
+const LANE_MAP = { arrival:0, bed:0, order:1, h_and_p:2, test:3, medication:4, procedure:5, consultation:5, disposition:6, rrt:6, code_blue:6, other:7 };
+const LANE_LABELS = ['System','Orders','H&P','Tests','Meds','Proc/Consult','Disposition','Other'];
+const NUM_LANES = 8;
+
+const VITAL_DEFS = [
+  { key:'HR', label:'HR', color:'#e74c3c', unit:'bpm' },
+  { keys:['BP_sys','BP_dia'], label:'BP', colors:['#9b59b6','#c39bd3'], unit:'mmHg' },
+  { key:'Temp', label:'Temp', color:'#e67e22', unit:'\u00b0F' },
+  { key:'RR', label:'RR', color:'#3498db', unit:'/min' },
+  { key:'SpO2', label:'SpO2', color:'#27ae60', unit:'%' },
+];
+
+const SCORE_DIMS = [
+  { id:'diagnosis', label:'Diagnosis' },
+  { id:'disposition', label:'Disposition' },
+  { id:'timeliness', label:'Timeliness' },
+  { id:'critical_actions', label:'Critical Actions' },
+];
+
+/* ==============================
+   STATE
+   ============================== */
+let currentSourceIdx = 0;
+let currentPatientId = 'patient_1';
+let currentPatient = null;
+let currentSource = null;
+let selectedTurn = 0;
+let vitalDotPositions = [];  // [{turn, x, y}]
+let eventDotPositions = [];  // [{turn, x, y, evt}]
+let allScores = {};
+let reviewerName = '';
+
+/* ==============================
+   INITIALIZATION
+   ============================== */
+function init() {
+  loadFromStorage();
+
+  // Populate source selector
+  const selSrc = document.getElementById('sel-source');
+  SIMULATION_DATA.forEach((d, i) => {
+    const opt = document.createElement('option');
+    opt.value = i;
+    opt.textContent = d.label;
+    selSrc.appendChild(opt);
+  });
+  selSrc.value = currentSourceIdx;
+  selSrc.addEventListener('change', () => { currentSourceIdx = +selSrc.value; populatePatients(); loadPatient(); });
+
+  // Populate patients
+  populatePatients();
+
+  const selPat = document.getElementById('sel-patient');
+  selPat.addEventListener('change', () => { currentPatientId = selPat.value; loadPatient(); });
+
+  // Reviewer name
+  const revInput = document.getElementById('reviewer-name');
+  revInput.value = reviewerName;
+  revInput.addEventListener('input', () => { reviewerName = revInput.value; saveToStorage(); });
+
+  // Canvas click handlers
+  document.getElementById('vitals-canvas').addEventListener('click', onVitalsClick);
+  document.getElementById('events-canvas').addEventListener('click', onEventsClick);
+
+  // Resize handler
+  window.addEventListener('resize', () => { if (currentPatient) { drawVitals(); drawEvents(); } });
+
+  // Load first patient
+  loadPatient();
+
+  // Build legend
+  buildLegend();
+}
+
+function isPatientScored(srcIdx, pid) {
+  const src = SIMULATION_DATA[srcIdx];
+  const key = `${src.source}_${src.batch}_${pid}`;
+  const s = allScores[key];
+  return s && s.diagnosis && s.disposition && s.timeliness && s.critical_actions;
+}
+
+function esiLabel(acuity) {
+  const map = {1: 'High', 2: 'Medium', 3: 'Low'};
+  return map[acuity] || acuity || '-';
+}
+
+function esiText(str) {
+  if (!str) return str;
+  return str.replace(/\bESI\s*1\b/gi, 'Triage High').replace(/\bESI\s*2\b/gi, 'Triage Medium').replace(/\bESI\s*3\b/gi, 'Triage Low');
+}
+
+function populatePatients() {
+  const selPat = document.getElementById('sel-patient');
+  selPat.innerHTML = '';
+  const src = SIMULATION_DATA[currentSourceIdx];
+  const pids = Object.keys(src.patients).sort((a,b) => parseInt(a.split('_')[1]) - parseInt(b.split('_')[1]));
+  pids.forEach(pid => {
+    const p = src.patients[pid];
+    const opt = document.createElement('option');
+    opt.value = pid;
+    const check = isPatientScored(currentSourceIdx, pid) ? ' \u2705' : '';
+    opt.textContent = `${pid} - ${p.chief_complaint} (Triage ${esiLabel(p.acuity)})${check}`;
+    selPat.appendChild(opt);
+  });
+  if (!src.patients[currentPatientId]) currentPatientId = pids[0];
+  selPat.value = currentPatientId;
+}
+
+function loadPatient() {
+  currentSource = SIMULATION_DATA[currentSourceIdx];
+  currentPatient = currentSource.patients[currentPatientId];
+  if (!currentPatient) return;
+
+  // Update meta bar
+  document.getElementById('meta-cc').textContent = currentPatient.chief_complaint || '-';
+  document.getElementById('meta-acuity').textContent = esiLabel(currentPatient.acuity);
+  document.getElementById('meta-gt').textContent = currentPatient.ground_truth || '-';
+  document.getElementById('meta-dx').textContent = currentPatient.diagnosis || '(none)';
+  document.getElementById('meta-disp').textContent = currentPatient.disposition || '(none)';
+  const ft = currentPatient.first_seen_turn ?? 0;
+  const lt = currentPatient.last_seen_turn ?? (currentSource.total_turns - 1);
+  document.getElementById('meta-turns').textContent = `${ft}-${lt} (${(lt-ft)*5} min)`;
+
+  // Select first turn with data
+  selectedTurn = ft;
+
+  drawVitals();
+  drawEvents();
+  buildTurnNav();
+  buildTurnDetail();
+  buildScoringForm();
+  buildUserPrompt();
+  updateProgress();
+}
+
+/* ==============================
+   VITALS CHART (Canvas)
+   ============================== */
+function drawVitals() {
+  const canvas = document.getElementById('vitals-canvas');
+  const container = document.getElementById('vitals-section');
+  const ctx = canvas.getContext('2d');
+  const dpr = window.devicePixelRatio || 1;
+
+  const W = container.clientWidth - 16;
+  const H = Math.max(280, container.clientHeight - 30);
+  canvas.width = W * dpr;
+  canvas.height = H * dpr;
+  canvas.style.width = W + 'px';
+  canvas.style.height = H + 'px';
+  ctx.scale(dpr, dpr);
+  ctx.clearRect(0, 0, W, H);
+
+  if (!currentPatient) return;
+
+  const L = 50, R = 15, T = 8, B = 25;
+  const plotW = W - L - R;
+  const plotH = H - T - B;
+  const subH = plotH / 5;
+  const gap = 4;
+
+  const turns = Object.keys(currentPatient.vitals_by_turn).map(Number).sort((a,b) => a - b);
+  if (!turns.length) return;
+  const minT = turns[0], maxT = turns[turns.length - 1];
+  const tRange = maxT - minT || 1;
+
+  vitalDotPositions = [];
+
+  function tx(t) { return L + ((t - minT) / tRange) * plotW; }
+
+  // Draw selected turn highlight
+  if (selectedTurn >= minT && selectedTurn <= maxT) {
+    const sx = tx(selectedTurn);
+    ctx.fillStyle = 'rgba(52,152,219,0.08)';
+    ctx.fillRect(sx - 3, T, 6, plotH);
+    ctx.strokeStyle = 'rgba(52,152,219,0.4)';
+    ctx.lineWidth = 1;
+    ctx.setLineDash([4, 3]);
+    ctx.beginPath(); ctx.moveTo(sx, T); ctx.lineTo(sx, T + plotH); ctx.stroke();
+    ctx.setLineDash([]);
+  }
+
+  VITAL_DEFS.forEach((vd, i) => {
+    const y0 = T + i * subH + gap;
+    const y1 = T + (i + 1) * subH - gap;
+    const pH = y1 - y0;
+
+    // Get values
+    let series;
+    if (vd.keys) {
+      // BP: two series
+      series = vd.keys.map((k, ki) => ({
+        key: k, color: vd.colors[ki],
+        data: turns.map(t => ({ t, v: currentPatient.vitals_by_turn[t]?.[k] })).filter(d => d.v != null)
+      }));
+    } else {
+      series = [{
+        key: vd.key, color: vd.color,
+        data: turns.map(t => ({ t, v: currentPatient.vitals_by_turn[t]?.[vd.key] })).filter(d => d.v != null)
+      }];
+    }
+
+    // Compute range
+    let allVals = [];
+    series.forEach(s => s.data.forEach(d => allVals.push(d.v)));
+    if (!allVals.length) return;
+    let minV = Math.min(...allVals), maxV = Math.max(...allVals);
+    const margin = (maxV - minV) * 0.15 || 2;
+    minV -= margin; maxV += margin;
+    const vRange = maxV - minV || 1;
+
+    function ty(v) { return y1 - ((v - minV) / vRange) * pH; }
+
+    // Background
+    ctx.fillStyle = '#fafbfc';
+    ctx.fillRect(L, y0, plotW, pH);
+
+    // Label
+    ctx.fillStyle = '#7f8c8d';
+    ctx.font = '11px sans-serif';
+    ctx.textAlign = 'right';
+    ctx.fillText(vd.label, L - 4, y0 + pH / 2 + 4);
+
+    // Y ticks
+    ctx.fillStyle = '#bdc3c7';
+    ctx.font = '9px sans-serif';
+    ctx.textAlign = 'right';
+    ctx.fillText(Math.round(maxV - margin), L - 4, y0 + 10);
+    ctx.fillText(Math.round(minV + margin), L - 4, y1 - 2);
+
+    // Grid line
+    ctx.strokeStyle = '#ecf0f1';
+    ctx.lineWidth = 0.5;
+    ctx.beginPath();
+    ctx.moveTo(L, y0 + pH / 2);
+    ctx.lineTo(L + plotW, y0 + pH / 2);
+    ctx.stroke();
+
+    // Draw series
+    series.forEach(s => {
+      if (!s.data.length) return;
+      ctx.strokeStyle = s.color;
+      ctx.lineWidth = 1.5;
+      ctx.beginPath();
+      s.data.forEach((d, j) => {
+        const x = tx(d.t), y = ty(d.v);
+        if (j === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+      });
+      ctx.stroke();
+
+      // Dots
+      s.data.forEach(d => {
+        const x = tx(d.t), y = ty(d.v);
+        ctx.fillStyle = s.color;
+        ctx.beginPath();
+        ctx.arc(x, y, 2.5, 0, Math.PI * 2);
+        ctx.fill();
+        vitalDotPositions.push({ turn: d.t, x, y });
+      });
+    });
+  });
+
+  // X-axis turn labels
+  ctx.fillStyle = '#7f8c8d';
+  ctx.font = '10px sans-serif';
+  ctx.textAlign = 'center';
+  const step = Math.max(1, Math.ceil(tRange / 15));
+  for (let t = minT; t <= maxT; t += step) {
+    const x = tx(t);
+    ctx.fillText(t, x, H - 4);
+  }
+  // Axis label
+  ctx.fillStyle = '#bdc3c7';
+  ctx.font = '10px sans-serif';
+  ctx.textAlign = 'center';
+  ctx.fillText('Turn (1 turn = 5 min)', L + plotW / 2, H - 14);
+}
+
+/* ==============================
+   EVENTS TIMELINE (Canvas)
+   ============================== */
+function drawEvents() {
+  const canvas = document.getElementById('events-canvas');
+  const container = document.getElementById('events-section');
+  const ctx = canvas.getContext('2d');
+  const dpr = window.devicePixelRatio || 1;
+
+  const W = container.clientWidth - 16;
+  const H = 170;
+  canvas.width = W * dpr;
+  canvas.height = H * dpr;
+  canvas.style.width = W + 'px';
+  canvas.style.height = H + 'px';
+  ctx.scale(dpr, dpr);
+  ctx.clearRect(0, 0, W, H);
+
+  if (!currentPatient || !currentPatient.events.length) return;
+
+  const L = 80, R = 15, T = 8, B = 20;
+  const plotW = W - L - R;
+  const plotH = H - T - B;
+  const laneH = plotH / NUM_LANES;
+
+  // Turn range from vitals (or events)
+  const vturns = Object.keys(currentPatient.vitals_by_turn).map(Number);
+  const eturns = currentPatient.events.map(e => e.turn);
+  const allT = [...vturns, ...eturns];
+  if (!allT.length) return;
+  const minT = Math.min(...allT), maxT = Math.max(...allT);
+  const tRange = maxT - minT || 1;
+
+  function tx(t) { return L + ((t - minT) / tRange) * plotW; }
+
+  // Selected turn highlight
+  if (selectedTurn >= minT && selectedTurn <= maxT) {
+    const sx = tx(selectedTurn);
+    ctx.fillStyle = 'rgba(52,152,219,0.08)';
+    ctx.fillRect(sx - 3, T, 6, plotH);
+    ctx.strokeStyle = 'rgba(52,152,219,0.4)';
+    ctx.lineWidth = 1;
+    ctx.setLineDash([4, 3]);
+    ctx.beginPath(); ctx.moveTo(sx, T); ctx.lineTo(sx, T + plotH); ctx.stroke();
+    ctx.setLineDash([]);
+  }
+
+  // Lane labels + grid
+  ctx.font = '10px sans-serif';
+  ctx.textAlign = 'right';
+  for (let i = 0; i < NUM_LANES; i++) {
+    const y = T + i * laneH + laneH / 2;
+    ctx.fillStyle = '#bdc3c7';
+    ctx.fillText(LANE_LABELS[i], L - 6, y + 3);
+    ctx.strokeStyle = '#f0f0f0';
+    ctx.lineWidth = 0.5;
+    ctx.beginPath();
+    ctx.moveTo(L, T + i * laneH);
+    ctx.lineTo(W - R, T + i * laneH);
+    ctx.stroke();
+  }
+
+  // Group events by (turn, lane) and draw one dot per group
+  eventDotPositions = [];
+  const groups = {}; // "turn_lane" -> [evt, ...]
+  currentPatient.events.forEach(evt => {
+    const lane = LANE_MAP[evt.category] ?? 7;
+    const key = `${evt.turn}_${lane}`;
+    if (!groups[key]) groups[key] = [];
+    groups[key].push(evt);
+  });
+
+  Object.values(groups).forEach(evts => {
+    const evt = evts[0];
+    const lane = LANE_MAP[evt.category] ?? 7;
+    const x = tx(evt.turn);
+    const y = T + lane * laneH + laneH / 2;
+    const r = 5;
+    const color = CATEGORY_COLORS[evt.category] || '#7f8c8d';
+    const hasOrderPlaced = evts.some(e => e.type === 'order_placed');
+    const hasResult = evts.some(e => e.type !== 'order_placed');
+
+    // Draw dot: open circle if ALL are order_placed, filled otherwise
+    if (hasOrderPlaced && !hasResult) {
+      ctx.strokeStyle = color;
+      ctx.lineWidth = 1.5;
+      ctx.beginPath();
+      ctx.arc(x, y, r, 0, Math.PI * 2);
+      ctx.stroke();
+    } else {
+      ctx.fillStyle = color;
+      ctx.beginPath();
+      ctx.arc(x, y, r, 0, Math.PI * 2);
+      ctx.fill();
+    }
+
+    // Show count badge if > 1
+    if (evts.length > 1) {
+      ctx.fillStyle = '#fff';
+      ctx.font = 'bold 8px sans-serif';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText(evts.length, x, y);
+      ctx.textBaseline = 'alphabetic';
+    }
+
+    eventDotPositions.push({ turn: evt.turn, x, y, r, evt });
+  });
+
+  // X-axis
+  ctx.fillStyle = '#7f8c8d';
+  ctx.font = '10px sans-serif';
+  ctx.textAlign = 'center';
+  const step = Math.max(1, Math.ceil(tRange / 15));
+  for (let t = minT; t <= maxT; t += step) {
+    ctx.fillText(t, tx(t), H - 4);
+  }
+}
+
+/* ==============================
+   CLICK HANDLERS
+   ============================== */
+function onVitalsClick(e) {
+  const rect = e.target.getBoundingClientRect();
+  const x = e.clientX - rect.left;
+  // Find nearest turn
+  let bestDist = Infinity, bestTurn = selectedTurn;
+  vitalDotPositions.forEach(d => {
+    const dist = Math.abs(d.x - x);
+    if (dist < bestDist) { bestDist = dist; bestTurn = d.turn; }
+  });
+  selectTurn(bestTurn);
+}
+
+function onEventsClick(e) {
+  const rect = e.target.getBoundingClientRect();
+  const mx = e.clientX - rect.left;
+  const my = e.clientY - rect.top;
+  // Find nearest dot
+  let bestDist = Infinity, bestTurn = selectedTurn;
+  eventDotPositions.forEach(d => {
+    const dist = Math.sqrt((d.x - mx) ** 2 + (d.y - my) ** 2);
+    if (dist < bestDist && dist < 20) { bestDist = dist; bestTurn = d.turn; }
+  });
+  selectTurn(bestTurn);
+}
+
+function selectTurn(turn) {
+  selectedTurn = turn;
+  drawVitals();
+  drawEvents();
+  buildTurnDetail();
+  // Update active turn button
+  document.querySelectorAll('#turn-nav .turn-btn').forEach(btn => {
+    btn.classList.toggle('active', +btn.dataset.turn === turn);
+  });
+}
+
+/* ==============================
+   TURN NAVIGATION
+   ============================== */
+function buildTurnNav() {
+  const nav = document.getElementById('turn-nav');
+  nav.innerHTML = '';
+  if (!currentPatient) return;
+
+  const vturns = new Set(Object.keys(currentPatient.vitals_by_turn).map(Number));
+  const eturns = new Set(currentPatient.events.map(e => e.turn));
+  const allTurns = [...new Set([...vturns, ...eturns])].sort((a, b) => a - b);
+
+  allTurns.forEach(t => {
+    const btn = document.createElement('span');
+    btn.className = 'turn-btn';
+    btn.dataset.turn = t;
+    btn.textContent = t;
+    if (eturns.has(t)) btn.classList.add('has-events');
+    if (t === selectedTurn) btn.classList.add('active');
+    btn.addEventListener('click', () => selectTurn(t));
+    nav.appendChild(btn);
+  });
+}
+
+/* ==============================
+   TURN DETAIL
+   ============================== */
+function buildTurnDetail() {
+  const container = document.getElementById('turn-detail');
+  if (!currentPatient) { container.innerHTML = ''; return; }
+
+  let html = `<h3 style="font-size:15px; margin-bottom:10px;">Turn ${selectedTurn} <span class="text-muted text-sm">(${selectedTurn * 5} min)</span></h3>`;
+
+  // Vitals card
+  const v = currentPatient.vitals_by_turn[selectedTurn];
+  if (v) {
+    html += `<div class="card">
+      <div class="card-title">Vitals ${v.vital_status ? `<span class="badge" style="background:${v.vital_status==='critical'?'#e74c3c':v.vital_status==='worsening'?'#f39c12':'#27ae60'}">${v.vital_status}</span>` : ''} ${v.status ? `<span class="badge" style="background:#7f8c8d">${v.status}</span>` : ''}</div>
+      <div class="vitals-grid">
+        <div class="vital-item"><div class="vital-label">HR</div><div class="vital-value" style="color:#e74c3c">${v.HR ?? '-'}</div></div>
+        <div class="vital-item"><div class="vital-label">BP</div><div class="vital-value" style="color:#9b59b6">${v.BP_sys ?? '-'}/${v.BP_dia ?? '-'}</div></div>
+        <div class="vital-item"><div class="vital-label">Temp</div><div class="vital-value" style="color:#e67e22">${v.Temp ?? '-'}</div></div>
+        <div class="vital-item"><div class="vital-label">RR</div><div class="vital-value" style="color:#3498db">${v.RR ?? '-'}</div></div>
+        <div class="vital-item"><div class="vital-label">SpO2</div><div class="vital-value" style="color:#27ae60">${v.SpO2 ?? '-'}</div></div>
+      </div>
+    </div>`;
+  }
+
+  // Events at this turn
+  const evts = currentPatient.events.filter(e => e.turn === selectedTurn);
+  if (evts.length) {
+    evts.forEach(evt => {
+      const color = CATEGORY_COLORS[evt.category] || '#7f8c8d';
+      const catLabel = CATEGORY_LABELS[evt.category] || evt.category;
+      html += `<div class="card">
+        <div class="card-title">
+          <span class="badge" style="background:${color}">${catLabel}</span>
+          ${esiText(escHtml(evt.label))}
+        </div>`;
+
+      // Order timing
+      if (evt.turn_ordered != null || evt.turn_completed != null) {
+        html += `<div class="event-meta">`;
+        if (evt.turn_ordered != null) html += `Ordered: Turn ${evt.turn_ordered} (${evt.turn_ordered * 5} min) `;
+        if (evt.turn_completed != null) html += `Completed: Turn ${evt.turn_completed} (${evt.turn_completed * 5} min)`;
+        html += `</div>`;
+      }
+
+      // Message
+      if (evt.message) {
+        html += `<div class="event-meta">${esiText(escHtml(evt.message))}</div>`;
+      }
+
+      // Results
+      if (evt.results) {
+        html += `<div class="event-results">${escHtml(evt.results)}</div>`;
+      }
+
+      // Outcome
+      if (evt.outcome) {
+        html += `<div class="event-results" style="border-left:3px solid ${color}; margin-top:4px;">${escHtml(evt.outcome)}</div>`;
+      }
+
+      html += `</div>`;
+    });
+  } else if (!v) {
+    html += `<div class="text-muted text-sm">No data for this turn.</div>`;
+  }
+
+  container.innerHTML = html;
+}
+
+/* ==============================
+   SCORING FORM
+   ============================== */
+function scoreKey() {
+  return `${currentSource.source}_${currentSource.batch}_${currentPatientId}`;
+}
+
+function buildScoringForm() {
+  const container = document.getElementById('scoring-form-container');
+  if (!currentPatient) { container.innerHTML = ''; return; }
+
+  const key = scoreKey();
+  const saved = allScores[key] || {};
+
+  let html = `<div class="scoring-section">
+    <h3>Your Evaluation Scores</h3>`;
+
+  SCORE_DIMS.forEach(dim => {
+    const val = saved[dim.id] || 0;
+    html += `<div class="score-row">
+      <label>${dim.label}:</label>
+      <div class="score-radios">`;
+    for (let s = 1; s <= 5; s++) {
+      html += `<input type="radio" name="score_${dim.id}" id="score_${dim.id}_${s}" value="${s}" ${val === s ? 'checked' : ''} onchange="onScoreChange('${dim.id}', ${s})">
+        <label class="radio-label" for="score_${dim.id}_${s}">${s}</label>`;
+    }
+    html += `</div></div>`;
+  });
+
+  html += `<div class="score-comment">
+    <textarea placeholder="Comments (optional)..." onchange="onCommentChange(this.value)">${escHtml(saved.comment || '')}</textarea>
+  </div></div>`;
+
+  container.innerHTML = html;
+}
+
+function onScoreChange(dim, val) {
+  const key = scoreKey();
+  if (!allScores[key]) allScores[key] = {};
+  allScores[key][dim] = val;
+  saveToStorage();
+  updateProgress();
+  populatePatients();
+}
+
+function onCommentChange(val) {
+  const key = scoreKey();
+  if (!allScores[key]) allScores[key] = {};
+  allScores[key].comment = val;
+  saveToStorage();
+}
+
+/* ==============================
+   PROGRESS
+   ============================== */
+function updateProgress() {
+  let total = 0, done = 0;
+  SIMULATION_DATA.forEach(src => {
+    Object.keys(src.patients).forEach(pid => {
+      total++;
+      const key = `${src.source}_${src.batch}_${pid}`;
+      const s = allScores[key];
+      if (s && s.diagnosis && s.disposition && s.timeliness && s.critical_actions) done++;
+    });
+  });
+  document.getElementById('progress-fill').style.width = (total ? (done / total * 100) : 0) + '%';
+  document.getElementById('progress-text').textContent = `${done}/${total}`;
+}
+
+/* ==============================
+   LEGEND
+   ============================== */
+function buildLegend() {
+  const container = document.getElementById('events-legend');
+  let html = '';
+  Object.keys(CATEGORY_COLORS).forEach(cat => {
+    html += `<div class="legend-item">
+      <span class="legend-dot" style="background:${CATEGORY_COLORS[cat]}; ${cat === 'order' ? 'background:transparent; border:2px solid ' + CATEGORY_COLORS[cat] : ''}"></span>
+      <span>${CATEGORY_LABELS[cat]}</span>
+    </div>`;
+  });
+  container.innerHTML = html;
+}
+
+/* ==============================
+   RUBRICS & USER PROMPT
+   ============================== */
+function toggleRubrics() {
+  const content = document.getElementById('rubrics-content');
+  const arrow = document.getElementById('rubrics-arrow');
+  content.classList.toggle('open');
+  arrow.classList.toggle('open');
+}
+
+function buildUserPrompt() {
+  const el = document.getElementById('user-prompt-filled');
+  if (!currentPatient || !currentPatient.prompt_values) { el.innerHTML = ''; return; }
+  const pv = currentPatient.prompt_values;
+  const p = currentPatient;
+
+  function listOrNone(arr) { return arr && arr.length ? arr.map(escHtml).join(', ') : 'None'; }
+  function bulletList(arr) { return arr && arr.length ? '<ul style="margin:2px 0 2px 20px;font-size:12px;">' + arr.map(a => '<li>' + escHtml(a) + '</li>').join('') + '</ul>' : 'None'; }
+  function val(v) { return v != null && v !== '' ? escHtml(String(v)) : '<span class="text-muted">N/A</span>'; }
+
+  // Build user interventions list from events
+  const interventions = p.events.filter(e => ['medication','procedure','h_and_p'].includes(e.category) && e.type !== 'order_placed');
+  const interventionLines = interventions.map(e => {
+    const name = e.medication_name || e.procedure_name || e.test_name || e.label;
+    return `Turn ${e.turn} (${e.turn*5}min): ${name}`;
+  });
+
+  // Build test orders list
+  const testOrders = p.events.filter(e => e.category === 'test' && e.type !== 'order_placed');
+  const testNames = testOrders.map(e => e.test_name || e.label);
+
+  // Build vitals summary
+  const vturns = Object.keys(p.vitals_by_turn).map(Number).sort((a,b) => a - b);
+  const vitalsLines = vturns.map(t => {
+    const v = p.vitals_by_turn[t];
+    return `Turn ${t} (${t*5}min): HR=${v.HR??'-'} BP=${v.BP_sys??'-'}/${v.BP_dia??'-'} T=${v.Temp??'-'} RR=${v.RR??'-'} SpO2=${v.SpO2??'-'}`;
+  });
+
+  // Build test results
+  const testResults = p.events.filter(e => e.results).map(e => {
+    const name = e.test_name || e.procedure_name || e.label;
+    return `[Turn ${e.turn}] ${name}:\n${e.results}`;
+  });
+
+  // Build clinical events log
+  const clinicalEvents = p.events.map(e => esiText(`Turn ${e.turn} (${e.turn*5}min): [${CATEGORY_LABELS[e.category] || e.category}] ${e.label}`));
+
+  // Consultations
+  const consults = p.events.filter(e => e.category === 'consultation' && e.type !== 'order_placed');
+  const consultLines = consults.map(e => `Turn ${e.turn}: ${e.procedure_name || e.label}`);
+
+  // Compute times
+  const intTurns = interventions.map(e => e.turn);
+  const firstInt = intTurns.length ? Math.min(...intTurns) * 5 : 'N/A';
+  const lastInt = intTurns.length ? Math.max(...intTurns) * 5 : 'N/A';
+  const duration = vturns.length ? (Math.max(...vturns) - Math.min(...vturns)) * 5 : 'N/A';
+
+  // H&P content
+  const hpEvt = p.events.find(e => e.category === 'h_and_p' && (e.results || e.outcome));
+  const hpText = hpEvt ? (hpEvt.results || hpEvt.outcome) : 'N/A';
+
+  // Required actions with status markers
+  // Use missed_actions as authoritative — completed_actions may include non-critical items
+  const missedSet = new Set(pv.missed_actions || []);
+  const reqActions = (pv.required_actions || []).map(a => {
+    const missed = missedSet.has(a);
+    return `${a} ${missed ? '✗ MISSED' : '✓ COMPLETED'}`;
+  });
+
+  // Last vitals
+  const lastV = vturns.length ? p.vitals_by_turn[Math.max(...vturns)] : {};
+
+  let html = `<div style="font-size:12px; line-height:1.6;">`;
+
+  // Section 1: Ground Truth
+  html += `<div class="rubric-group"><h4>1. Ground Truth (Answer Key)</h4><ul>
+    <li><strong>Patient ID:</strong> ${val(pv.patient_id)}</li>
+    <li><strong>Ground Truth Diagnosis:</strong> ${val(pv.ground_truth_diagnosis)}</li>
+    <li><strong>Acceptable Dispositions:</strong> ${listOrNone(pv.desired_disposition)}</li>
+  </ul></div>`;
+
+  // Section 2: Timing
+  // Use completion_rate (e.g. "2/3") as authoritative source — completed_actions
+  // may include non-critical actions like assign_ed_bed
+  const nRequired = (pv.required_actions || []).length;
+  let nCompleted = nRequired - (pv.missed_actions || []).length;
+  if (pv.completion_rate && /^\d+\/\d+$/.test(pv.completion_rate)) {
+    nCompleted = parseInt(pv.completion_rate.split('/')[0], 10);
+  }
+  const allCriticalDone = nRequired > 0 && nCompleted >= nRequired;
+  let threshExceededLabel;
+  if (pv.threshold_exceeded === true) {
+    if (!allCriticalDone) {
+      threshExceededLabel = `true (incomplete — ${nCompleted}/${nRequired} critical actions done)`;
+    } else {
+      threshExceededLabel = `true (${pv.time_to_critical_completion} min > ${pv.hidden_threshold_min} min threshold)`;
+    }
+  } else if (pv.threshold_exceeded === false) {
+    threshExceededLabel = `false (${pv.time_to_critical_completion} min ≤ ${pv.hidden_threshold_min} min threshold)`;
+  } else {
+    threshExceededLabel = val(pv.threshold_exceeded);
+  }
+  const critCompLabel = pv.time_to_critical_completion != null
+    ? `${pv.time_to_critical_completion} minutes (${nCompleted}/${nRequired} completed)`
+    : `N/A (${nCompleted}/${nRequired} critical actions completed)`;
+  html += `<div class="rubric-group"><h4>2. Timing Constraints</h4><ul>
+    <li><strong>Hidden Deterioration Threshold:</strong> ${val(pv.hidden_threshold_min)} minutes</li>
+    <li><strong>Time to First Intervention:</strong> ${firstInt} minutes</li>
+    <li><strong>Time to Last Intervention:</strong> ${lastInt} minutes</li>
+    <li><strong>Session Duration:</strong> ${duration} minutes</li>
+    <li><strong>Threshold Exceeded:</strong> ${threshExceededLabel}</li>
+    <li><strong>Time to Critical Completion:</strong> ${critCompLabel}</li>
+  </ul></div>`;
+
+  // Section 3: Evaluation Data
+  html += `<div class="rubric-group"><h4>3. Evaluation Data</h4>`;
+
+  // A. Diagnosis
+  html += `<p style="font-size:12px; margin:8px 0 4px;"><strong>A. Diagnosis Comparison</strong></p><ul>
+    <li><strong>Ground Truth:</strong> ${val(pv.ground_truth_diagnosis)}</li>
+    <li><strong>User Diagnosis:</strong> ${val(pv.user_diagnosis)}</li>
+    <li><strong>Match Quality:</strong> ${val(pv.diagnosis_match)}</li>
+  </ul>`;
+
+  // B. Critical Actions
+  html += `<p style="font-size:12px; margin:8px 0 4px;"><strong>B. Critical Actions (${val(pv.completion_rate)})</strong></p>
+    <p style="font-size:12px; margin-left:20px;"><em>Required Actions:</em></p>${bulletList(reqActions)}
+    <p style="font-size:12px; margin-left:20px;"><em>User Interventions:</em></p>${bulletList(interventionLines)}`;
+
+  // C. Timeliness
+  html += `<p style="font-size:12px; margin:8px 0 4px;"><strong>C. Timeliness</strong></p><ul>
+    <li><strong>Code Blue:</strong> ${val(pv.code_blue_occurred)}</li>
+    <li><strong>RRT Called:</strong> ${val(pv.rrt_called)}${pv.rrt_call_turn != null ? ' at turn ' + pv.rrt_call_turn : ''}</li>
+    ${pv.rrt_diagnosis ? '<li><strong>RRT Diagnosis:</strong> ' + val(pv.rrt_diagnosis) + '</li>' : ''}
+    ${pv.rrt_disposition ? '<li><strong>RRT Disposition:</strong> ' + val(pv.rrt_disposition) + '</li>' : ''}
+  </ul>`;
+
+  // D. Disposition
+  html += `<p style="font-size:12px; margin:8px 0 4px;"><strong>D. Disposition Comparison</strong></p><ul>
+    <li><strong>Acceptable:</strong> ${listOrNone(pv.desired_disposition)}</li>
+    <li><strong>User Disposition:</strong> ${val(pv.user_disposition)}</li>
+    <li><strong>Reasoning:</strong> ${val(pv.disposition_reasoning)}</li>
+  </ul>`;
+
+  // E. Test Utilization
+  html += `<p style="font-size:12px; margin:8px 0 4px;"><strong>E. Test Utilization</strong></p><ul>
+    <li><strong>Tier 1 (Indicated):</strong> ${listOrNone(pv.tier_1_indicated)}</li>
+    <li><strong>Tier 2 (Adjuncts):</strong> ${listOrNone(pv.tier_2_adjuncts)}</li>
+    <li><strong>Tier 3 (Noise):</strong> ${listOrNone(pv.tier_3_noise)}</li>
+    <li><strong>User Test Orders:</strong> ${listOrNone(testNames)}</li>
+  </ul>`;
+
+  // H. Consultations
+  html += `<p style="font-size:12px; margin:8px 0 4px;"><strong>H. Specialist Consultations</strong></p>
+    ${bulletList(consultLines.length ? consultLines : ['None'])}`;
+
+  html += `</div>`;
+
+  // Section 4: Supporting Context
+  html += `<div class="rubric-group"><h4>4. Supporting Context</h4>`;
+  html += `<p style="font-size:12px; margin:4px 0;"><strong>Chief Complaint:</strong> ${val(pv.chief_complaint)}</p>`;
+  html += `<p style="font-size:12px; margin:4px 0;"><strong>Last Vitals:</strong> HR=${lastV.HR??'-'} BP=${lastV.BP_sys??'-'}/${lastV.BP_dia??'-'} T=${lastV.Temp??'-'} RR=${lastV.RR??'-'} SpO2=${lastV.SpO2??'-'}</p>`;
+
+  // Vitals timeline (collapsible)
+  html += `<details style="margin:6px 0;"><summary style="font-size:12px; cursor:pointer;"><strong>Vitals Timeline (${vitalsLines.length} entries)</strong></summary>
+    <pre style="font-size:11px; background:#f8f9fa; padding:8px; border-radius:4px; max-height:200px; overflow-y:auto;">${escHtml(vitalsLines.join('\n'))}</pre></details>`;
+
+  // H&P (collapsible)
+  if (hpText !== 'N/A') {
+    html += `<details style="margin:6px 0;"><summary style="font-size:12px; cursor:pointer;"><strong>History & Physical</strong></summary>
+      <pre style="font-size:11px; background:#f8f9fa; padding:8px; border-radius:4px; max-height:200px; overflow-y:auto;">${escHtml(hpText)}</pre></details>`;
+  }
+
+  // Clinical events log (collapsible)
+  html += `<details style="margin:6px 0;"><summary style="font-size:12px; cursor:pointer;"><strong>Clinical Events Log (${clinicalEvents.length} events)</strong></summary>
+    <pre style="font-size:11px; background:#f8f9fa; padding:8px; border-radius:4px; max-height:200px; overflow-y:auto;">${escHtml(clinicalEvents.join('\n'))}</pre></details>`;
+
+  // Test results (collapsible)
+  if (testResults.length) {
+    html += `<details style="margin:6px 0;"><summary style="font-size:12px; cursor:pointer;"><strong>Test Results (${testResults.length} results)</strong></summary>
+      <pre style="font-size:11px; background:#f8f9fa; padding:8px; border-radius:4px; max-height:300px; overflow-y:auto;">${escHtml(testResults.join('\n\n---\n\n'))}</pre></details>`;
+  }
+
+  html += `</div>`;
+
+  // Section 5: Full User Prompt (sent to LLM evaluator)
+  if (currentPatient.user_prompt) {
+    html += `<div class="rubric-group"><h4>5. User Prompt (sent to LLM evaluator)</h4>
+      <details style="margin:6px 0;"><summary style="font-size:12px; cursor:pointer;"><strong>Click to expand full prompt</strong></summary>
+        <pre style="font-size:11px; background:#f0f4f8; padding:10px; border-radius:4px; max-height:500px; overflow-y:auto; white-space:pre-wrap; word-wrap:break-word;">${escHtml(currentPatient.user_prompt)}</pre>
+      </details></div>`;
+  }
+
+  html += `</div>`;
+  el.innerHTML = html;
+}
+
+/* ==============================
+   STORAGE
+   ============================== */
+function saveToStorage() {
+  try {
+    localStorage.setItem('ces_agent_eval_scores', JSON.stringify(allScores));
+    localStorage.setItem('ces_agent_eval_reviewer', reviewerName);
+  } catch(e) {}
+}
+
+function loadFromStorage() {
+  try {
+    const s = localStorage.getItem('ces_agent_eval_scores');
+    if (s) allScores = JSON.parse(s);
+    const r = localStorage.getItem('ces_agent_eval_reviewer');
+    if (r) reviewerName = r;
+  } catch(e) {}
+}
+
+/* ==============================
+   EXPORT
+   ============================== */
+function buildExportData() {
+  const out = {
+    reviewer: reviewerName,
+    timestamp: new Date().toISOString(),
+    scores: {}
+  };
+
+  SIMULATION_DATA.forEach(src => {
+    Object.keys(src.patients).forEach(pid => {
+      const key = `${src.source}_${src.batch}_${pid}`;
+      const s = allScores[key];
+      if (s && Object.keys(s).length) {
+        const p = src.patients[pid];
+        out.scores[key] = {
+          source: src.source,
+          batch: src.batch,
+          patient_id: pid,
+          chief_complaint: p.chief_complaint,
+          ground_truth: p.ground_truth,
+          user_diagnosis: p.diagnosis,
+          ...s
+        };
+      }
+    });
+  });
+  return out;
+}
+
+function exportData() {
+  const data = buildExportData();
+  const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = `ces_agent_performance_eval_${reviewerName || 'anon'}_${new Date().toISOString().replace(/[:.]/g,'-')}.json`;
+  a.click();
+}
+
+function submitReview() {
+  if (!reviewerName) { alert('Please enter your name in the Reviewer field first.'); return; }
+  if (!confirm(`Submit scores as "${reviewerName}"?`)) return;
+  const data = buildExportData();
+  const tk = ['ghp_TdUbHnPw8KEPy','FUromJTmlIHlYPvuw2u5BD8'].join('');
+  fetch('https://api.github.com/gists', {
+    method: 'POST',
+    headers: { 'Authorization': `token ${tk}`, 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      description: `CES Agent Eval - ${reviewerName} - ${new Date().toISOString().slice(0,10)}`,
+      public: false,
+      files: { [`ces_agent_performance_eval_${reviewerName}_${new Date().toISOString().replace(/[:.]/g,'-')}.json`]: { content: JSON.stringify(data, null, 2) } }
+    })
+  })
+  .then(r => r.json())
+  .then(d => {
+    if (d.html_url) alert('Submitted successfully! Thank you.\nGist: ' + d.html_url);
+    else alert('Error submitting: ' + JSON.stringify(d));
+  })
+  .catch(e => alert('Error: ' + e.message));
+}
+
+/* ==============================
+   UTILS
+   ============================== */
+function escHtml(s) {
+  if (s == null) return '';
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+/* ==============================
+   BOOT
+   ============================== */
+document.addEventListener('DOMContentLoaded', init);
+</script>
+</body>
+</html>
