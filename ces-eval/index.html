@@ -329,7 +329,12 @@ function esiLabel(acuity) {
 
 function esiText(str) {
   if (!str) return str;
-  return str.replace(/\bESI\s*1\b/gi, 'Triage High').replace(/\bESI\s*2\b/gi, 'Triage Medium').replace(/\bESI\s*3\b/gi, 'Triage Low');
+  return str.replace(/high-acuity patient \(ESI\s*1\)/gi, 'HIGH triage patient')
+            .replace(/high-acuity patient \(ESI\s*2\)/gi, 'MEDIUM triage patient')
+            .replace(/high-acuity patient \(ESI\s*3\)/gi, 'LOW triage patient')
+            .replace(/\bESI\s*1\b/gi, 'Triage HIGH')
+            .replace(/\bESI\s*2\b/gi, 'Triage MEDIUM')
+            .replace(/\bESI\s*3\b/gi, 'Triage LOW');
 }
 
 function populatePatients() {
