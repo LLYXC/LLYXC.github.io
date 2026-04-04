@@ -739,7 +739,7 @@ function buildTurnDetail() {
       html += `<div class="card">
         <div class="card-title">
           <span class="badge" style="background:${color}">${catLabel}</span>
-          ${esiText(escHtml(evt.label))}
+          ${escHtml(evt.label)}
         </div>`;
 
       // Order timing
@@ -752,7 +752,7 @@ function buildTurnDetail() {
 
       // Message
       if (evt.message) {
-        html += `<div class="event-meta">${esiText(escHtml(evt.message))}</div>`;
+        html += `<div class="event-meta">${escHtml(evt.message)}</div>`;
       }
 
       // Results
@@ -903,7 +903,7 @@ function buildUserPrompt() {
   });
 
   // Build clinical events log
-  const clinicalEvents = p.events.map(e => esiText(`Turn ${e.turn} (${e.turn*5}min): [${CATEGORY_LABELS[e.category] || e.category}] ${e.label}`));
+  const clinicalEvents = p.events.map(e => `Turn ${e.turn} (${e.turn*5}min): [${CATEGORY_LABELS[e.category] || e.category}] ${e.label}`);
 
   // Consultations
   const consults = p.events.filter(e => e.category === 'consultation' && e.type !== 'order_placed');
