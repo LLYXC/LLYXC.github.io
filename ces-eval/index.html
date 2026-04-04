@@ -342,7 +342,7 @@ function populatePatients() {
     const opt = document.createElement('option');
     opt.value = pid;
     const check = isPatientScored(currentSourceIdx, pid) ? ' \u2705' : '';
-    opt.textContent = `${pid} - ${p.chief_complaint} (Triage ${esiLabel(p.acuity)})${check}`;
+    opt.textContent = `${pid} - ${p.chief_complaint} (Triage ${p.triage_category || '-'})${check}`;
     selPat.appendChild(opt);
   });
   if (!src.patients[currentPatientId]) currentPatientId = pids[0];
@@ -356,7 +356,7 @@ function loadPatient() {
 
   // Update meta bar
   document.getElementById('meta-cc').textContent = currentPatient.chief_complaint || '-';
-  document.getElementById('meta-acuity').textContent = esiLabel(currentPatient.acuity);
+  document.getElementById('meta-acuity').textContent = currentPatient.triage_category || '-';
   document.getElementById('meta-gt').textContent = currentPatient.ground_truth || '-';
   document.getElementById('meta-dx').textContent = currentPatient.diagnosis || '(none)';
   document.getElementById('meta-disp').textContent = currentPatient.disposition || '(none)';
