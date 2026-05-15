@@ -9,7 +9,11 @@
     <title>Luyang Luo's Homepage</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.29.0/feather.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:wght@600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/swup@4"></script>
+
     <style>
         /* Updated styles with wider left panel */
         .left-panel {
@@ -61,7 +65,7 @@
             font-weight: 600;
             color: #1a202c;
             margin-bottom: 1rem;
-            border-bottom: 2px solid #A51C30;
+            border-bottom: 2px solid #00356B;
             padding-bottom: 0.5rem;
             width: fit-content;
         }
@@ -142,7 +146,7 @@
         }
 
         .social-link:hover {
-            color: #A51C30;
+            color: #00356B;
         }
 
         .social-icon {
@@ -178,7 +182,7 @@
 
         /* Navigation styles */
         .nav-link {
-            color: #A51C30;
+            color: #00356B;
             text-decoration: none;
             font-size: 0.9rem;
             padding: 0.5rem 1rem;
@@ -188,13 +192,13 @@
         }
 
         .nav-link:hover {
-            color: #A51C30;
+            color: #00356B;
             background-color: #f3f4f6;
         }
 
         .nav-link.active {
             color: white;
-            background-color: #A51C30;
+            background-color: #00356B;
             font-weight: 600;
         }
 
@@ -260,6 +264,254 @@
                 display: none;
             }
         }
+
+        /* ============== Yale Theme Refinements ============== */
+        :root {
+            --yale-blue: #00356B;
+            --yale-blue-light: #286DC0;
+            --yale-blue-dark: #0a2240;
+            --yale-blue-tint: #e6edf4;
+            --ink: #1a202c;
+            --ink-soft: #2d3748;
+            --ink-muted: #4a5568;
+            --rule: #edf2f7;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+            -webkit-font-smoothing: antialiased;
+            color: var(--ink);
+            background-color: #fafbfc;
+        }
+
+        .left-panel,
+        .top-bar,
+        .main-content,
+        .content-section {
+            background-color: #ffffff;
+        }
+
+        .main-content {
+            border-left: 1px solid var(--rule);
+            min-height: calc(100vh - 50px);
+        }
+
+        .profile-name,
+        .section-title {
+            font-family: 'Source Serif 4', Georgia, 'Times New Roman', serif;
+            letter-spacing: -0.005em;
+        }
+
+        .profile-name {
+            display: inline-block;
+            padding-bottom: 0.4rem;
+            border-bottom: 2px solid var(--yale-blue);
+            margin-bottom: 0.6rem;
+            font-size: 1.6rem;
+            line-height: 1.2;
+        }
+
+        .profile-title {
+            font-weight: 500;
+            color: var(--ink-soft);
+        }
+
+        .profile-affiliation a {
+            transition: color 0.2s;
+        }
+
+        .section-title {
+            font-size: 1.35rem;
+            color: var(--yale-blue);
+            letter-spacing: 0.01em;
+        }
+
+        .section-content {
+            line-height: 1.7;
+            color: var(--ink-soft);
+        }
+
+        .section-content p + p {
+            margin-top: 0.75rem;
+        }
+
+        .news-item {
+            padding: 0.5rem 0;
+            align-items: baseline;
+            border-bottom: 1px solid #f5f7fa;
+        }
+
+        .news-item:last-child {
+            border-bottom: none;
+        }
+
+        .news-date {
+            color: var(--yale-blue);
+            font-variant-numeric: tabular-nums;
+            font-weight: 600;
+            font-size: 0.82rem;
+        }
+
+        .news-content {
+            line-height: 1.6;
+        }
+
+        /* Re-map Tailwind blue scale to Yale Blue palette */
+        .text-blue-900 { color: var(--yale-blue); }
+        .text-blue-800 { color: #003e7d; }
+        .text-blue-700 { color: #1a5099; }
+        .text-blue-600 { color: var(--yale-blue-light); }
+        .bg-blue-100 { background-color: var(--yale-blue-tint); }
+
+        .hover\:text-blue-900:hover { color: var(--yale-blue-dark); }
+        .hover\:text-blue-800:hover { color: #002a55; }
+        .hover\:text-blue-700:hover { color: #003e7d; }
+        .hover\:text-blue-600:hover { color: var(--yale-blue); }
+
+        a[class*="text-blue-"],
+        a[class*="hover:text-blue-"] {
+            transition: color 0.15s, text-decoration-color 0.15s;
+        }
+
+        a[class*="text-blue-"]:hover,
+        a[class*="hover:text-blue-"]:hover {
+            text-decoration: underline;
+            text-underline-offset: 2px;
+            text-decoration-thickness: 1px;
+        }
+
+        /* Refined navigation */
+        .nav-link {
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+        }
+
+        /* Profile photo polish */
+        .profile-photo {
+            box-shadow: 0 6px 20px rgba(0, 53, 107, 0.12);
+            border-radius: 10px;
+        }
+
+        /* Pill/chip refinement (used on publications) */
+        span.bg-blue-100.text-blue-800 {
+            background-color: var(--yale-blue-tint);
+            color: var(--yale-blue);
+            font-weight: 600;
+            letter-spacing: 0.02em;
+        }
+
+        @media (max-width: 768px) {
+            .profile-name { font-size: 1.35rem; }
+            .section-title { font-size: 1.2rem; }
+            .main-content { border-left: none; }
+        }
+
+        /* ============== Yale Style Pass 2 ============== */
+        /* Taller bar so a serif nav can breathe */
+        .top-bar {
+            height: 64px;
+            box-shadow: 0 1px 0 var(--rule);
+        }
+        .top-bar .h-full {
+            height: 64px;
+        }
+        .main-content {
+            margin-top: 64px;
+            min-height: calc(100vh - 64px);
+        }
+
+        /* Yale-style nav: serif, mixed-case, underline accent */
+        .nav-link {
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-weight: 600;
+            font-size: 1.05rem;
+            text-transform: none;
+            letter-spacing: 0;
+            padding: 0.5rem 0.4rem;
+            border-radius: 0;
+            color: var(--yale-blue);
+        }
+        .nav-link:hover {
+            color: var(--yale-blue-dark);
+            background-color: transparent;
+            text-decoration: underline;
+            text-decoration-color: var(--yale-blue);
+            text-underline-offset: 8px;
+            text-decoration-thickness: 2px;
+        }
+        .nav-link.active {
+            color: var(--yale-blue);
+            background-color: transparent;
+            font-weight: 700;
+            text-decoration: underline;
+            text-decoration-color: var(--yale-blue);
+            text-underline-offset: 8px;
+            text-decoration-thickness: 3px;
+        }
+
+        /* Slightly larger body type */
+        body { font-size: 16.5px; }
+        .section-content { font-size: 1rem; }
+
+        /* Ruleless, larger section headings (Yale relies on weight + color) */
+        .section-title {
+            font-size: 1.65rem;
+            font-weight: 700;
+            border-bottom: none;
+            padding-bottom: 0;
+            width: auto;
+            margin-bottom: 1.1rem;
+            line-height: 1.2;
+        }
+
+        /* Bigger profile name */
+        .profile-name { font-size: 1.85rem; }
+
+        /* Mobile-nav is hidden on desktop */
+        .mobile-nav { display: none; }
+
+        @media (max-width: 768px) {
+            /* Hide the desktop top-bar; slide-in left panel becomes the mobile nav */
+            .top-bar { display: none; }
+            .main-content {
+                margin-top: 0;
+                padding-top: 56px;
+                min-height: 100vh;
+            }
+            .section-title { font-size: 1.35rem; }
+            .profile-name { font-size: 1.5rem; }
+
+            /* Mobile nav inside the slide-in left panel */
+            .mobile-nav {
+                display: block;
+                margin-top: 2rem;
+                padding-top: 1.25rem;
+                border-top: 1px solid var(--rule);
+            }
+            .mobile-nav a {
+                display: block;
+                padding: 0.6rem 0;
+                font-family: 'Source Serif 4', Georgia, serif;
+                font-size: 1.1rem;
+                font-weight: 600;
+                color: var(--yale-blue);
+                text-decoration: none;
+                letter-spacing: 0.5px;
+                border-bottom: 1px solid #f5f7fa;
+            }
+            .mobile-nav a:last-child { border-bottom: none; }
+            .mobile-nav a.active {
+                text-decoration: underline;
+                text-underline-offset: 6px;
+                text-decoration-thickness: 2px;
+                font-weight: 700;
+            }
+
+            .menu-button {
+                box-shadow: 0 2px 8px rgba(0, 53, 107, 0.08);
+            }
+        }
     </style>
 </head>
 <body class="bg-white">
@@ -276,30 +528,23 @@
                 <h1 class="profile-name">Luyang Luo (骆路阳)</h1>
                 <h2 class="profile-title">Senior Post-doctoral Research Fellow</h2>
                 <div class="profile-affiliation">
-                    <a href="https://dbmi.hms.harvard.edu/" class="text-red-900 hover:text-red-700">
+                    <a href="https://dbmi.hms.harvard.edu/" class="text-blue-900 hover:text-blue-700">
                         Department of Biomedical Informatics
                     </a><br>
-                    <a href="https://hms.harvard.edu" class="text-red-900 hover:text-red-700">
+                    <a href="https://hms.harvard.edu" class="text-blue-900 hover:text-blue-700">
                         Harvard Medical School
                     </a>
                 </div>
-            </div>
-
-            <div class="contact-info">
-                <p class="mb-2">
-                    <i data-feather="mail" class="inline w-4 h-4 mr-2"></i>
-                    luyang_luo@hms.harvard.edu
-                </p>
-                <p>
-                    <i data-feather="map-pin" class="inline w-4 h-4 mr-2"></i>
-                    Boston
-                </p>
             </div>
 
             <div class="social-links">
                 <a href="https://scholar.google.com.hk/citations?user=eD1O_vAAAAAJ&hl=en" class="social-link">
                     <img src="./pic/google_scholar.png" alt="Google Scholar" class="social-icon">
                     Google Scholar
+                </a>
+                <a href="https://www.linkedin.com/in/luyang-luo" class="social-link">
+                    <img src="./pic/LinkedIn_s.png" alt="LinkedIn" class="social-icon">
+                    LinkedIn
                 </a>
                 <a href="https://github.com/LLYXC" class="social-link">
                     <img src="./pic/github_s.jpg" alt="GitHub" class="social-icon">
@@ -309,11 +554,14 @@
                     <img src="./pic/twittwer.png" alt="Twitter" class="social-icon">
                     Twitter
                 </a>
-                <a href="https://www.linkedin.com/in/luyang-luo" class="social-link">
-                    <img src="./pic/LinkedIn_s.png" alt="LinkedIn" class="social-icon">
-                    LinkedIn
-                </a>
             </div>
+
+            <nav class="mobile-nav">
+                <a href="index.html" class="active">HOME</a>
+                <a href="publications.html">PUBLICATIONS</a>
+                <a href="services.html">SERVICES</a>
+                <a href="teaching.html">EDUCATION</a>
+            </nav>
         </div>
     </div>
 
@@ -322,8 +570,8 @@
         <div class="h-full flex items-center justify-center space-x-12">
             <a href="index.html" class="nav-link active">HOME</a>
             <a href="publications.html" class="nav-link">PUBLICATIONS</a>
-            <a href="services.html" class="nav-link">ACADEMIC SERVICES</a>
-            <a href="teaching.html" class="nav-link">MENTORING & TEACHING</a>
+            <a href="services.html" class="nav-link">SERVICES</a>
+            <a href="teaching.html" class="nav-link">EDUCATION</a>
         </div>
     </div>
 
@@ -334,8 +582,8 @@
             <h2 class="section-title">Biography</h2>
             <div class="section-content">
                 <p>
-                    I am currently a senior post-doctoral research fellow at the <span class="font-semibold">Department of Biomedical Informatics, Harvard Medical School</span>, where I am working with <a href="https://pranavrajpurkar.com/" class="text-red-900 hover:text-red-700">Prof. Pranav Rajpurkar</a>. 
-                    I co-lead the <a  class="text-red-800 hover:text-red-900">Medical AI Bootcamp</a> (for Harvard, Stanford, and MIT students and medical doctors all around the world).
+                    I am currently a senior post-doctoral research fellow at the <span class="font-semibold">Department of Biomedical Informatics, Harvard Medical School</span>, where I am working with <a href="https://pranavrajpurkar.com/" class="text-blue-900 hover:text-blue-700">Prof. Pranav Rajpurkar</a>. 
+                    I co-lead the <a  class="text-blue-800 hover:text-blue-900">Medical AI Bootcamp</a> (for Harvard, Stanford, and MIT students and medical doctors all around the world).
                 </p>
 				<br>
                 <p>I develop AI systems for healthcare that span patient communication, clinical decision-making, and model reliability. 
@@ -406,7 +654,7 @@
                     <span class="news-date">[01/2026]</span>
                     <span class="news-content">
                         One paper accepted as 
-                        <span class="text-red-600 font-medium">Oral Presentation</span>
+                        <span class="text-blue-700 font-medium">Oral Presentation</span>
                         for the
                         <a href="https://huggingface.co/datasets/rajpurkarlab/ReXGroundingCT" class="text-blue-600 hover:text-blue-800">
                             HeaLing
@@ -525,7 +773,7 @@
                 <div class="news-item flex">
                     <span class="news-date">[05/2025]</span>
                     <span class="news-content">
-                        One paper <span class="text-red-600 font-medium">early accepted</span> by MICCAI
+                        One paper <span class="text-blue-700 font-medium">early accepted</span> by MICCAI
                     </span>
                 </div>
                 <div class="news-item flex">
@@ -565,7 +813,7 @@
                     <span class="news-date">[01/2025]</span>
                     <span class="news-content">
                         One abstract was selected as 
-                        <span class="text-red-600 font-medium">Oral Presentation</span>
+                        <span class="text-blue-700 font-medium">Oral Presentation</span>
                         at 
                         <a href="https://annualmeeting.siim.org/sessions/transforming-radiology-reporting-ai-driven-tools-for-education-communication-and-reliability-scientific-research-abstracts/" class="text-blue-600 hover:text-blue-800">
                             SIIM 2025
@@ -590,15 +838,15 @@
                     <span class="news-content">
                         Our paper 
                         <a href="https://arxiv.org/abs/2410.00441" class="text-blue-600 hover:text-blue-800">ReXplain</a>
-                        won the <span class="text-red-600 font-medium">Best Paper</span> of AI for Medicine and Healthcare, AAAI Bridge Program 2025!
+                        won the <span class="text-blue-700 font-medium">Best Paper</span> of AI for Medicine and Healthcare, AAAI Bridge Program 2025!
                     </span>
                 </div>
             </div>
         </div>
 		<footer class="text-center py-8">
 			<div class="text-sm text-gray-600 mt-4">
-				<a href="https://hms.harvard.edu" class="hover:text-red-900">Harvard Medical School</a> |
-				<a href="https://dbmi.hms.harvard.edu" class="hover:text-red-900">Department of Biomedical Informatics</a>
+				<a href="https://hms.harvard.edu" class="hover:text-blue-900">Harvard Medical School</a> |
+				<a href="https://dbmi.hms.harvard.edu" class="hover:text-blue-900">Department of Biomedical Informatics</a>
 			</div>
 			<p class="mt-6 text-gray-600 text-sm">
 				© Luyang Luo | Last updated: May 2026
@@ -628,11 +876,25 @@
             document.addEventListener('click', function(event) {
                 const isClickInsidePanel = leftPanel.contains(event.target);
                 const isClickOnButton = menuButton.contains(event.target);
-                
+
                 if (!isClickInsidePanel && !isClickOnButton && leftPanel.classList.contains('active')) {
                     leftPanel.classList.remove('active');
                 }
             });
+
+            // Initialize Swup so nav clicks swap only the main content + top bar
+            // (left panel stays mounted, no flash on navigation)
+            if (window.Swup) {
+                const swup = new Swup({
+                    containers: ['.main-content', '.top-bar']
+                });
+                swup.hooks.on('page:view', function () {
+                    feather.replace();
+                    if (leftPanel.classList.contains('active')) {
+                        leftPanel.classList.remove('active');
+                    }
+                });
+            }
         });
     </script>
 </body>
