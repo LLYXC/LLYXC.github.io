@@ -1,7 +1,7 @@
 """Throwaway: build restyled Publications / Bootcamp / Join pages for the prototype from the live pages' content."""
 import re, html, sys, os
 repo, proto = sys.argv[1], sys.argv[2]
-V = '10'
+V = '11'
 FONTS = '<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>\n<link href="https://fonts.googleapis.com/css2?family=Cardo:ital,wght@0,400;0,700;1,400&family=Libre+Franklin:wght@400;500;600&display=swap" rel="stylesheet">'
 norm = lambda t: re.sub(r'[^a-z0-9]+', ' ', t.lower()).strip()
 txt = lambda h: re.sub(r'\s+', ' ', html.unescape(re.sub(r'<[^>]+>', '', h))).strip()
@@ -72,7 +72,7 @@ a.pub-t:hover{color:var(--accent)!important;text-decoration:underline}
 os.makedirs(proto, exist_ok=True)
 open(f'{proto}/site.css', 'w').write(CSS)
 
-CAPS = {'publications': 'Three stacks, one per theme. Click one to filter.', 'bootcamp': 'One project, one mentor, two tracks.', 'join': 'There is an open place in the team.'}
+CAPS = {'publications': 'Three stacks, one per theme. Click one to filter.', 'bootcamp': 'Two tracks, one camp.', 'join': 'One piece is missing.'}
 REVEAL = """<script>
 (()=>{const els=document.querySelectorAll('.page h2,.page>p,.page>ul,.pub');
  if(!('IntersectionObserver' in window)||matchMedia('(prefers-reduced-motion: reduce)').matches) return;

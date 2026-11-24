@@ -3,7 +3,7 @@
 <title>Join · Luyang Luo</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cardo:ital,wght@0,400;0,700;1,400&family=Libre+Franklin:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/site.css?v=10">
+<link rel="stylesheet" href="/site.css?v=11">
 </head><body>
 <div class="proto">Throwaway prototype</div>
 <header class="nav"><a class="brand" href="/"><img src="/portrait.jpg" alt=""><span>Luyang Luo</span></a><nav><a href="/">Home</a><a href="/publications/">Publications</a><a href="/bootcamp/">Bootcamp</a><a class="active" href="/join/">Join</a></nav></header>
@@ -63,7 +63,7 @@
                     <li>Links to anything that shows your work: papers, code, projects</li>
                 </ul>
 </main>
-<aside class="vig" id="vig" aria-hidden="true"><p class="vig-cap">There is an open place in the team.</p></aside>
+<aside class="vig" id="vig" aria-hidden="true"><p class="vig-cap">One piece is missing.</p></aside>
 </div>
 <footer class="foot">© Luyang Luo</footer>
 
@@ -75,7 +75,7 @@
 </script>
 <script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js"}}</script>
 <script type="module">
-import { mount } from '/vignette.js?v=10';
+import { mount } from '/vignette.js?v=11';
 const counts = {}; ['build','know','wire'].forEach(k => counts[k] = document.querySelectorAll('.pub[data-themes~="'+k+'"]').length);
 window.__vig = mount(document.getElementById('vig'), 'join', { counts, onPick: f => window.__filt && window.__filt(f) });
 if (window.__vig && window.__vig.select && window.__f) window.__vig.select(window.__f);

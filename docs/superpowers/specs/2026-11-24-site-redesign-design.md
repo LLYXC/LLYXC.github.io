@@ -33,7 +33,7 @@ These came from him directly and are not open:
 - Theme 02 keeps the light page. Nothing on the site turns dark.
 - The forecasting question is not listed under theme 02.
 - The new paper "Abandonment of safe medical advice by large language models under patient resistance" (Science, 2026, in press) is added.
-- The other pages follow the style of the home page and have animated elements of their own.
+- The other pages follow the style of the home page and have animated elements of their own. Same style, but not the same content or elements from page to page.
 
 ## Goals
 
@@ -191,7 +191,7 @@ Generated from the paper data file.
 - **Order.** Newest first, grouped under year headings.
 - **Filter.** Chips for All, 01 Build, 02 Know and 03 Wire. A paper can carry more than one theme. Papers with no theme appear only under All. With JavaScript off, everything shows. `/publications/#know` arrives with that filter on.
 - **Header.** "Selected Publications", the Google Scholar link, and "* denotes co-first authorship", as today.
-- **Animated island.** Three stacks of papers, one per theme, each as tall as its paper count, with agents moving between them and the AI core. Clicking a stack, or its label, sets the filter; the chosen stack lifts and turns amber. It mirrors the chips and does not replace them.
+- **Animated object.** A desk with three stacks of papers, one per theme, each as tall as its paper count. Clicking a stack, or its label, sets the filter; the chosen stack lifts and turns amber. It mirrors the chips and does not replace them.
 
 Theme tags for the 37 (Claude's sorting):
 
@@ -213,24 +213,21 @@ Same words, new frame: the shared menu, serif headings, hairline rules between s
 
 ## Animated elements on the inner pages
 
-Every inner page repeats the home page's arrangement: text on the left, and on the right a small animated island that stays in view while the text scrolls. On a phone the island sits above the text and scrolls away with it. Each island is cut from the same world as the home scene, with the same pawns, amber agents and AI core, and can be turned by dragging.
+Every inner page repeats the home page's arrangement: text on the left, and on the right a small animated 3D object that stays in view while the text scrolls. On a phone the object sits above the text and scrolls away with it. It can be turned by dragging.
 
-| Page | Island | Caption |
-|---|---|---|
-| Publications | Three stacks of papers that act as the theme filter (above). | Three stacks, one per theme. Click one to filter. |
-| Bootcamp | Seven pawns in a horseshoe around one table and the AI core: a mentor, three on the AI track, three on the medicine track. | One project, one mentor, two tracks. |
-| Join | A team of four (students, engineers, clinicians, researchers) and, a short path away, a translucent amber pawn on a pulsing ring labelled "You?". | There is an open place in the team. |
+The rule Luyang set: same style, different content. Each page has its own object, drawn in the home scene's style (the same palette, light, low-poly shapes and amber accent). Nothing from the home scene is repeated on an inner page: no pawns, no AI core, no travelling agents. No two inner pages share an object.
 
-Teaching and Services get the same two-column frame. Their islands are left to the builder; reusing the Bootcamp island on Teaching is fine.
+| Page | Object | What moves | Caption |
+|---|---|---|---|
+| Publications | A desk with three stacks of papers, a lamp, a mug and a pen. The stacks are the theme filter (above). | A sheet drifts down onto a stack now and then; the lamp glows. | Three stacks, one per theme. Click one to filter. |
+| Bootcamp | A camp: a blue tent labelled "AI track", a coral tent labelled "Medicine track", a fire between them, log seats, a flag, trees. | The fire flickers and throws sparks; the flag sways. | Two tracks, one camp. |
+| Join | A three-by-three floor of coloured tiles with the centre missing. Four tiles are labelled Students, Engineers, Clinicians and Researchers. An amber tile labelled "You?" hovers over the gap. | The amber tile settles into the gap, the floor ripples, and it lifts again. | One piece is missing. |
+
+Teaching and Services get the same two-column frame and an object of their own under the same rule. What those two objects are is left to the builder.
 
 Two quieter touches apply to every inner page: sections and publication entries fade up as they scroll into view, and a publication entry shows an amber marker at its left edge on hover. Both are skipped under reduced motion.
 
-The islands follow the same rules as the home scene: text first, a still image when there is no WebGL, no travelling agents under reduced motion, and no rendering while off-screen or in a hidden tab. What "animated elements" means here is Claude's reading of "some fancy elements"; Luyang has seen these three in the prototype.
-
-Two sentences change so the site does not contradict its own home page:
-
-- Join: "My current work centers on three directions: …" names the three new headlines and links each to its theme on the home page.
-- Bootcamp: "…align with my core research directions: …" does the same.
+The objects follow the same rules as the home scene: text first, a still image when there is no WebGL, no motion under reduced motion, and no rendering while off-screen or in a hidden tab. The choice of these three objects is Claude's; Luyang has seen them in the prototype.
 
 ## The paper data file
 
