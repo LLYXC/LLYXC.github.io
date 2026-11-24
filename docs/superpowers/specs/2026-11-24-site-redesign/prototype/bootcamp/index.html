@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Medical AI Bootcamp · Luyang Luo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cardo:ital,wght@0,400;0,700;1,400&family=Libre+Franklin:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/site.css?v=10">
+</head><body>
+<div class="proto">Throwaway prototype</div>
+<header class="nav"><a class="brand" href="/"><img src="/portrait.jpg" alt=""><span>Luyang Luo</span></a><nav><a href="/">Home</a><a href="/publications/">Publications</a><a class="active" href="/bootcamp/">Bootcamp</a><a href="/join/">Join</a></nav></header>
+<div class="split">
+<main class="page">
+<h1>Medical AI Bootcamp</h1>
+<p class="lead">
+                    The Medical AI Bootcamp
+                    is a closely mentored research program at the intersection of AI and medicine, which I co-lead with
+                    <a href="https://pranavrajpurkar.com/">Prof. Pranav Rajpurkar</a> at Harvard Medical School.
+                    It is open to Yale, Harvard, Stanford, and MIT students, as well as medical doctors across the world.
+                    We directly mentor participants through research projects — from framing a question, to building and evaluating systems,
+                    to writing and publishing the work.
+                </p>
+                <p>
+                    Participants lead their own research project with structured guidance, meet weekly as a group to discuss progress and
+                    dissect recent papers, and frequently become co-authors — many as first authors — on peer-reviewed publications.
+                </p>
+<h2>At a Glance</h2>
+<ul>
+                    <li><strong>Duration:</strong> 6–9 months, with a commitment of roughly 15–20 hours per week</li>
+                    <li><strong>Meeting:</strong> Weekly group Zoom meetings for progress updates, paper discussions, and skill development</li>
+                    <li><strong>Mentorship:</strong> weekly guidance from me and collaborating faculty and researchers</li>
+                    <li><strong>Goal:</strong> a real research contribution — most projects target a peer-reviewed publication</li>
+                </ul>
+<h2>Two Tracks</h2>
+<p>
+                    <strong>AI Track</strong> — for undergraduate and graduate students at
+                    <strong>Yale, Harvard, Stanford, and MIT</strong>. You should have practical machine learning foundations
+                    (strong performance in relevant coursework), solid Python skills, and the ability to commit for at least two semesters.
+                    Programming ability is assessed during the interview.
+                </p>
+                <p>
+                    <strong>Medicine Track</strong> — for <strong>MDs and equivalent degree
+                    holders anywhere in the world</strong>. Clinical experience is preferred, and all specialties are welcome. Applicant should have a
+                    genuine interest in how AI can change clinical practice.
+                </p>
+<h2>What You'll Work On</h2>
+<p>
+                    Projects track the frontier of medical AI and align with my core research directions: <a href="/#build">building AI that does clinical work</a>, <a href="/#know">knowing what it will do before we deploy it</a>, and <a href="/#wire">wiring AI into the health system</a>.
+                    Recent bootcampers I closely supervised have published in venues such as NEJM AI, CHIL, MLHC, and more.
+                </p>
+<h2>How to apply</h2>
+<p>
+                    Applications are reviewed on a <strong>rolling monthly</strong> basis. The application takes about
+                    10–15 minutes: a CV/resume, a transcript (for students), and a short statement of motivation.
+                </p>
+                <p>
+                    <a href="https://airtable.com/appMG2Ng2QZG2eeAC/pagTuItA5xeXO9rDX/form"
+                       class="btn" target="_blank" rel="noopener">
+                        Apply Now
+                    </a>
+                </p>
+</main>
+<aside class="vig" id="vig" aria-hidden="true"><p class="vig-cap">One project, one mentor, two tracks.</p></aside>
+</div>
+<footer class="foot">© Luyang Luo</footer>
+
+<script>
+(()=>{const els=document.querySelectorAll('.page h2,.page>p,.page>ul,.pub');
+ if(!('IntersectionObserver' in window)||matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+ const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}}),{rootMargin:'0px 0px -6% 0px'});
+ els.forEach(e=>{e.classList.add('rv');io.observe(e);});})();
+</script>
+<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js"}}</script>
+<script type="module">
+import { mount } from '/vignette.js?v=10';
+const counts = {}; ['build','know','wire'].forEach(k => counts[k] = document.querySelectorAll('.pub[data-themes~="'+k+'"]').length);
+window.__vig = mount(document.getElementById('vig'), 'bootcamp', { counts, onPick: f => window.__filt && window.__filt(f) });
+if (window.__vig && window.__vig.select && window.__f) window.__vig.select(window.__f);
+</script>
+</body></html>

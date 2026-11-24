@@ -10,3 +10,4 @@ exclude:
   - vendor
   - README.md
   - LICENSE
+  - docs
