@@ -226,13 +226,14 @@ Generated from the paper data file. Luyang changed its brief on 2026-11-24: ever
 
 ### Keeping the list current
 
-`tools/update_papers.py` does the refresh. It reads the profile's list pages (which papers exist, title, venue line, year, citations), keeps everything already known about each paper, and for a new paper looks up the full author list and a link on OpenAlex. Tested on 2026-11-24 from Luyang's laptop: 73 papers, and the citation total matches the 3,361 Scholar shows.
+`tools/update_papers.py` does the refresh. It reads the profile page (which papers exist, title, venue line, year, citations), keeps everything already known about each paper, and for a new paper looks up the full author list and a link on OpenAlex.
 
-In production a scheduled GitHub Action runs it once a week and commits the data file when it changed; the commit rebuilds the site. Three things the builder must know:
+Where it runs was settled by trying it (2026-11-25):
 
-- **Scholar has no API and blocks scripts unevenly.** The list pages answered a plain request from a home connection. The per-paper pages, which hold the full author list, redirected to a challenge, which is why authors come from OpenAlex. GitHub's servers may be refused where a laptop is not. This has not been tried yet and is the first thing to test.
-- **A bad answer changes nothing.** If Scholar returns no papers, or far fewer than last time, the script stops with an error and the last good list stays on the site. A failed run must fail the Action visibly, not publish an empty page.
-- **If GitHub's servers are refused,** the fallbacks are, in order: run the same script from Luyang's laptop on a schedule or by hand; or pay for a Scholar scraping service (SerpAPI has an author endpoint) and keep its key in the repository's secrets. Luyang decides if it comes to that.
+- **Not on GitHub.** A GitHub Action ran the script once from the `redesign` branch and Google Scholar answered 403. Scholar refuses data-centre addresses, so the Action was removed.
+- **From Luyang's Mac, twice a month.** Luyang chose this ("bi-monthly", read as the 1st and 15th; every two months is a one-line change). `tools/install_schedule.sh` installs a launchd job that runs `tools/refresh_and_publish.sh` at 10:00 on those days. The job works in its own copy of the repository, commits `_data/` only when the list changed, and pushes to `master`. A run missed while the Mac sleeps happens on waking; one missed while it is off is skipped.
+- **Within Scholar's rules.** Its robots.txt allows `/citations?user=…` and disallows paging (`cstart=`) and the per-paper pages. So the script makes one request, for the newest 100 papers, and nothing else. Past 100 papers, only the newest 100 have their citation counts refreshed.
+- **A bad answer changes nothing.** If Scholar refuses, or returns far fewer papers than last time, the script stops with an error, nothing is published, and the Mac shows a notification.
 
 What the update cannot know stays hand-written and is laid over the Scholar entry by title: co-first marks, notes, extra links, a preferred title or venue name, and papers Scholar does not list yet. One paper's title differs between the site and Scholar ("Medical Image Debiasing by Learning Adaptive Agreement from a Biased Council" on the site, "Mitigating medical dataset bias by learning adaptive agreement from a biased council" on Scholar); it is matched by an explicit entry, and the site's title is shown until Luyang says otherwise.
 
@@ -275,7 +276,7 @@ Two layers. The first is the Scholar list, written only by `update_papers.py`: f
 
 Each paper has one title, shown with the same wording and capitals on both pages. A paper may also carry a short venue name, such as "PSB" or "CHIL", which the home page uses in place of the full one. Claude's call.
 
-A new paper appears on the Publications page by itself, within a week of reaching Scholar. It needs a hand-written entry only to gain co-first marks, notes or extra links, or to appear on the home page.
+A new paper appears on the Publications page by itself, at the next scheduled refresh after it reaches Scholar. It needs a hand-written entry only to gain co-first marks, notes or extra links, or to appear on the home page.
 
 ## Checks before calling it done
 
@@ -283,7 +284,7 @@ A new paper appears on the Publications page by itself, within a week of reachin
 - Screenshots at laptop and phone width of every page, and of the home page in all four states, with no script errors and no sideways scroll.
 - Every one of the 35 existing papers appears on the new Publications page with the same title, authors, venue, notes and links as before. Check this by comparing against the current page, not by eye.
 - Every paper on the Scholar profile appears exactly once. No hand-written entry is matched to two Scholar entries, and none sits beside a Scholar duplicate of itself under another title.
-- The weekly update has run on GitHub at least once, and a run that is refused leaves the list untouched and the Action red.
+- The scheduled refresh has run once from the Mac, and a refused run leaves the list untouched and says so.
 - Each filter, each sort order and the search narrow the list as described, and "Showing N of M" is right.
 - Five existing entries list fewer authors than OpenAlex records (ReXGroundingCT, the explainable foundation model, the breast imaging survey, the debiasing paper, the super-resolution segmentation paper). They are carried over unchanged and listed for Luyang to look at.
 - Every paper link answers. Papers with no link are listed for Luyang.
@@ -302,7 +303,7 @@ Luyang asked for the open points to be settled before the site went live.
 - **Themes do not depend on the scene.** `assets/home.js` runs the rows, chips and panels and has no 3D code; it loads `assets/scene.js` afterwards and tells it about each change of theme. So the themes work before the 3D library arrives and when there is no WebGL. Under the still image the caption stays on the overview, and the step chips, counters and "drag to turn" hint are hidden. Checked three ways in Chrome: normal, WebGL disabled, scripts disabled.
 - **The import map comes first.** The line that says where "three" lives is in the page head, before the preload hints. Placed after them, the preloaded scene script failed to find the library.
 - **Old addresses.** `404.html` answers any address that no longer exists, in the site's style, with links to the four pages. A search of GitHub code and of the web found nothing that links to the deleted images or to `/teaching/` and `/services/`, so none of those files was kept. A search cannot prove there is none: an image embedded from this site somewhere else would now be broken.
-- **Weekly update.** `.github/workflows/update-papers.yml` runs the update script every Monday and by hand. It commits to `master` only when the list changed, then asks GitHub for a Pages build, because a push made by a workflow does not reliably start one.
+- **Automatic update.** Tried on GitHub and refused by Google Scholar; now a scheduled job on Luyang's Mac, twice a month. See "Keeping the list current".
 
 ## Not done
 

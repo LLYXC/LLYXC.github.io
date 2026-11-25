@@ -3,7 +3,7 @@
     python3 tools/update_papers.py             fetch the profile, look up new papers, rebuild _data/papers.json
     python3 tools/update_papers.py --offline   rebuild _data/papers.json from the files as they are
                                                (run this after editing _data/papers_extra.json by hand)
-    python3 tools/update_papers.py --from-dir DIR   as the first form, but read profile pages saved in DIR (p0.html, p100.html, ...)
+    python3 tools/update_papers.py --from-file F    as the first form, but read a profile page saved in F instead of fetching it
 
 Three files in _data/:
   scholar.json       written here, never by hand. One entry per paper on the profile: title, venue line, year and
@@ -13,10 +13,16 @@ Three files in _data/:
                      that matches nothing on Scholar is a paper of its own (one that is in press, say).
   papers.json        written here, never by hand. The two files above merged; it is what the pages read.
 
-Scholar has no API. Its list pages answer a plain request; the per-paper pages, which hold the full author list,
-refuse scripts, which is why authors come from OpenAlex. A run changes nothing unless Scholar answered properly:
-an empty or much shorter list is treated as a block or an outage and the script exits non-zero.
-Standard library only.
+Scholar has no API, so this reads the profile page, and only in the way Scholar's robots.txt allows: one request for
+/citations?user=..., which returns the newest 100 papers. Paging further (cstart=) and the per-paper pages are
+disallowed, so they are not requested; that is why full author lists come from OpenAlex, and why, once the profile
+passes 100 papers, only the newest 100 have their citation counts refreshed (older ones keep their last known count).
+
+Scholar answers a home or office connection and refuses data-centre addresses: tried from GitHub Actions on
+2026-11-25, it returned 403. So this is run from a laptop, not from GitHub.
+
+A run changes nothing unless Scholar answered properly: a refusal, or an empty or much shorter list, is treated as a
+block or an outage and the script exits non-zero. Standard library only.
 """
 import difflib, html, json, os, re, sys, time, urllib.parse, urllib.request
 
@@ -39,20 +45,10 @@ def get(url, timeout=30):
     with urllib.request.urlopen(req, timeout=timeout) as r:
         return r.read().decode('utf-8', 'replace')
 
-def profile_pages(from_dir):
-    """Yield the profile's list pages, 100 papers at a time, newest first."""
-    start = 0
-    while True:
-        if from_dir:
-            path = os.path.join(from_dir, f'p{start}.html')
-            if not os.path.exists(path): return
-            page = open(path, encoding='utf-8', errors='replace').read()
-        else:
-            page = get(f'https://scholar.google.com/citations?user={USER}&hl=en&cstart={start}&pagesize={PAGE}&sortby=pubdate')
-        yield page
-        if page.count('class="gsc_a_tr"') < PAGE: return
-        start += PAGE
-        if not from_dir: time.sleep(2)
+def profile_page(from_file):
+    """The profile's first page: the newest 100 papers. One request, and the only kind robots.txt allows."""
+    if from_file: return open(from_file, encoding='utf-8', errors='replace').read()
+    return get(f'https://scholar.google.com/citations?user={USER}&hl=en&sortby=pubdate&pagesize={PAGE}')
 
 def parse(page):
     out = []
@@ -80,15 +76,14 @@ def openalex(title):
             return dict(authors_full=names, doi=w.get('doi') or '', landing=((w.get('primary_location') or {}).get('landing_page_url') or ''))
     return None
 
-def refresh(from_dir):
+def refresh(from_file):
     old = load(SCHOLAR)
     known = {o['cid']: o for o in old}
-    now = []
     try:
-        for page in profile_pages(from_dir): now += parse(page)
-    except OSError as e:   # a refusal (HTTP 429 and the like), a time-out, no network
+        now = parse(profile_page(from_file))
+    except OSError as e:   # a refusal (HTTP 403 or 429), a time-out, no network
         sys.exit(f'Could not read the Scholar profile ({e}). Nothing was changed.')
-    if len(now) < max(1, .7 * len(old)):
+    if len(now) < min(PAGE, max(1, .7 * len(old))):
         sys.exit(f'Scholar returned {len(now)} papers where {len(old)} were known. Treating that as a block or an outage; nothing was changed.')
     out, added = [], []
     for s in now:
@@ -98,7 +93,12 @@ def refresh(from_dir):
         if not more['authors_full']:
             more.update(openalex(s['title']) or {}); time.sleep(.3)
         out.append(dict(s, **more))
-    gone = [o['title'] for c, o in known.items() if c not in {s['cid'] for s in now}]
+    seen = {s['cid'] for s in now}
+    unseen = [o for o in old if o['cid'] not in seen]
+    # A full page means the profile has more papers than one page shows: those not on it are older ones, kept as they were.
+    # A short page is the whole profile, so a paper missing from it has been removed there.
+    gone = [] if len(now) >= PAGE else [o['title'] for o in unseen]
+    if len(now) >= PAGE: out += unseen
     save(SCHOLAR, out)
     print(f'Scholar: {len(out)} papers, {sum(p["citations"] for p in out)} citations; {len(added)} new, {len(gone)} gone, '
           f'{sum(not p["authors_full"] for p in out)} without a full author list')
@@ -190,5 +190,5 @@ def merge():
 if __name__ == '__main__':
     args = sys.argv[1:]
     if '--offline' not in args:
-        refresh(args[args.index('--from-dir') + 1] if '--from-dir' in args else None)
+        refresh(args[args.index('--from-file') + 1] if '--from-file' in args else None)
     merge()

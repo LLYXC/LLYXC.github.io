@@ -26,9 +26,14 @@ Do not edit `_data/papers.json` or `_data/scholar.json` by hand; the update scri
 
 ## Publications and Google Scholar
 
-Every Monday a GitHub Action (`.github/workflows/update-papers.yml`) runs `python3 tools/update_papers.py` and, if the list changed, commits `_data/` to `master`, which rebuilds the site. So `master` gains a commit most weeks: pull before you push. The Action can also be run by hand from the repository's Actions tab.
+The Publications page follows the Google Scholar profile. Google Scholar refuses requests from GitHub's servers, so the refresh runs from a Mac, not from GitHub:
 
-The script reads the Google Scholar profile, looks up full author lists for new papers on OpenAlex, lays the hand-written entries over the result and writes `_data/papers.json`, which the pages read. It needs only Python 3, so it can be run from a laptop as well. If Scholar refuses the request or returns far fewer papers than before, the script stops and changes nothing, the Action shows as failed, and the site keeps the last good list. The header of the script says more.
+- **On a schedule.** `sh tools/install_schedule.sh` sets this Mac to refresh at 10:00 on the 1st and 15th of each month (`--remove` undoes it). If the Mac is asleep then, it runs on waking; if it is off, that run is skipped. A failed run shows a notification, and everything is logged in `~/Library/Logs/luyangluo-site-papers.log`.
+- **By hand, any time.** `sh tools/refresh_and_publish.sh`.
+
+Either way the refresh happens in a separate copy of the repository (under `~/Library/Application Support/luyangluo-site/`), and when the list changed it commits `_data/` and pushes to `master`, which rebuilds the site. So `master` can gain a commit without you: pull before you push.
+
+What the refresh does: `tools/update_papers.py` reads the profile page, looks up full author lists for new papers on OpenAlex, lays the hand-written entries over the result and writes `_data/papers.json`, which the pages read. It needs only Python 3. If Scholar refuses the request or returns far fewer papers than before, it stops and changes nothing. The header of the script says more.
 
 ## Preview on your own machine
 
