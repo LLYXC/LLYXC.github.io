@@ -1,686 +1,83 @@
 ---
+layout: default
+home: true
+style: home
 permalink: /
-layout: null
+description: "Luyang Luo is an Assistant Professor of Biostatistics and Health Informatics at Yale University. His research asks how to build AI for medicine and how AI will change medicine."
 ---
-<!DOCTYPE html>
-<html lang="en">
-	
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="keywords" content="Luyang Luo, Medical AI, Biostatistics, Yale University">
-    <meta name="description" content="Luyang Luo's home page">
-    <title>Luyang Luo's Homepage</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.29.0/feather.min.js"></script>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:wght@600;700&display=swap" rel="stylesheet">
-
-    <style>
-        /* Updated styles with wider left panel */
-        .left-panel {
-            position: fixed;
-            left: 0;
-            top: 0;
-            bottom: 0;
-            width: 33.333%; /* 1/3 of page width */
-            max-width: 500px; /* Maximum width limit for very wide screens */
-            background-color: white;
-            padding: 3rem; /* Increased padding for better spacing */
-            overflow-y: auto;
-            display: flex;
-            justify-content: center; /* Center the content container */
-            z-index: 30; /* Ensure panel stays above other content */
-        }
-
-        .left-panel-content {
-            width: 80%; /* Content takes up 80% of panel width */
-            max-width: 300px; /* Maximum width for the content */
-        }
-
-        .top-bar {
-            position: fixed;
-            top: 0;
-            left: 33.333%;
-            right: 0;
-            height: 50px; /* Reduced height */
-            background-color: white;
-            z-index: 10;
-        }
-
-        .main-content {
-            margin-left: 33.333%;
-            margin-top: 50px; /* Match new top-bar height */
-            padding: 1.5rem; /* Reduced padding */
-            width: calc(66.667% - 2rem); /* Full remaining width minus padding */
-            background-color: white;
-        }
-
-        .content-section {
-            background-color: white;
-            padding: 1.25rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .section-title {
-            font-size: 1.25rem;
-            font-weight: 600;
-            color: #1a202c;
-            margin-bottom: 1rem;
-            border-bottom: 2px solid #00356B;
-            padding-bottom: 0.5rem;
-            width: fit-content;
-        }
-
-        .section-content {
-            font-size: 0.95rem;
-            line-height: 1.5;
-            color: #4a5568;
-        }
-
-        .news-item {
-            padding: 0.25rem 0;
-            border-bottom: none;
-        }
-
-        .news-item:last-child {
-            border-bottom: none;
-        }
-
-        .news-date {
-            font-size: 0.85rem;
-            color: #718096;
-            width: 80px;
-            flex-shrink: 0;
-        }
-
-        .news-content {
-            font-size: 0.95rem;
-            color: #4a5568;
-        }
-
-        /* Enhanced profile section styles */
-        .profile-photo {
-            width: 300px; /* Smaller photo */
-            height: 300px;
-            object-fit: cover;
-            border-radius: 8px;
-            margin: 0 auto 1.5rem;
-        }
-
-        .profile-name {
-            font-size: 1.5rem; /* Smaller font size */
-            font-weight: bold;
-            color: #1a202c;
-            margin-bottom: 0.5rem;
-        }
-
-        .profile-title {
-            font-size: 1.1rem; /* Smaller font size */
-            color: #4a5568;
-            margin-bottom: 0.5rem;
-        }
-
-        .profile-affiliation {
-            font-size: 1rem; /* Smaller font size */
-            color: #4a5568;
-            margin-bottom: 1.5rem;
-        }
-
-        .contact-info {
-            margin-bottom: 1.5rem;
-            font-size: 0.95rem; /* Smaller font size */
-        }
-
-        .social-links {
-            display: flex;
-            flex-direction: column;
-            gap: 0.75rem;
-        }
-
-        .social-link {
-            display: flex;
-            align-items: center;
-            color: #4a5568;
-            text-decoration: none;
-            font-size: 0.95rem; /* Smaller font size */
-            transition: color 0.2s;
-        }
-
-        .social-link:hover {
-            color: #00356B;
-        }
-
-        .social-icon {
-            width: 20px; /* Smaller icons */
-            height: 20px;
-            margin-right: 8px;
-        }
-
-        /* Responsive adjustments */
-        @media (max-width: 1280px) {
-            .left-panel {
-                width: 400px;
-            }
-            .top-bar {
-                left: 400px;
-            }
-            .main-content {
-                margin-left: 400px;
-            }
-        }
-
-        @media (max-width: 1024px) {
-            .left-panel {
-                width: 350px;
-            }
-            .top-bar {
-                left: 350px;
-            }
-            .main-content {
-                margin-left: 350px;
-            }
-        }
-
-        /* Navigation styles */
-        .nav-link {
-            color: #00356B;
-            text-decoration: none;
-            font-size: 0.9rem;
-            padding: 0.5rem 1rem;
-            transition: all 0.2s;
-            letter-spacing: 1px;
-            border-radius: 0.25rem;
-        }
-
-        .nav-link:hover {
-            color: #00356B;
-            background-color: #f3f4f6;
-        }
-
-        .nav-link.active {
-            color: white;
-            background-color: #00356B;
-            font-weight: 600;
-        }
-
-        /* Enhanced mobile responsiveness */
-        @media (max-width: 768px) {
-            .left-panel {
-                width: 100%;
-                max-width: 100%;
-                height: 100vh;
-                transform: translateX(-100%);
-                transition: transform 0.3s ease-in-out;
-                padding: 2rem;
-            }
-
-            .left-panel.active {
-                transform: translateX(0);
-            }
-
-            .left-panel-content {
-                max-width: 100%;
-            }
-
-            .top-bar {
-                left: 0;
-                padding: 0 1rem;
-                z-index: 20;
-            }
-
-            .main-content {
-                margin-left: 0;
-                width: 100%;
-                padding: 1rem;
-            }
-
-            /* Mobile menu button */
-            .menu-button {
-                display: block;
-                position: fixed;
-                top: 10px;
-                left: 10px;
-                z-index: 40;
-                background-color: white;
-                border: 1px solid #edf2f7;
-                border-radius: 4px;
-                padding: 0.5rem;
-                cursor: pointer;
-            }
-
-            /* Adjust navigation for mobile */
-            .top-bar .flex {
-                flex-wrap: wrap;
-                justify-content: flex-end;
-            }
-
-            .nav-link {
-                font-size: 0.8rem;
-                padding: 0.25rem 0.5rem;
-            }
-        }
-
-        @media (min-width: 769px) {
-            .menu-button {
-                display: none;
-            }
-        }
-
-        /* ============== Yale Theme Refinements ============== */
-        :root {
-            --yale-blue: #00356B;
-            --yale-blue-light: #286DC0;
-            --yale-blue-dark: #0a2240;
-            --yale-blue-tint: #e6edf4;
-            --ink: #1a202c;
-            --ink-soft: #2d3748;
-            --ink-muted: #4a5568;
-            --rule: #edf2f7;
-        }
-
-        body {
-            font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-            -webkit-font-smoothing: antialiased;
-            color: var(--ink);
-            background-color: #fafbfc;
-        }
-
-        .left-panel,
-        .top-bar,
-        .main-content,
-        .content-section {
-            background-color: #ffffff;
-        }
-
-        .main-content {
-            border-left: 1px solid var(--rule);
-            min-height: calc(100vh - 50px);
-        }
-
-        .profile-name,
-        .section-title {
-            font-family: 'Source Serif 4', Georgia, 'Times New Roman', serif;
-            letter-spacing: -0.005em;
-        }
-
-        .profile-name {
-            display: inline-block;
-            padding-bottom: 0.4rem;
-            border-bottom: 2px solid var(--yale-blue);
-            margin-bottom: 0.6rem;
-            font-size: 1.6rem;
-            line-height: 1.2;
-        }
-
-        .profile-title {
-            font-weight: 500;
-            color: var(--ink-soft);
-        }
-
-        .profile-affiliation a {
-            transition: color 0.2s;
-        }
-
-        .section-title {
-            font-size: 1.35rem;
-            color: var(--yale-blue);
-            letter-spacing: 0.01em;
-        }
-
-        .section-content {
-            line-height: 1.7;
-            color: var(--ink-soft);
-        }
-
-        .section-content p + p {
-            margin-top: 0.75rem;
-        }
-
-        .news-item {
-            padding: 0.5rem 0;
-            align-items: baseline;
-            border-bottom: 1px solid #f5f7fa;
-        }
-
-        .news-item:last-child {
-            border-bottom: none;
-        }
-
-        .news-date {
-            color: var(--yale-blue);
-            font-variant-numeric: tabular-nums;
-            font-weight: 600;
-            font-size: 0.82rem;
-        }
-
-        .news-content {
-            line-height: 1.6;
-        }
-
-        /* Re-map Tailwind blue scale to Yale Blue palette */
-        .text-blue-900 { color: var(--yale-blue); }
-        .text-blue-800 { color: #003e7d; }
-        .text-blue-700 { color: #1a5099; }
-        .text-blue-600 { color: var(--yale-blue-light); }
-        .bg-blue-100 { background-color: var(--yale-blue-tint); }
-
-        .hover\:text-blue-900:hover { color: var(--yale-blue-dark); }
-        .hover\:text-blue-800:hover { color: #002a55; }
-        .hover\:text-blue-700:hover { color: #003e7d; }
-        .hover\:text-blue-600:hover { color: var(--yale-blue); }
-
-        a[class*="text-blue-"],
-        a[class*="hover:text-blue-"] {
-            transition: color 0.15s, text-decoration-color 0.15s;
-        }
-
-        a[class*="text-blue-"]:hover,
-        a[class*="hover:text-blue-"]:hover {
-            text-decoration: underline;
-            text-underline-offset: 2px;
-            text-decoration-thickness: 1px;
-        }
-
-        /* Refined navigation */
-        .nav-link {
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-        }
-
-        /* Profile photo polish */
-        .profile-photo {
-            box-shadow: 0 6px 20px rgba(0, 53, 107, 0.12);
-            border-radius: 10px;
-        }
-
-        /* Pill/chip refinement (used on publications) */
-        span.bg-blue-100.text-blue-800 {
-            background-color: var(--yale-blue-tint);
-            color: var(--yale-blue);
-            font-weight: 600;
-            letter-spacing: 0.02em;
-        }
-
-        @media (max-width: 768px) {
-            .profile-name { font-size: 1.35rem; }
-            .section-title { font-size: 1.2rem; }
-            .main-content { border-left: none; }
-        }
-
-        /* ============== Yale Style Pass 2 ============== */
-        /* Taller bar so a serif nav can breathe */
-        .top-bar {
-            height: 64px;
-            box-shadow: 0 1px 0 var(--rule);
-        }
-        .top-bar .h-full {
-            height: 64px;
-        }
-        .main-content {
-            margin-top: 64px;
-            min-height: calc(100vh - 64px);
-        }
-
-        /* Yale-style nav: serif, mixed-case, underline accent */
-        .nav-link {
-            font-family: 'Source Serif 4', Georgia, serif;
-            font-weight: 600;
-            font-size: 1.05rem;
-            text-transform: none;
-            letter-spacing: 0;
-            padding: 0.5rem 0.4rem;
-            border-radius: 0;
-            color: var(--yale-blue);
-        }
-        .nav-link:hover {
-            color: var(--yale-blue-dark);
-            background-color: transparent;
-            text-decoration: underline;
-            text-decoration-color: var(--yale-blue);
-            text-underline-offset: 8px;
-            text-decoration-thickness: 2px;
-        }
-        .nav-link.active {
-            color: var(--yale-blue);
-            background-color: transparent;
-            font-weight: 700;
-            text-decoration: underline;
-            text-decoration-color: var(--yale-blue);
-            text-underline-offset: 8px;
-            text-decoration-thickness: 3px;
-        }
-
-        /* Slightly larger body type */
-        body { font-size: 16.5px; }
-        .section-content { font-size: 1rem; }
-
-        /* Ruleless, larger section headings (Yale relies on weight + color) */
-        .section-title {
-            font-size: 1.65rem;
-            font-weight: 700;
-            border-bottom: none;
-            padding-bottom: 0;
-            width: auto;
-            margin-bottom: 1.1rem;
-            line-height: 1.2;
-        }
-
-        /* Bigger profile name */
-        .profile-name { font-size: 1.85rem; }
-
-        /* Mobile-nav is hidden on desktop */
-        .mobile-nav { display: none; }
-
-        @media (max-width: 768px) {
-            /* Hide the desktop top-bar; slide-in left panel becomes the mobile nav */
-            .top-bar { display: none; }
-            .main-content {
-                margin-top: 0;
-                padding-top: 56px;
-                min-height: 100vh;
-            }
-            .section-title { font-size: 1.35rem; }
-            .profile-name { font-size: 1.5rem; }
-
-            /* Mobile nav inside the slide-in left panel */
-            .mobile-nav {
-                display: block;
-                margin-top: 2rem;
-                padding-top: 1.25rem;
-                border-top: 1px solid var(--rule);
-            }
-            .mobile-nav a {
-                display: block;
-                padding: 0.6rem 0;
-                font-family: 'Source Serif 4', Georgia, serif;
-                font-size: 1.1rem;
-                font-weight: 600;
-                color: var(--yale-blue);
-                text-decoration: none;
-                letter-spacing: 0.5px;
-                border-bottom: 1px solid #f5f7fa;
-            }
-            .mobile-nav a:last-child { border-bottom: none; }
-            .mobile-nav a.active {
-                text-decoration: underline;
-                text-underline-offset: 6px;
-                text-decoration-thickness: 2px;
-                font-weight: 700;
-            }
-
-            .menu-button {
-                box-shadow: 0 2px 8px rgba(0, 53, 107, 0.08);
-            }
-        }
-            /* ===== Unified centered layout ===== */
-        *, *::before, *::after { box-sizing: border-box; }
-        html, body { overflow-x: hidden; }
-        .left-panel, .menu-button { display: none !important; }
-        .top-bar {
-            left: 0 !important;
-            height: 64px;
-            display: flex !important;
-            align-items: center;
-            justify-content: center;
-            padding: 0 1.5rem;
-            box-shadow: 0 1px 0 #edf2f7;
-            background: #ffffff;
-        }
-        .header-nav {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 2rem;
-            flex-wrap: wrap;
-        }
-        .main-content {
-            margin: 64px auto 0 auto !important;
-            max-width: 860px !important;
-            width: auto !important;
-            border-left: none !important;
-            padding: 2.5rem 1.5rem !important;
-        }
-        .profile-header {
-            text-align: center;
-            margin-bottom: 2.5rem;
-            padding-bottom: 2rem;
-            border-bottom: 1px solid #edf2f7;
-        }
-        .profile-header .profile-photo { width: 190px; height: 190px; margin: 0 auto 1.1rem auto; }
-        .profile-header .profile-name { display: inline-block; margin-bottom: 0.5rem; }
-        .profile-header .social-links {
-            flex-direction: row;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 1.5rem;
-            margin-top: 1.1rem;
-        }
-        @media (max-width: 1280px) { .main-content { margin-left: auto !important; } }
-        @media (max-width: 1024px) { .main-content { margin-left: auto !important; } }
-        @media (max-width: 768px) {
-            .top-bar { height: 56px; gap: 1rem; padding: 0 1rem; }
-            .header-nav { gap: 0.9rem; }
-            .header-nav .nav-link { font-size: 0.82rem; padding: 0.2rem 0.3rem; }
-            .main-content { margin-top: 56px !important; padding: 1.5rem 1rem !important; }
-        }
-    </style>
-</head>
-<body class="bg-white">
-    <!-- Top Navigation Bar -->
-    <div class="top-bar">
-        <nav class="header-nav">
-            <a href="/" class="nav-link active">HOME</a>
-            <a href="/publications/" class="nav-link">PUBLICATIONS</a>
-            <a href="/bootcamp/" class="nav-link">BOOTCAMP</a>
-            <a href="/join/" class="nav-link">JOIN</a>
-        </nav>
+<main class="hero">
+  <header class="me">
+    <img src="/assets/portrait.jpg" width="150" height="150" alt="Portrait of Luyang Luo">
+    <div>
+      <p class="me-name">Luyang Luo</p>
+      <p class="me-role">Assistant Professor of Biostatistics and Health Informatics<br>Yale University</p>
+      <div class="me-links">
+        <a href="https://scholar.google.com.hk/citations?user=eD1O_vAAAAAJ&hl=en">Scholar</a>
+        <a href="https://ysph.yale.edu/profile/luyang-luo/">Yale</a>
+        <a href="https://github.com/LLYXC">GitHub</a>
+        <a href="https://www.linkedin.com/in/luyang-luo">LinkedIn</a>
+        <a href="https://x.com/LLYfromXC">X</a>
+      </div>
     </div>
+  </header>
+  <section class="copy">
+    <h1><span>How do we build AI for medicine?</span><span class="q2">How will AI change medicine?</span></h1>
 
-    <!-- Main Content -->
-    <div class="main-content">
+    <ol class="items" id="items">
+{%- for t in site.data.themes %}
+      <li class="item">
+        <button class="item-h" data-mode="{{ t.key }}">
+          <span class="num">{{ t.number }}</span>
+          <span><span class="hd">{{ t.headline }}</span><span class="sub">{{ t.line }}</span></span>
+          <span class="chev" aria-hidden="true"></span>
+        </button>
+      </li>
+{%- endfor %}
+    </ol>
 
-        <!-- Profile Header -->
-        <div class="profile-header">
-            <img src="/pic/portrait.jpg" alt="Luyang Luo" class="profile-photo">
-            <h1 class="profile-name">Luyang Luo</h1>
-            <h2 class="profile-title">Assistant Professor of Biostatistics </h2>
-            <div class="profile-affiliation">
-                <a href="https://www.yale.edu" class="text-blue-900 hover:text-blue-700">Yale University</a>
-                <span> · </span>
-                <a href="https://ysph.yale.edu/profile/luyang-luo/" class="text-blue-900 hover:text-blue-700">Yale Profile</a>
-            </div>
-            <div class="social-links">
-                <a href="https://scholar.google.com.hk/citations?user=eD1O_vAAAAAJ&hl=en" class="social-link">
-                    <img src="/pic/google_scholar.png" alt="Google Scholar" class="social-icon">
-                    Google Scholar
-                </a>
-                <a href="https://www.linkedin.com/in/luyang-luo" class="social-link">
-                    <img src="/pic/LinkedIn_s.png" alt="LinkedIn" class="social-icon">
-                    LinkedIn
-                </a>
-                <a href="https://github.com/LLYXC" class="social-link">
-                    <img src="/pic/github_s.jpg" alt="GitHub" class="social-icon">
-                    GitHub
-                </a>
-                <a href="https://x.com/LLYfromXC" class="social-link">
-                    <img src="/pic/twittwer.png" alt="Twitter" class="social-icon">
-                    Twitter
-                </a>
-            </div>
-        </div>
-
-        <!-- Research Directions Section -->
-        <div class="content-section">
-            <div class="section-content">
-                <p>
-                    <span class="font-semibold text-blue-900">Multimodal foundation models and agents for medicine.</span>
-                    I develop generalist medical AI that learns jointly from biomedical data and navigates the healthcare systems, and I study how to compose these foundation models into agents that can reason over a case, gather the evidence they need, and collaborate with clinicians across the diagnostic workflow — moving from single-task predictors toward systems that participate in the full arc of clinical care.
-                </p>
-                <br>
-                <p>
-                    <span class="font-semibold text-blue-900">Rigorous evaluation environments and benchmarks for medical AI.</span>
-                    Impressive benchmark scores rarely tell us whether a model is safe to use in the clinic. I build the evaluation infrastructure needed to close this gap: dynamic clinical environment simulators that test models in realistic, interactive settings, and benchmarks that probe grounding, robustness, and behavior across diverse populations — so that progress in medical AI is measured by clinical readiness, not leaderboard position.
-                </p>
-                <br>
-                <p>
-                    <span class="font-semibold text-blue-900">Bridging AI to patients, clinicians, and health systems.</span>
-                    A model only matters when it reaches the people it is meant to serve. I create generative tools that translate complex diagnostic findings into language patients can understand, interpretable and reliable decision support that clinicians can trust and verify, and methods for monitoring and continuously improving models after deployment — treating AI not as a replacement for clinicians, but as infrastructure for a learning healthcare system.
-                </p>
-            </div>
-        </div>
-
-		<footer class="text-center py-8">
-			<p class="mt-6 text-gray-600 text-sm">
-				© Luyang Luo | Last updated: Sep 2026
-			</p>
-		</footer>
+    <div class="themes" id="themes">
+      <div class="tabs" id="tabs" role="group" aria-label="Research themes">
+        <button class="tab" data-mode="overview" aria-pressed="false">All</button>
+{%- for t in site.data.themes %}
+        <button class="tab" data-mode="{{ t.key }}" aria-pressed="false" aria-controls="p-{{ t.key }}"><b>{{ t.number }}</b>{{ t.short }}</button>
+{%- endfor %}
+      </div>
+{%- for t in site.data.themes %}
+      <section class="panel" id="p-{{ t.key }}" data-mode="{{ t.key }}" aria-labelledby="h-{{ t.key }}">
+        <h2 class="p-hd" id="h-{{ t.key }}">{{ t.headline }}</h2>
+        <p class="p-sub">{{ t.line }}</p>
+        <p class="lbl">Questions</p>
+        <ul class="qs">{% for q in t.questions %}<li>{{ q }}</li>{% endfor %}</ul>
+        <p class="lbl">Papers</p>
+        <ul class="papers">
+{%- assign chosen = site.data.papers | where: "home_theme", t.key | sort: "home_position" -%}
+{%- for p in chosen %}
+          <li>{% if p.url != "" %}<a class="ptitle" href="{{ p.url | escape }}" target="_blank" rel="noopener">{% else %}<span class="ptitle">{% endif %}{{ p.title | escape }}<span class="meta">{{ p.venue | escape }} · {{ p.year }}{% if p.status != "" %}, {{ p.status }}{% endif %}</span>{% if p.url != "" %}</a>{% else %}</span>{% endif %}</li>
+{%- endfor %}
+        </ul>
+        <a class="more" href="/publications/">More in publications</a>
+      </section>
+{%- endfor %}
     </div>
+  </section>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Initialize Feather icons
-            feather.replace();
+  <section class="stage" id="stage" aria-label="Animated model of a health system with AI agents moving between its stakeholders">
+    <div class="scene" id="scene">
+      <canvas id="gl"></canvas>
+      <div id="labels"></div>
+      <div class="legend"><i></i><span>Each light is an AI agent. Drag to turn.</span></div>
+    </div>
+    <div class="cap">
+      <div class="slot">
+        <div class="stepper" id="stepper"></div>
+        <div class="hud">
+          <div><span><i>Simulated </i>encounters</span><strong id="hud-n">0</strong></div>
+          <div class="bad"><span>Failures<i> surfaced</i></span><strong id="hud-f">0</strong></div>
+        </div>
+      </div>
+      <p id="cap"><b>A health system, with AI agents moving through it.</b> Pick one of the three themes to re-stage it.</p>
+    </div>
+  </section>
+</main>
 
-            // Mobile menu functionality
-            const menuButton = document.getElementById('menuButton');
-            const leftPanel = document.querySelector('.left-panel');
-            const mainContent = document.querySelector('.main-content');
-
-            function toggleMenu() {
-                leftPanel.classList.toggle('active');
-            }
-
-            if (menuButton) {
-                menuButton.addEventListener('click', toggleMenu);
-            }
-
-            // Close menu when clicking outside
-            document.addEventListener('click', function(event) {
-                const isClickInsidePanel = leftPanel.contains(event.target);
-                const isClickOnButton = menuButton.contains(event.target);
-
-                if (!isClickInsidePanel && !isClickOnButton && leftPanel.classList.contains('active')) {
-                    leftPanel.classList.remove('active');
-                }
-            });
-
-            // Initialize Swup so nav clicks swap only the main content + top bar
-            // (left panel stays mounted, no flash on navigation)
-            if (window.Swup) {
-                const swup = new Swup({
-                    containers: ['.main-content', '.top-bar']
-                });
-                swup.hooks.on('page:view', function () {
-                    feather.replace();
-                    if (leftPanel.classList.contains('active')) {
-                        leftPanel.classList.remove('active');
-                    }
-                });
-            }
-        });
-    </script>
-</body>
-</html>
+<script type="module" src="/assets/home.js?v={{ site.time | date: '%s' }}"></script>

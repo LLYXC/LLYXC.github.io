@@ -1,0 +1,45 @@
+# Keeps the Publications page in step with Luyang's Google Scholar profile.
+# Once a week it runs tools/update_papers.py. If the paper list changed, it commits _data/ to master,
+# which rebuilds the site. If Google Scholar refuses the request, the script exits with an error, this
+# run shows as failed, and the site keeps the last good list.
+name: Update publications from Google Scholar
+
+on:
+  schedule:
+    - cron: "17 6 * * 1"        # Mondays, 06:17 UTC
+  workflow_dispatch:            # and by hand: Actions tab, "Run workflow"
+  push:                         # TEMPORARY: lets the fetch be tried from the redesign branch before the merge
+    branches: [redesign]
+    paths: [".github/workflows/update-papers.yml"]
+
+permissions:
+  contents: write               # to commit the refreshed list
+  pages: write                  # to ask for the site to be rebuilt
+
+concurrency: update-papers
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Refresh the paper list from Google Scholar
+        run: python3 tools/update_papers.py
+
+      - name: Commit the list if it changed
+        if: github.ref == 'refs/heads/master'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if git diff --quiet -- _data; then
+            echo "The list is unchanged."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add _data
+          git commit -m "Update publications from Google Scholar"
+          git push
+          # A push made by a workflow does not reliably start the Pages build, so ask for one.
+          gh api -X POST "repos/${{ github.repository }}/pages/builds"

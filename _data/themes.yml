@@ -1,0 +1,28 @@
+# The three research themes on the home page, in this order.
+# `key` is fixed: the 3D scene in assets/home.js stages each theme by its key, and it is the page address (/#build).
+# A paper joins a theme's list through its "home" entry in papers_extra.json.
+- key: build
+  number: "01"
+  short: Capability
+  headline: Build AI that does clinical work
+  line: Whole workflows, not single predictions.
+  questions:
+    - How good could the AI be?
+    - Can it carry a whole clinical workflow, not just a diagnosis?
+- key: know
+  number: "02"
+  short: Evaluation
+  headline: Know before we deploy
+  line: Simulators and benchmarks that show how AI behaves, fails and holds up.
+  questions:
+    - What will happen before I deploy this AI?
+    - How robust should it be, and what are its failure modes?
+    - Can we simulate the healthcare system?
+- key: wire
+  number: "03"
+  short: Deployment
+  headline: Wire AI into the health system
+  line: With every stakeholder and between them, monitored after launch.
+  questions:
+    - How will new interactions develop between AI and humans, and among AIs?
+    - After deployment, how do we monitor AI systems?

@@ -1,8 +1,7 @@
-# Jekyll configuration for LLYXC.github.io
+# Jekyll configuration for LLYXC.github.io (served at luyangluo.com by GitHub Pages, built from master).
 #
-# Pages are self-contained HTML with `layout: null` and their own `permalink`,
-# so no theme/layout is used. Jekyll's job here is just to emit each page at its
-# clean permalink URL (e.g. /publications/).
+# No theme and no plugins. _layouts/ holds the shared page frame, _data/ the themes and the paper list,
+# assets/ the styles, scripts and images. See README.md for what to edit and what is generated.
 
 exclude:
   - Gemfile
@@ -11,3 +10,5 @@ exclude:
   - README.md
   - LICENSE
   - docs
+  - tools
+  - assets/portrait-original.png

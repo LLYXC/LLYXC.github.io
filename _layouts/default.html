@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en"{% if page.home %} data-mode="overview"{% endif %}>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{% if page.home %}Luyang Luo{% else %}{{ page.title }} · Luyang Luo{% endif %}</title>
+<meta name="description" content="{{ page.description | escape }}">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cardo:ital,wght@0,400;0,700;1,400&family=Libre+Franklin:wght@400;500;600&display=swap" rel="stylesheet">
+<script>document.documentElement.classList.add('js')</script>
+{%- if page.home or page.object %}
+{%- comment %} The import map says where "three" lives. It must come before anything that loads a module, the preload hints included. {% endcomment %}
+<script type="importmap">{"imports":{"three":"/assets/three.module.min.js"}}</script>
+<link rel="modulepreload" href="/assets/three.module.min.js">{% endif %}
+{%- if page.home %}
+<link rel="modulepreload" href="/assets/scene.js?v={{ site.time | date: '%s' }}">{% endif %}
+<link rel="stylesheet" href="/assets/{{ page.style }}.css?v={{ site.time | date: '%s' }}">
+</head>
+<body>
+<header class="nav"><nav>
+{%- assign menu = "Home|/,Publications|/publications/,Bootcamp|/bootcamp/,Join|/join/" | split: "," -%}
+{%- for item in menu -%}{%- assign m = item | split: "|" -%}
+<a{% if page.url == m[1] %} class="active"{% endif %} href="{{ m[1] }}">{{ m[0] }}</a>
+{%- endfor -%}
+</nav></header>
+{{ content }}
+<footer class="foot">© Luyang Luo</footer>
+</body>
+</html>

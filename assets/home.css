@@ -1,0 +1,194 @@
+/* The home page. Inner pages use site.css; the two files share nothing, so each can change without the other. */
+:root{
+  --bg:#f5f2ea; --ink:#14202e; --ink2:#414d5c; --muted:#6c7786; --rule:rgba(20,32,46,.13);
+  --accent:#00356B; --accent2:#286DC0; --agent:#e39a14; --fail:#d9482f;
+  --card:rgba(255,255,255,.78); --chip:rgba(255,255,255,.86);
+  --navh:60px;
+  --serif:Cardo, Georgia, 'Times New Roman', serif;
+  --sans:'Libre Franklin', system-ui, -apple-system, 'Segoe UI', sans-serif;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.55;
+  -webkit-font-smoothing:antialiased;transition:background-color .9s ease,color .9s ease;overflow-x:hidden}
+a{color:inherit}
+button{font:inherit;color:inherit}
+
+
+/* nav */
+.nav{position:sticky;top:0;z-index:30;height:var(--navh);display:flex;align-items:center;justify-content:flex-end;
+  padding:0 clamp(16px,4vw,52px);border-bottom:1px solid var(--rule);
+  background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  transition:background-color .9s ease,border-color .9s ease}
+.brand{white-space:nowrap;font-family:var(--serif);font-weight:700;font-size:1.2rem;text-decoration:none;letter-spacing:-.005em}
+.nav nav{display:flex;gap:clamp(14px,2.2vw,30px)}
+.nav nav a{font-size:.92rem;font-weight:500;text-decoration:none;color:var(--ink2);padding:6px 0;border-bottom:2px solid transparent;transition:color .2s,border-color .2s}
+.nav nav a:hover,.nav nav a.active{color:var(--accent);border-color:var(--accent)}
+
+/* hero */
+.hero{display:grid;grid-template-columns:minmax(350px,37fr) 63fr;grid-template-areas:"me stage" "copy stage";grid-template-rows:auto 1fr;align-items:start}
+.me{grid-area:me;display:flex;gap:22px;align-items:center;padding:clamp(20px,3.6vh,36px) clamp(16px,2.5vw,36px) 0 clamp(16px,4vw,52px)}
+.me img{width:150px;height:150px;box-shadow:0 6px 22px rgba(0,53,107,.16);border-radius:50%;object-fit:cover;object-position:50% 18%;flex:none}
+.me-name{font-family:var(--serif);font-weight:700;font-size:2rem;line-height:1.1;letter-spacing:-.01em;margin:0}
+.me-role{margin:6px 0 9px;font-size:.95rem;line-height:1.4;color:var(--ink2);transition:color .9s}
+.me-links{display:flex;flex-wrap:wrap;gap:3px 14px;font-size:.84rem}
+.me-links a{color:var(--accent);text-underline-offset:3px;transition:color .9s}
+.copy{grid-area:copy;padding:clamp(20px,3.6vh,34px) clamp(16px,2.5vw,36px) 56px clamp(16px,4vw,52px)}
+.kicker{font-size:.76rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin:0 0 18px;transition:color .9s}
+h1{font-family:var(--serif);font-weight:400;font-size:clamp(2.1rem,3.3vw,3.2rem);line-height:1.06;letter-spacing:-.012em;margin:0 0 24px}
+h1 span{display:block}
+h1 .q2{color:var(--accent);transition:color .9s}
+.lede{font-size:1.06rem;color:var(--ink2);max-width:36ch;margin:0 0 30px;transition:color .9s}
+
+.items{list-style:none;margin:0;padding:0;border-top:1px solid var(--rule);transition:border-color .9s}
+.item{border-bottom:1px solid var(--rule);transition:border-color .9s,background-color .5s}
+.item-h{display:grid;grid-template-columns:44px 1fr 20px;gap:4px;align-items:start;width:100%;text-align:left;background:none;border:0;
+  padding:17px 10px 17px 12px;cursor:pointer;border-left:3px solid transparent;transition:border-color .3s,background-color .3s}
+.item-h:hover{background:color-mix(in srgb,var(--accent) 6%,transparent)}
+.item-h:focus-visible{outline:2px solid var(--accent2);outline-offset:-2px}
+.num{font-family:var(--serif);font-weight:700;font-size:1.02rem;color:var(--agent);padding-top:.22em;font-variant-numeric:tabular-nums}
+.hd{display:block;font-family:var(--serif);font-weight:700;font-size:1.46rem;line-height:1.2;letter-spacing:-.004em}
+.sub{display:block;margin-top:4px;font-size:.93rem;color:var(--ink2);transition:color .9s}
+.chev{width:9px;height:9px;border-right:2px solid var(--muted);border-bottom:2px solid var(--muted);transform:rotate(-45deg);margin-top:.62em;transition:transform .25s,border-color .25s}
+.item-h:hover .chev{transform:translateX(4px) rotate(-45deg);border-color:var(--accent)}
+
+/* A chosen theme: the three rows give way to a strip of chips that stays in view, with one panel under it.
+   Switching theme never moves the chips, so there is nothing to scroll back to. */
+.tabs{position:sticky;top:var(--navh);z-index:4;display:flex;flex-wrap:wrap;gap:6px;padding:11px 0;background:var(--bg);border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);transition:background-color .9s,border-color .9s}
+.tab{font-size:.88rem;font-weight:500;line-height:1.2;padding:7px 14px;border-radius:999px;border:1px solid var(--rule);background:transparent;color:var(--ink2);cursor:pointer;white-space:nowrap;transition:background-color .2s,border-color .2s,color .2s}
+.tab b{font-family:var(--serif);color:var(--agent);margin-right:6px}
+.tab:hover{border-color:var(--accent)}
+.tab:focus-visible{outline:2px solid var(--accent2);outline-offset:2px}
+.tab[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:#fff}.tab[aria-pressed="true"] b{color:#ffd27a}
+.themes{container:themes/inline-size}
+.panel{padding:20px 0 0}
+.p-hd{font-family:var(--serif);font-weight:700;font-size:1.46rem;line-height:1.2;letter-spacing:-.004em;margin:0}
+.p-sub{margin:4px 0 0;font-size:.93rem;color:var(--ink2);transition:color .9s}
+@keyframes rise{from{opacity:0;transform:translateY(8px)}}
+html:not(.js) .tabs{display:none}
+.js[data-mode="overview"] .themes,.js:not([data-mode="overview"]) .items,.js .panel{display:none}
+.js[data-mode="build"] .panel[data-mode="build"],.js[data-mode="know"] .panel[data-mode="know"],.js[data-mode="wire"] .panel[data-mode="wire"]{display:block;animation:rise .35s ease both}
+.lbl{font-size:.7rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin:18px 0 8px;transition:color .9s}
+.qs{list-style:none;margin:0 0 6px;padding:0}
+.qs li{font-family:var(--serif);font-style:italic;font-size:1.12rem;line-height:1.35;padding:3px 0 3px 16px;position:relative}
+.qs li::before{content:"";position:absolute;left:0;top:.72em;width:7px;height:2px;background:var(--agent)}
+.papers{list-style:none;margin:0;padding:0}
+.papers li{padding:8px 0;border-top:1px solid var(--rule);transition:border-color .9s}
+.papers li:first-child{border-top:0}
+.papers .ptitle{display:block;text-decoration:none;font-size:.9rem;font-weight:500;line-height:1.35}
+.papers a:hover{color:var(--accent);text-decoration:underline;text-underline-offset:2px}
+.papers .meta{display:block;font-size:.78rem;color:var(--muted);margin-top:2px;transition:color .9s}
+.more{display:inline-block;margin-top:10px;border:1px solid var(--rule);border-radius:999px;padding:6px 14px;font-size:.8rem;font-weight:500;text-decoration:none;color:var(--accent);transition:border-color .2s,color .9s}
+.more:hover{border-color:var(--accent)}
+
+.demos{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:0 0 8px}
+.demo-v,.demo iframe{display:block;width:100%;aspect-ratio:16/9;border:0;border-radius:8px;background:#0b2444 center/cover no-repeat;position:relative;padding:0}
+.demo-v{cursor:pointer}
+.demo-v.blank{background-image:linear-gradient(135deg,#0b2444,#286DC0)}
+.play{position:absolute;left:50%;top:50%;width:38px;height:38px;border-radius:50%;background:var(--agent);transform:translate(-50%,-50%);box-shadow:0 2px 10px rgba(0,0,0,.3)}
+.play::after{content:"";position:absolute;left:15px;top:11px;border-left:12px solid #1b1404;border-top:8px solid transparent;border-bottom:8px solid transparent}
+.demo-t{margin:7px 0 0;font-weight:600;font-size:.9rem}
+.demo-d{margin:1px 0 0;font-size:.78rem;color:var(--muted);line-height:1.35;transition:color .9s}
+/* stage: the scene on top, its caption underneath. Only the name labels are drawn over the scene. */
+.stage{grid-area:stage;position:sticky;top:var(--navh);height:calc(100vh - var(--navh));min-height:540px;overflow:hidden;display:flex;flex-direction:column;container:stage/inline-size}
+.scene{position:relative;flex:1;min-height:0}
+/* Until the 3D scene has drawn its first frame, and for good where it cannot run, the stage shows a still of it. The still
+   is the overview, framed exactly as the live scene frames itself, so the swap does not move anything. */
+.stage:not(.live) .scene{background:url(/assets/scene-still.webp) center/contain no-repeat}
+.stage:not(.live) .legend,.stage:not(.live) .hud,.stage:not(.live) .stepper{visibility:hidden}
+#gl{position:absolute;inset:0;width:100%;height:100%;display:block;cursor:grab;touch-action:pan-y}
+#gl.drag{cursor:grabbing}
+#labels{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.lab{position:absolute;left:0;top:0;transform:translate(-999px,-999px);font-size:11px;font-weight:600;line-height:1;padding:4px 8px;border-radius:999px;
+  white-space:nowrap;background:var(--chip);color:var(--ink);border:1px solid var(--rule);
+  transition:opacity .5s,background-color .45s,color .45s,border-color .45s;will-change:transform}
+/* a label lifted clear of another keeps a stem down to its figure */
+.lab::after{content:"";position:absolute;left:50%;top:100%;width:1px;height:1px;transform-origin:50% 0;transform:translateX(var(--sx,0px)) scaleY(var(--stem,0));background:color-mix(in srgb,var(--ink) 42%,transparent)}
+.lab.on{background:var(--agent);border-color:var(--agent);color:#1b1404}
+html[data-mode="know"] .lab.who{opacity:.9}
+.lab.fail{background:var(--fail);border-color:var(--fail);color:#fff;opacity:0;transition:opacity .25s}
+.lab.fail.show{opacity:1}
+
+.cap{flex:none;display:flex;flex-direction:column;align-items:center;gap:8px;padding:4px 20px 20px;pointer-events:none}
+.cap p{margin:0;font-size:.88rem;line-height:1.45;color:var(--ink2);text-align:center;text-wrap:balance;max-width:60ch;min-height:2.9em;transition:color .9s}
+.cap p b{color:var(--ink);font-weight:600;transition:color .9s}
+/* one slot above the caption, shared by the workflow steps (theme 01) and, on small stages, the counters (theme 02) */
+.slot{display:grid;place-items:center;width:100%;min-height:27px}
+.slot>*{grid-area:1/1}
+.stepper{display:flex;justify-content:center;align-items:center;gap:6px;opacity:0;transition:opacity .5s}
+html[data-mode="build"] .stepper{opacity:1}
+.step{font-size:11px;font-weight:600;line-height:1;padding:5px 9px;border-radius:999px;border:1px solid var(--rule);background:var(--chip);color:var(--muted);white-space:nowrap;transition:background-color .35s,border-color .35s,color .35s}
+.step.on{color:var(--ink);border-color:var(--agent)}
+.step.cur{background:var(--agent);border-color:var(--agent);color:#1b1404}
+.hud{position:absolute;top:22px;right:26px;display:flex;gap:26px;opacity:0;transition:opacity .6s;pointer-events:none;text-align:right}
+html[data-mode="know"] .hud{opacity:1}
+.hud div{font-size:.68rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.hud i{font-style:normal}
+.hud strong{display:block;font-family:var(--serif);font-weight:700;font-size:1.8rem;letter-spacing:0;color:var(--ink);font-variant-numeric:tabular-nums;line-height:1.15}
+.hud .bad strong{color:var(--fail)}
+.legend{position:absolute;top:22px;left:22px;display:flex;align-items:center;gap:8px;font-size:.78rem;color:var(--muted);pointer-events:none;transition:color .9s}
+.legend i{width:9px;height:9px;border-radius:50%;background:var(--agent);box-shadow:0 0 0 4px color-mix(in srgb,var(--agent) 25%,transparent)}
+
+.foot{position:relative;z-index:5;border-top:1px solid var(--rule);padding:22px clamp(16px,4vw,52px);font-size:.82rem;color:var(--muted);background:var(--bg);transition:background-color .9s,border-color .9s,color .9s}
+/* about */
+.about{border-top:1px solid var(--rule);padding:56px clamp(16px,4vw,52px) 72px;display:grid;grid-template-columns:auto 1fr 1fr;gap:clamp(24px,4vw,56px);align-items:start;position:relative;z-index:5;background:var(--bg);transition:background-color .9s,border-color .9s}
+.about img{width:112px;height:112px;border-radius:50%;object-fit:cover;object-position:50% 18%}
+.about h2{font-family:var(--serif);font-weight:600;font-size:1.5rem;margin:0 0 6px;letter-spacing:-.01em}
+.about p{margin:0 0 12px;color:var(--ink2);max-width:46ch;transition:color .9s}
+.links{display:flex;flex-wrap:wrap;gap:8px 18px;font-size:.92rem}
+.links a{color:var(--accent);text-underline-offset:3px;transition:color .9s}
+
+/* short laptop windows: spacing and headline give way first, the portrait stays large, one-liners go last */
+@media (min-width:921px) and (max-height:860px){
+  .me{padding-top:18px;gap:18px}.me img{width:124px;height:124px}.me-name{font-size:1.8rem}
+  .copy{padding-top:16px}h1{font-size:clamp(1.8rem,2.8vw,2.6rem);margin-bottom:16px}
+  .item-h{padding-top:13px;padding-bottom:13px}
+}
+@media (min-width:921px) and (max-height:740px){
+  .me{padding-top:16px}.me img{width:108px;height:108px}.me-name{font-size:1.6rem}.me-role{font-size:.88rem;margin:4px 0 6px}
+  .copy{padding-top:14px}h1{font-size:clamp(1.6rem,2.4vw,2.2rem);margin-bottom:14px}
+  .item-h{padding-top:10px;padding-bottom:10px}.hd{font-size:1.32rem}.sub{font-size:.86rem;margin-top:2px}
+}
+@media (min-width:921px) and (max-height:670px){.sub{display:none}}
+/* a narrow left column in a short window: the three themes still fit without scrolling */
+@media (min-width:921px) and (max-width:1180px) and (max-height:800px){.sub{display:none}}
+@media (max-width:920px){
+  /* stacked: the stage is as tall as the scene needs at this width plus its caption, and never more than about half the window */
+  :root{--stageh:max(300px,min(52vh,calc(67vw + 96px)))}
+  .hero{grid-template-columns:1fr;grid-template-areas:"me" "stage" "copy";grid-template-rows:auto}
+  .stage{height:var(--stageh);min-height:0;z-index:6;background:var(--bg);border-bottom:1px solid var(--rule);transition:background-color .9s,border-color .9s}
+  .cap{gap:5px;padding:2px 16px 10px}.cap p{font-size:.78rem;line-height:1.35;min-height:2.7em}
+  .slot{min-height:24px}
+  .tabs{top:calc(var(--navh) + var(--stageh))}
+  .copy{padding-top:22px}
+  .me img{width:112px;height:112px}.me-name{font-size:1.6rem}.me{gap:16px}
+  .about{grid-template-columns:1fr}
+  .legend{display:none}
+  .hud{position:static;gap:16px;text-align:left}
+  .hud div{display:flex;align-items:baseline;gap:6px;font-size:.6rem;letter-spacing:.08em;white-space:nowrap}
+  .hud strong{display:inline;font-size:1.05rem;line-height:1}
+  .hud div:first-child strong{min-width:6.2ch}
+}
+/* a window too short to pin the scene and still read under it: let the scene scroll away */
+@media (max-width:920px) and (max-height:560px){.stage{position:relative;top:0}.tabs{top:var(--navh)}}
+/* small stages, whatever the window: the steps shrink to dots with only the current one named, and the counters join the caption */
+@container stage (max-width:680px){
+  .stepper{gap:5px}
+  .step{font-size:0;width:8px;height:8px;padding:0;border-color:color-mix(in srgb,var(--muted) 55%,transparent);background:transparent}
+  .step.on{background:var(--agent);border-color:var(--agent)}
+  .step.cur{font-size:10.5px;width:auto;height:auto;padding:4px 9px}
+  .hud{position:static;gap:16px;text-align:left}
+  .hud div{display:flex;align-items:baseline;gap:6px;font-size:.6rem;letter-spacing:.08em;white-space:nowrap}
+  .hud strong{display:inline;font-size:1.05rem;line-height:1}
+  .hud div:first-child strong{min-width:6.2ch}
+}
+@container stage (max-width:460px){.hud i{display:none}.cap p{min-height:4.05em}}
+/* a narrow chip strip (a phone, or the left column of a small laptop window): the chips drop their numbers, then tighten, to stay on one row */
+@container themes (max-width:439px){.tab{font-size:.84rem;padding:6px 10px}.tab b{display:none}}
+@container themes (max-width:329px){.tabs{gap:4px}.tab{font-size:.78rem;padding:6px 7px}}
+@media (max-width:600px){
+  .nav nav{gap:12px}.nav nav a{font-size:.8rem}
+  .lab{font-size:9px;padding:3px 6px}
+  html[data-mode="overview"] .lab.who{opacity:0}
+}
+@media (prefers-reduced-motion:reduce){*{transition-duration:.01ms!important;animation-duration:.01ms!important}}

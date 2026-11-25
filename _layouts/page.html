@@ -1,0 +1,20 @@
+---
+layout: default
+---
+{%- comment -%} An inner page: one column of text and, when the page names an `object`, a small 3D object beside it. {%- endcomment -%}
+{% if page.object %}<div class="split">{% endif %}
+<main class="page">
+{{ content }}
+</main>
+{% if page.object %}<aside class="vig" id="vig" aria-hidden="true"><p class="vig-cap">{{ page.caption }}</p></aside>
+</div>{% endif %}
+<script>
+(()=>{const els=document.querySelectorAll('.page h2,.page>p,.page>ul,.pub');
+ if(!('IntersectionObserver' in window)||matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+ const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}}),{rootMargin:'0px 0px -6% 0px'});
+ els.forEach(e=>{e.classList.add('rv');io.observe(e);});})();
+</script>
+{% if page.object %}<script type="module">
+import { mount } from '/assets/vignette.js?v={{ site.time | date: '%s' }}';
+mount(document.getElementById('vig'), '{{ page.object }}');
+</script>{% endif %}
